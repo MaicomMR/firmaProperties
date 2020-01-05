@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1Vz9RMGNK422wLyG7akZMegp8NY" />
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RunManager">
+    <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner scope="XML" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="975" y="334" key="com.intellij.ide.util.TipDialog" timestamp="1578245050691">
+      <screen x="0" y="0" width="2560" height="1019" />
+    </state>
+    <state x="975" y="334" key="com.intellij.ide.util.TipDialog/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1578245050691" />
+    <state x="943" y="219" width="672" height="678" key="search.everywhere.popup" timestamp="1578245086744">
+      <screen x="0" y="0" width="2560" height="1019" />
+    </state>
+    <state x="943" y="219" width="672" height="678" key="search.everywhere.popup/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1578245086744" />
+  </component>
+</project>
