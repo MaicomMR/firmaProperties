@@ -26,7 +26,14 @@ class Estate extends Controller
      */
     public function create()
     {
-        //
+        $categories = \App\Category::all();
+        $subCategories = \App\SubCategory::all();
+
+
+        return view('admin.add')->with([
+            'categories'=>$categories,
+            'subCategories'=>$subCategories
+        ]);;
     }
 
     /**

@@ -7,6 +7,8 @@
 @stop
 
 @section('content')
+
+
     <form>
         <div class="container">
             <div class="row">
@@ -48,9 +50,9 @@
                     <label for="exampleInputEmail1">Categoria</label><br/>
                     <div class="input-group">
                         <select class="custom-select" id="inputGroupSelect04">
-                            <option selected>Selecione uma...</option>
-                            <option value="1">Equipamentos de TI</option>
-                            <option value="2">Infraestrutura</option>
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
                         </select>
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary bg-green" type="button">
@@ -64,13 +66,9 @@
                     <label for="exampleInputEmail1">Sub Categoria</label><br/>
                     <div class="input-group">
                         <select class="custom-select" id="inputGroupSelect04">
-                            <option selected>Selecione uma...</option>
-                            <option value="1">Notebook</option>
-                            <option value="2">Teclado</option>
-                            <option value="3">Mouse</option>
-                            <option value="3">Monitor</option>
-                            <option value="3">Gabinete</option>
-                            <option value="3">Outros</option>
+                            @foreach($subCategories as $subCategory)
+                                <option value="{{$subCategory->id}}">{{$subCategory->name}}</option>
+                            @endforeach
                         </select>
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary bg-green" type="button">

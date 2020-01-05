@@ -7,7 +7,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable />
@@ -148,7 +148,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1578245046870</updated>
-      <workItem from="1578245050221" duration="2934000" />
+      <workItem from="1578245050221" duration="6900000" />
+      <workItem from="1578252466285" duration="6727000" />
+      <workItem from="1578265525996" duration="651000" />
     </task>
     <servers />
   </component>
@@ -156,17 +158,17 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="975" y="334" key="com.intellij.ide.util.TipDialog" timestamp="1578245050691">
+    <state x="975" y="334" key="com.intellij.ide.util.TipDialog" timestamp="1578265548410">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
-    <state x="975" y="334" key="com.intellij.ide.util.TipDialog/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1578245050691" />
+    <state x="975" y="334" key="com.intellij.ide.util.TipDialog/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1578265548410" />
     <state x="977" y="107" width="606" height="804" key="find.popup" timestamp="1578246710009">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
     <state x="977" y="107" width="606" height="804" key="find.popup/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1578246710009" />
-    <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup" timestamp="1578247913572">
+    <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup" timestamp="1578261215672">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
-    <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1578247913572" />
+    <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1578261215672" />
   </component>
 </project>

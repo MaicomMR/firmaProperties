@@ -17,6 +17,4 @@ Route::get('/', function () {
 
 Route::get('home', 'Estate@index');
 
-Route::get('/add', function () {
-    return view('admin.add');
-});
+Route::get('add', 'Estate@create');
