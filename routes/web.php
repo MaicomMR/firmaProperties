@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('home', 'Properties@index');
+
+Route::get('/add', function () {
+    return view('admin.add');
+});
