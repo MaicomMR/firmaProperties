@@ -13,17 +13,19 @@
         <tr>
             <th scope="col">Nome</th>
             <th scope="col">Tipo</th>
+            <th scope="col">Etiqueta</th>
             <th scope="col">Valor</th>
             <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
 
-    @foreach($propertiesList as $propertie)
+    @foreach($EstateList as $propertie)
 
         <tr>
             <td>{{$propertie->name}}</td>
             <td>{{$propertie->name}}</td>
+            <td>{{$propertie->label_id}}</td>
             <td>{{$propertie->value}}</td>
 
             <td>
