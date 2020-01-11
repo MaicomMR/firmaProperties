@@ -13,6 +13,14 @@
       <executable />
     </execution>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Sass File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -118,6 +126,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager">
@@ -150,7 +159,10 @@
       <updated>1578245046870</updated>
       <workItem from="1578245050221" duration="6900000" />
       <workItem from="1578252466285" duration="6727000" />
-      <workItem from="1578265525996" duration="651000" />
+      <workItem from="1578265525996" duration="5147000" />
+      <workItem from="1578604495026" duration="3000" />
+      <workItem from="1578695175882" duration="612000" />
+      <workItem from="1578783431605" duration="1342000" />
     </task>
     <servers />
   </component>
@@ -158,17 +170,33 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="975" y="334" key="com.intellij.ide.util.TipDialog" timestamp="1578265548410">
+    <state width="2517" height="275" key="GridCell.Tab.0.bottom" timestamp="1578271369714">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
-    <state x="975" y="334" key="com.intellij.ide.util.TipDialog/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1578265548410" />
+    <state width="2517" height="275" key="GridCell.Tab.0.bottom/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1578271369714" />
+    <state width="2517" height="275" key="GridCell.Tab.0.center" timestamp="1578271369714">
+      <screen x="0" y="0" width="2560" height="1019" />
+    </state>
+    <state width="2517" height="275" key="GridCell.Tab.0.center/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1578271369714" />
+    <state width="2517" height="275" key="GridCell.Tab.0.left" timestamp="1578271369713">
+      <screen x="0" y="0" width="2560" height="1019" />
+    </state>
+    <state width="2517" height="275" key="GridCell.Tab.0.left/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1578271369713" />
+    <state width="2517" height="275" key="GridCell.Tab.0.right" timestamp="1578271369714">
+      <screen x="0" y="0" width="2560" height="1019" />
+    </state>
+    <state width="2517" height="275" key="GridCell.Tab.0.right/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1578271369714" />
+    <state x="975" y="334" key="com.intellij.ide.util.TipDialog" timestamp="1578783431968">
+      <screen x="0" y="0" width="2560" height="1019" />
+    </state>
+    <state x="975" y="334" key="com.intellij.ide.util.TipDialog/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1578783431968" />
     <state x="977" y="107" width="606" height="804" key="find.popup" timestamp="1578246710009">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
     <state x="977" y="107" width="606" height="804" key="find.popup/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1578246710009" />
-    <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup" timestamp="1578261215672">
+    <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup" timestamp="1578785574924">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
-    <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1578261215672" />
+    <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1578785574924" />
   </component>
 </project>

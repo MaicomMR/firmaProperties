@@ -18,3 +18,8 @@ Route::get('/', function () {
 Route::get('home', 'Estate@index');
 
 Route::get('add', 'Estate@create');
+
+Route::get('categories', 'Categories@index');
+
+Route::get('bill-of-sale', 'BillController@index');
+

@@ -215,7 +215,7 @@ return [
                 ],
                 [
                     'text' => 'Listar',
-                    'url'  => '#',
+                    'url'  => 'categories',
                 ],
             ],
         ],
