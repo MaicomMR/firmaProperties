@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\BillOfSale;
 use Illuminate\Http\Request;
 
-class BillController extends Controller
+class Sellers extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class BillController extends Controller
      */
     public function index()
     {
-        return view('admin.billOfSaleAdd');
+        dd('oi');
     }
 
     /**
@@ -35,19 +34,7 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
-        $billOfSale = new BillOfSale;
-
-
-        $billOfSale->billNumber = $request->billNumber;
-        $billOfSale->OnlineAcessCode = $request->billAcessKey;
-        $billOfSale->totalValue = $request->totalValue;
-        $billOfSale->billCopyPath = $request->billCopyPath;
-        $billOfSale->billPhotoPath = $request->billPhotoPath;
-
-
-
-        dd($billOfSale);
-        return view('home');
+        //
     }
 
     /**

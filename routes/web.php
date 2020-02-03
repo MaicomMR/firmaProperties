@@ -17,9 +17,13 @@ Route::get('/', function () {
 
 Route::get('home', 'Estate@index');
 
+Route::get('seller', 'Sellers@index')->name('seller');
+
 Route::get('add', 'Estate@create');
 
 Route::get('categories', 'Categories@index');
 
 Route::get('bill-of-sale', 'BillController@index');
+
+Route::post('bill-of-sale/save', 'BillController@store')->name('saveBill');
 

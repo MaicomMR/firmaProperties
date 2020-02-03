@@ -192,12 +192,12 @@ return [
         ],
         ['header' => 'PATRIMÔNIO'],
         [
-            'text' => 'Adicionar',
+            'text' => 'Adicionar Patrimônio',
             'url'  => 'add',
             'icon' => 'fas fa-plus-square',
         ],
         [
-            'text' => 'Listar',
+            'text' => 'Listar Patrimônios',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-list-alt',
         ],
@@ -218,6 +218,22 @@ return [
                     'url'  => 'categories',
                 ],
             ],
+        ],
+        ['header' => 'NOTAS FISCAIS'],
+        [
+            'text' => 'Adicionar Nota Fiscal',
+            'url'  => 'bill-of-sale',
+            'icon' => 'fas fa-file-alt',
+        ],
+        [
+            'text' => 'Adicionar Fornecedor',
+            'url'  => 'seller',
+            'icon' => 'fas fa-file-alt',
+        ],
+        [
+            'text' => 'Listar',
+            'url'  => '#',
+            'icon' => 'far fa-file-alt',
         ],
         ['header' => 'CONFIGURAÇÕES'],
         [
