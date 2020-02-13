@@ -15,11 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('home', 'Estate@index');
-
 Route::get('seller', 'Sellers@index')->name('seller');
 
 Route::get('add', 'Estate@create');
+
+Route::get('estates/index', 'Estate@index')->name('listagemPatrimonio');
 
 Route::get('categories', 'Categories@index');
 

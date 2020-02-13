@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCategoryForeignkeyToEstate extends Migration
+class AddSellerIdToEstates extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,8 @@ class AddCategoryForeignkeyToEstate extends Migration
     public function up()
     {
         Schema::table('estates', function (Blueprint $table) {
-            $table->unsignedBigInteger('categories_id');
-            $table->unsignedBigInteger('sub_categories_id');
-            $table->foreign('categories_id')->references('id')->on('categories');
-            $table->foreign('sub_categories_id')->references('id')->on('sub_categories');
+            $table->unsignedBigInteger('seller_id')->nullable(true);
+            $table->foreign('seller_id')->references('id')->on('sellers');
         });
     }
 
@@ -29,8 +27,7 @@ class AddCategoryForeignkeyToEstate extends Migration
     public function down()
     {
         Schema::table('estates', function (Blueprint $table) {
-            $table->dropForeign(['categories_id']);
-            $table->dropForeign(['sub_categories_id']);
+            $table->dropForeign(['seller_id']);
         });
     }
 }

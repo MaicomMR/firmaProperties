@@ -18,7 +18,7 @@ class CreateEstatesTable extends Migration
             $table->timestamps();
 
             $table->string('name');
-            $table->string('estate_photo');
+            $table->string('estate_photo')->nullable(true);
             $table->double('value');
             $table->integer('label_id');
 

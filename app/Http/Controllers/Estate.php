@@ -16,7 +16,7 @@ class Estate extends Controller
 
     $EstateList = \App\Estate::all();
 
-    return view('admin.adminHome')->with(['EstateList'=>$EstateList]);;
+    return view('admin.estates.estateIndex')->with(['EstateList'=>$EstateList]);;
     }
 
     /**

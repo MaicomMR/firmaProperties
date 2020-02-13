@@ -198,7 +198,7 @@ return [
         ],
         [
             'text' => 'Listar Patrimônios',
-            'url'  => 'admin/settings',
+            'url'  => 'estates/index',
             'icon' => 'fas fa-list-alt',
         ],
         [
