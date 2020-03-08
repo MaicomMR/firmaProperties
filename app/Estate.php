@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Estate extends Model
 {
+
     protected $table = 'estates';
-    protected $fillable = ['categories_id'];
+    protected $fillable = ['categories_id', 'label_id'];
 
     public function category()
     {

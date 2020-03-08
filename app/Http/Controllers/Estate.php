@@ -1,7 +1,10 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
+use \App\Category;
+use \App\SubCategory;
 use Illuminate\Http\Request;
 
 class Estate extends Controller
@@ -9,17 +12,15 @@ class Estate extends Controller
 
     public function search($id){
 
-        $categories = \App\Category::all();
-        $subCategories = \App\SubCategory::all();
-
         $Estate = \App\Estate::find($id);
-//        dd($Estate);
+
+        $categoriesPlucked = Category::pluck('name', 'id');
+        $subCategoriesPlucked = SubCategory::pluck('name', 'id');
 
         return view('admin.add')->with([
-            'action'=>'see',
-            'estate'=>$Estate,
-            'categories'=>$categories,
-            'subCategories'=>$subCategories
+            'categoriesPlucked' => $categoriesPlucked,
+            'subCategoriesPlucked' => $subCategoriesPlucked,
+            'estate_object'=>$Estate,
         ]);
     }
 
@@ -28,7 +29,8 @@ class Estate extends Controller
 
     $EstateList = \App\Estate::all();
 
-    return view('admin.estates.estateIndex')->with(['EstateList'=>$EstateList]);;
+    return view('admin.estates.estateIndex')
+        ->with(['EstateList'=>$EstateList]);;
     }
 
     /**
@@ -42,7 +44,10 @@ class Estate extends Controller
         $subCategories = \App\SubCategory::all();
 
 
+
+
         return view('admin.add')->with([
+
             'categories'=>$categories,
             'subCategories'=>$subCategories
         ]);
@@ -56,7 +61,7 @@ class Estate extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd('store');
     }
 
     /**
@@ -78,7 +83,7 @@ class Estate extends Controller
      */
     public function edit($id)
     {
-        //
+        dd('edit' + $id);
     }
 
     /**

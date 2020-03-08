@@ -20,6 +20,10 @@ Route::get('seller', 'Sellers@index')->name('seller');
 Route::get('add', 'Estate@create');
 
 Route::get('estates/index', 'Estate@index')->name('listagemPatrimonio');
+
+Route::post('estate-edit/store', 'Estate@store')->name('estateAdd');
+Route::put('estate-edit/{id}', 'Estate@edit')->name('estateEdit');
+
 Route::get('estates/index/{id}', 'Estate@search');
 
 Route::get('categories', 'Categories@index');
@@ -27,4 +31,6 @@ Route::get('categories', 'Categories@index');
 Route::get('bill-of-sale', 'BillController@index');
 
 Route::post('bill-of-sale/save', 'BillController@store')->name('saveBill');
+
+
 

@@ -114,6 +114,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
       <path value="$PROJECT_DIR$/vendor/almasaeed2010/adminlte" />
       <path value="$PROJECT_DIR$/vendor/jeroennoten/laravel-adminlte" />
+      <path value="$PROJECT_DIR$/vendor/laravelcollective/html" />
     </include_path>
   </component>
   <component name="ProjectId" id="1Vz9RMGNK422wLyG7akZMegp8NY" />
@@ -171,7 +172,7 @@
       <workItem from="1581547731163" duration="4951000" />
       <workItem from="1582403938683" duration="612000" />
       <workItem from="1583086061054" duration="13102000" />
-      <workItem from="1583683180052" duration="918000" />
+      <workItem from="1583683180052" duration="12833000" />
     </task>
     <servers />
   </component>
