@@ -35,7 +35,6 @@
                     </thead>
 
                     @foreach($EstateList as $EstateList)
-{{--                        {{dd($EstateList->category[0]->name)}}--}}
                         <th scope="row">{{$EstateList->label_id}}</th>
                         <th scope="row">{{$EstateList->name}}</th>
                         <th scope="row">{{$EstateList->value}} R$</th>
@@ -46,10 +45,10 @@
                             <button type="button" class="btn btn-warning">
                                 <i class="fa fa-eye"aria-hidden="true"></i>
                             </button>
-
-                            <button type="button" class="btn btn-primary">
+                            <a href="{{ route('estateEdit', $EstateList->id)}}">
+                            <button  type="button" class="btn btn-primary">
                                 <i class="fas fa-pencil-alt"></i>
-                            </button>
+                            </button></a>
 
                             <button type="button" class="btn btn-danger" style="margin-left: 20px">
                                 <i class="fas fa-trash-alt"></i>

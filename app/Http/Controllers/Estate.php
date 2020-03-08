@@ -40,16 +40,12 @@ class Estate extends Controller
      */
     public function create()
     {
-        $categories = \App\Category::all();
-        $subCategories = \App\SubCategory::all();
-
-
-
+        $categoriesPlucked = Category::pluck('name', 'id');
+        $subCategoriesPlucked = SubCategory::pluck('name', 'id');
 
         return view('admin.add')->with([
-
-            'categories'=>$categories,
-            'subCategories'=>$subCategories
+            'categoriesPlucked' => $categoriesPlucked,
+            'subCategoriesPlucked' => $subCategoriesPlucked,
         ]);
     }
 

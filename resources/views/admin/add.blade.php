@@ -2,14 +2,16 @@
 
 @section('title', 'Adicionar novo patrimônio')
 
-@section('content_header')
-    <h1>Adicionar novo patrimônio</h1>
-@stop
+
 
 @section('content')
 
 
     @if (isset($estate_object))
+    @section('content_header')
+        <h1>Editar patrimônio</h1>
+    @stop
+
 {{--        {{dump("editando")}}--}}
         {!! Form::model($estate_object, [
     'route' => ['estateEdit', $estate_object->id],
@@ -19,6 +21,9 @@
     ]) !!}
 
     @else
+    @section('content_header')
+        <h1>Adicionar novo patrimônio</h1>
+    @stop
 {{--    {{dump("criando")}}--}}
     {!! Form::open([
     'route' => 'estateAdd',
@@ -32,9 +37,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-2">
-                    <label for="exampleInputEmail1">Código Interno</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                           placeholder="00001" disabled>
+                    {!! Form::label('id', 'Código Interno'); !!}
+                    {!! Form::text('id', null, ['class' => 'form-control', 'placeholder' => '0', 'disabled']); !!}
                 </div>
                 <div class="col-2">
                     {!! Form::label('label_id', 'Código Etiqueta'); !!}
