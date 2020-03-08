@@ -20,6 +20,7 @@ Route::get('seller', 'Sellers@index')->name('seller');
 Route::get('add', 'Estate@create');
 
 Route::get('estates/index', 'Estate@index')->name('listagemPatrimonio');
+Route::get('estates/index/{id}', 'Estate@search');
 
 Route::get('categories', 'Categories@index');
 

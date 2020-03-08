@@ -8,7 +8,6 @@
 
 @section('content')
 
-
     <form>
         <div class="container">
             <div class="row">
@@ -20,25 +19,25 @@
                 <div class="col-2">
                     <label for="exampleInputEmail1">Código Etiqueta</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                           placeholder="00001">
+                           placeholder="00001"
+                    >
                 </div>
                 <div class="form-group col-6">
                     <label for="exampleInputEmail1">Nome do patrimônio</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                           placeholder="Digite o nome do patrimônio">
+                    >
                     <small id="emailHelp" class="form-text text-muted">Este nome será exibido na listagem de
                         patrimônios.</small>
                 </div>
-
-
             </div>
+
             <div class="row">
                 <div class="form-group col-2">
                     <label for="exampleInputEmail1">Nota Fiscal</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                            placeholder="Número da nota">
                     <small id="emailHelp" class="form-text text-muted">Você pode adicionar uma nova nota fiscal clicando
-                        aqui.</small>
+                     aqui.</small>
                 </div>
                 <div class="form-group col-2">
                     <label for="exampleInputEmail1">Valor do bem</label>
@@ -49,16 +48,17 @@
                 <div class="dropdown col-3">
                     <label for="exampleInputEmail1">Categoria</label><br/>
                     <div class="input-group">
-                        <select class="custom-select" id="inputGroupSelect04">
+
+                            <select class="custom-select" id="inputGroupSelect04">
                             @foreach($categories as $category)
                                 <option value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
-                        </select>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary bg-green" type="button">
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                            </button>
-                        </div>
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary bg-green" type="button">
+                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                </button>
+                            </div>
                     </div>
                 </div>
 
@@ -79,8 +79,9 @@
 
                 </div>
             </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+
     </form>
 
 @stop

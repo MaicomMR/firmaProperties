@@ -9,10 +9,19 @@ class Estate extends Model
     protected $table = 'estates';
     protected $fillable = ['categories_id'];
 
-
-
-    public function categories()
+    public function category()
     {
-        return $this->belongsTo('App\Category', 'foreign_key');
+        return $this->hasMany('App\Category', 'id');
     }
+
+    public function subcategory()
+    {
+        return $this->hasMany('App\SubCategory', 'id');
+    }
+
+    public function seller()
+    {
+        return $this->hasMany('App\Seller', 'id');
+    }
+
 }

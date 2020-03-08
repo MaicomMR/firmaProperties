@@ -6,11 +6,23 @@ use Illuminate\Http\Request;
 
 class Estate extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function search($id){
+
+        $categories = \App\Category::all();
+        $subCategories = \App\SubCategory::all();
+
+        $Estate = \App\Estate::find($id);
+//        dd($Estate);
+
+        return view('admin.add')->with([
+            'action'=>'see',
+            'estate'=>$Estate,
+            'categories'=>$categories,
+            'subCategories'=>$subCategories
+        ]);
+    }
+
     public function index()
     {
 
@@ -33,7 +45,7 @@ class Estate extends Controller
         return view('admin.add')->with([
             'categories'=>$categories,
             'subCategories'=>$subCategories
-        ]);;
+        ]);
     }
 
     /**

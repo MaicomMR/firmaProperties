@@ -5,23 +5,18 @@
 @section('content_header')
 
     <link rel="stylesheet" type="text/css" href="css/adminStyle.css">
-    <h1>Listagem de Categorias e Sub-Categorias</h1>
+    <h1>Listagem de Patrimônios</h1>
 @stop
 
 @section('content')
 
-{{--{{dd($EstateList)}}--}}
-
+    {{--{{dd($EstateList)}}--}}
 
     <div class="container">
+
+
         <div class="row">
             <div class="col-sm-12">
-
-
-                <div class="topTable">
-                    <i class="fa fa-tag" aria-hidden="true"></i>
-                    ADICIONAR NOVA CATEGORIA
-                </div>
 
 
 
@@ -35,20 +30,34 @@
                         <th scope="col">categoria</th>
                         <th scope="col">sub-categoria</th>
                         <th scope="col">fornecedor</th>
+                        <th scope="col">ações</th>
                     <tr>
                     </thead>
 
                     @foreach($EstateList as $EstateList)
+{{--                        {{dd($EstateList->category[0]->name)}}--}}
                         <th scope="row">{{$EstateList->label_id}}</th>
                         <th scope="row">{{$EstateList->name}}</th>
-                        <th scope="row">{{$EstateList->value}}</th>
-                        <th scope="row">{{$EstateList->categories_id}}</th>
-                        <th scope="row">{{$EstateList->sub_categories_id}}</th>
-                        <th scope="row">{{$EstateList->seller_id}}</th>
+                        <th scope="row">{{$EstateList->value}} R$</th>
+                        <th scope="row">{{$EstateList->category[0]->name}}</th>
+                        <th scope="row">{{$EstateList->subcategory[0]->name}}</th>
+                        <th scope="row">{{$EstateList->seller[0]->name}}</th>
+                        <th scope="row">
+                            <button type="button" class="btn btn-warning">
+                                <i class="fa fa-eye"aria-hidden="true"></i>
+                            </button>
 
+                            <button type="button" class="btn btn-primary">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+
+                            <button type="button" class="btn btn-danger" style="margin-left: 20px">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+
+                        </th>
                         </tr>
                     @endforeach
-
 
                 </table>
             </div>
