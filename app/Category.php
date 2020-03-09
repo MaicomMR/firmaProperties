@@ -11,7 +11,7 @@ class Category extends Model
 
     public function estate()
     {
-        return $this->belongsTo('App\Estate');
+        return $this->belongsTo('App\EstateModel');
     }
 
 }

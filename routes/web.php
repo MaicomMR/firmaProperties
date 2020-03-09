@@ -17,11 +17,12 @@ Route::get('/', function () {
 
 Route::get('seller', 'Sellers@index')->name('seller');
 
-Route::get('add', 'Estate@create');
+Route::get('add', 'Estate@create')->name('');
 
 Route::get('estates/index', 'Estate@index')->name('listagemPatrimonio');
 
 Route::post('estate-edit/store', 'Estate@store')->name('estateAdd');
+
 Route::put('estate-edit/{id}', 'Estate@edit')->name('estateEditMethod');
 
 Route::get('estates/index/{id}', 'Estate@search')->name('estateEdit');
