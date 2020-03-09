@@ -20,7 +20,7 @@ class CreateEstatesTable extends Migration
             $table->string('name');
             $table->string('estate_photo')->nullable(true);
             $table->double('value');
-            $table->integer('label_id');
+            $table->string('label_id');
 
         });
     }
