@@ -17,9 +17,9 @@ Route::get('/', function () {
 
 Route::get('seller', 'Sellers@index')->name('seller');
 
-Route::get('add', 'Estate@create')->name('');
+Route::get('estates/index', 'Estate@index')->name('estateIndex');
 
-Route::get('estates/index', 'Estate@index')->name('listagemPatrimonio');
+Route::get('estates/add', 'Estate@create')->name('estateAdd');
 
 Route::post('estate-edit/store', 'Estate@store')->name('estateAdd');
 

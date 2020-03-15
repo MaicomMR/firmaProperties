@@ -28,11 +28,10 @@ class Estate extends Controller
 
     public function index()
     {
-
-    $EstateList = \App\EstateModel::all();
+    $EstateList = EstateModel::all();
 
     return view('admin.estates.estateIndex')
-        ->with(['EstateList'=>$EstateList]);;
+        ->with(['EstateList' => $EstateList]);
     }
 
     /**
@@ -111,7 +110,7 @@ class Estate extends Controller
      */
     public function edit($id)
     {
-        dd('edit' + $id);
+//        dd('edit' + $id);
     }
 
     /**

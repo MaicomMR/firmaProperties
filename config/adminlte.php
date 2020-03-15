@@ -193,7 +193,7 @@ return [
         ['header' => 'PATRIMÔNIO'],
         [
             'text' => 'Adicionar Patrimônio',
-            'url'  => 'add',
+            'url'  => 'estates/add',
             'icon' => 'fas fa-plus-square',
         ],
         [

@@ -9,9 +9,4 @@ class Category extends Model
     protected $table = 'categories';
     protected $fillable = ['name'];
 
-    public function estate()
-    {
-        return $this->belongsTo('App\EstateModel');
-    }
-
 }

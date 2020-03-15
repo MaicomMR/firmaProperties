@@ -26,20 +26,30 @@
                     <tr>
                     </thead>
 
-                    @foreach($EstateList as $EstateList)
-                        <th scope="row">{{$EstateList->label_id}}</th>
-                        <th scope="row">{{$EstateList->name}}</th>
-                        <th scope="row">{{$EstateList->value}} R$</th>
-                        <th scope="row">{{$EstateList->category[0]->name}}</th>
-                        <th scope="row">{{$EstateList->subcategory[0]->name}}</th>
-                        <th scope="row">{{$EstateList->seller[0]->name}}</th>
+
+
+                    @foreach($EstateList as $Estate)
+
+{{--                        {{dd($Estate->category)}}--}}
+
+                        <th scope="row">{{$Estate->label_id}}</th>
+                        <th scope="row">{{$Estate->name}}</th>
+                        <th scope="row">{{$Estate->value}} R$</th>
+                        <th scope="row">{{$Estate->category->name}}</th>
+                        <th scope="row">{{$Estate->subcategory->name}}</th>
+                        <th scope="row">
+                        @if($Estate->seller)
+                            {{$Estate->seller->name}}
+                        @endif
+                        </th>
+
                         <th scope="row">
 
                             <button type="button" class="btn btn-warning">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                             </button>
 
-                            <a class="btn btn-primary" href="{{ route('estateEdit', $EstateList->id)}}">
+                            <a class="btn btn-primary" href="{{ route('estateEdit', $Estate->id)}}">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
 
