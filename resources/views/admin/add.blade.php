@@ -27,9 +27,9 @@
     <h1>Editar patrimônio</h1>
 @stop
 {!! Form::model($estate_object, [
-'route' => ['estateEdit', $estate_object->id],
+'route' => ['estate.update', $estate_object->id],
 'class' => 'form',
-'method' => 'put',
+'method' => 'PUT',
 'files' => true
 ]) !!}
 

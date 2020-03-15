@@ -23,7 +23,7 @@ Route::get('estates/add', 'Estate@create')->name('estateAdd');
 
 Route::post('estate-edit/store', 'Estate@store')->name('estateAdd');
 
-Route::put('estate-edit/{id}', 'Estate@edit')->name('estateEditMethod');
+Route::put('estate-update/{id}', 'Estate@update')->name('estate.update');
 
 Route::get('estates/index/{id}', 'Estate@search')->name('estateEdit');
 

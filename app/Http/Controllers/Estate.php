@@ -85,7 +85,6 @@ class Estate extends Controller
             $estate->seller_id = $request->seller_id;
             $estate->estate_photo = null;
 
-//dd($estate);
             $estate->save();
             return back()->withInput();
         }
@@ -110,7 +109,7 @@ class Estate extends Controller
      */
     public function edit($id)
     {
-//        dd('edit' + $id);
+
     }
 
     /**
@@ -122,7 +121,32 @@ class Estate extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [ // <---
+            'name' => 'required|max:255|min:2',
+            'label_id' => 'required|',
+            'value' => 'required|numeric',
+            'categories_id' => 'required',
+            'sub_categories_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $estate = EstateModel::find($id);
+
+            $estate->name = $request->name;
+            $estate->value = $request->value;
+            $estate->label_id = $request->label_id;
+            $estate->categories_id = $request->categories_id;
+            $estate->sub_categories_id = $request->sub_categories_id;
+            $estate->seller_id = $request->seller_id;
+            $estate->estate_photo = null;
+
+            $estate->save();
+            return back()->withInput();
+        }
     }
 
     /**
