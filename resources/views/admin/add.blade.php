@@ -89,15 +89,14 @@
      'placeholder' => '1278,97']); !!}
         </div>
 
-
-{{--        {{dump($categoriesPlucked)}}--}}
-
         <div class="dropdown col-3">
             {!! Form::label('categories_id', 'Categoria'); !!}
             <div class="input-group">
-                {!! Form::select('categories_id', $categoriesPlucked, [
-                        'placeholder' => 'Selecione uma categoria',
-                        'class' => 'custom-select']); !!}
+                {!! Form::select('categories_id', $categoriesPlucked, null,[
+                        'class' => 'custom-select',
+                        'placeholder' => 'Selecione uma categoria'
+
+                        ]); !!}
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary bg-green" type="button">
                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
@@ -109,7 +108,7 @@
             {!! Form::label('sub_categories_id', 'Sub-Categoria'); !!}
 
             <div class="input-group">
-                {!! Form::select('sub_categories_id', $subCategoriesPlucked, [
+                {!! Form::select('sub_categories_id', $subCategoriesPlucked, null, [
                     'placeholder' => 'Selecione uma sub-categoria',
                     'class' => 'custom-select']); !!}
                 <div class="input-group-append">
