@@ -86,7 +86,7 @@ class Estate extends Controller
             $estate->estate_photo = null;
 
             $estate->save();
-            return back()->withInput();
+            return redirect()->back()->with('message', 'Patrimônio adicionado com sucesso.');
         }
     }
 
@@ -145,7 +145,7 @@ class Estate extends Controller
             $estate->estate_photo = null;
 
             $estate->save();
-            return back()->withInput();
+            return redirect()->back()->with('message', 'Patrimônio editado com sucesso.');
         }
     }
 

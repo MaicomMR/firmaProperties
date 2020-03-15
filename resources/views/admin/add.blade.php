@@ -5,7 +5,6 @@
 
 
 @section('content')
-
     @if(count($errors)>0)
         <div class="card">
             <div class="card-header h5">
@@ -41,6 +40,15 @@
 'route' => 'estateAdd',
 'class' => 'form']) !!}
 @endif
+
+
+@if(session()->has('message'))
+
+    <div class="alert alert-success" role="alert">
+        {{ session()->get('message') }}
+    </div>
+@endif
+
 
 {!! Form::token(); !!}
 
@@ -86,7 +94,8 @@
             {!! Form::label('value', 'Valor do bem'); !!}
             {!! Form::number('value', null, [
     'class' => 'form-control',
-     'placeholder' => '1278,97']); !!}
+     'placeholder' => '1278,97',
+     'step' => '.01']); !!}
         </div>
 
         <div class="dropdown col-3">
