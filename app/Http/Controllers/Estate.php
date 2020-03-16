@@ -12,6 +12,17 @@ use Validator;
 class Estate extends Controller
 {
 
+
+    /**
+     * Display the specified resource.
+     *
+     */
+    public function home()
+    {
+        return view('home');
+    }
+
+
     public function search($id){
 
         $Estate = \App\EstateModel::find($id);

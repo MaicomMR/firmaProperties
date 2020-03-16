@@ -53,10 +53,11 @@
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
 
-                            <a class="btn btn-danger" href="#">
+                            <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#exampleModal">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
 
+                            @include('modal.confirmDeleteModal')
                         </th>
                         </tr>
                     @endforeach
@@ -65,6 +66,8 @@
             </div>
         </div>
     </div>
+
+
 
 
 @stop

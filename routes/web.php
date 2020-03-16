@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('home', 'Estate@home')->name('home');
 
 Route::get('seller', 'Sellers@index')->name('seller');
 

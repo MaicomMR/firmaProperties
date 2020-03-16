@@ -22,9 +22,7 @@
     @endif
 
     @if (isset($estate_object))
-@section('content_header')
-    <h1>Editar patrimônio</h1>
-@stop
+
 {!! Form::model($estate_object, [
 'route' => ['estate.update', $estate_object->id],
 'class' => 'form',

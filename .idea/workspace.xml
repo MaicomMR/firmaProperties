@@ -13,6 +13,20 @@
       <executable />
     </execution>
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -173,7 +187,8 @@
       <workItem from="1582403938683" duration="612000" />
       <workItem from="1583086061054" duration="13102000" />
       <workItem from="1583683180052" duration="22355000" />
-      <workItem from="1584288071487" duration="12545000" />
+      <workItem from="1584288071487" duration="13613000" />
+      <workItem from="1584399912953" duration="1757000" />
     </task>
     <servers />
   </component>
@@ -205,10 +220,10 @@
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
     <state x="1042" y="324" key="NewPhpClassDialog/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1581551216813" />
-    <state x="975" y="334" key="com.intellij.ide.util.TipDialog" timestamp="1584288073214">
+    <state x="975" y="334" key="com.intellij.ide.util.TipDialog" timestamp="1584399914396">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
-    <state x="975" y="334" key="com.intellij.ide.util.TipDialog/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1584288073214" />
+    <state x="975" y="334" key="com.intellij.ide.util.TipDialog/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1584399914396" />
     <state x="977" y="107" width="736" height="804" key="find.popup" timestamp="1584300207864">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
