@@ -1,0 +1,38 @@
+.topTable{
+    text-align: center;
+    color: white;
+    font-size: 1.2em;
+    background-color: mediumseagreen;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.topTable:hover {
+    background-color: #39a162;
+}
+
+.attach-preview {
+    /*margin: 1em;*/
+    margin-top: 2em;
+    width: 100%;
+    height: 10vw;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.attach-icon{
+    font-size: 4.5em;
+}
+
+.pdf-preview {
+    background: rgb(217,0,0);
+    background: linear-gradient(90deg, rgba(217,0,0,1) 0%, rgba(204,5,5,1) 100%);
+}
+
+.image-preview {
+    background: rgb(217,0,0);
+    background: linear-gradient(90deg, rgb(130, 217, 110) 0%, rgb(86, 139, 52) 100%);
+}
