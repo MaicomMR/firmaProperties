@@ -202,6 +202,20 @@ return [
             'icon' => 'fas fa-list-alt',
         ],
         [
+            'text'    => 'Colaboradores',
+            'icon'    => 'fa fa-users',
+            'submenu' => [
+                [
+                    'text' => 'Adicionar Colaborador',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Listar Colaboradores',
+                    'url'  => '#',
+                ],
+            ],
+        ],
+        [
             'text'    => 'Categorias',
             'icon'    => 'fa fa-tags',
             'submenu' => [

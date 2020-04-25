@@ -214,13 +214,18 @@
     </state>
     <state x="975" y="334" key="com.intellij.ide.util.TipDialog/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1586213158125" />
     <state x="975" y="334" key="com.intellij.ide.util.TipDialog/0.0.2560.1019@0.0.2560.1019" timestamp="1587839861661" />
+    <state x="1089" y="427" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587844111322">
+      <screen x="0" y="0" width="2560" height="1019" />
+    </state>
+    <state x="1089" y="427" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1019@0.0.2560.1019" timestamp="1587844111322" />
     <state x="977" y="107" width="736" height="804" key="find.popup" timestamp="1584300207864">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
     <state x="977" y="107" width="736" height="804" key="find.popup/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1584300207864" />
-    <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup" timestamp="1584289507768">
+    <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup" timestamp="1587844232229">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
     <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1584289507768" />
+    <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup/0.0.2560.1019@0.0.2560.1019" timestamp="1587844232229" />
   </component>
 </project>
