@@ -39,9 +39,13 @@ Route::post('bill-of-sale/save', 'BillController@store')->name('saveBill');
 
 Route::get('employee/add', 'Employee@create')->name('employeeCreate');
 
+Route::put('employee/update/{id}', 'Employee@update')->name('employeeUpdate');
+
 Route::post('employee/store', 'Employee@store')->name('employeeStore');
 
 Route::get('employee/index', 'Employee@index')->name('employeeIndex');
+
+Route::get('employee/index/{id}', 'Employee@edit')->name('employeeEdit');
 
 
 

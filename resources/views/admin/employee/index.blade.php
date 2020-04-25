@@ -6,18 +6,27 @@
 
     <link rel="stylesheet" type="text/css" href="css/adminStyle.css">
     <h1>Listar colaboradores</h1>
+
+    @if(session()->has('message'))
+
+        <div class="alert alert-success" role="alert">
+            {{ session()->get('message') }}
+        </div>
+    @endif
+
+
 @stop
 
-@if(session()->has('message'))
 
-    <div class="alert alert-success" role="alert">
-        {{ session()->get('message') }}
-    </div>
-@endif
 
 
 
 @section('content')
+
+
+
+
+
     @if(count($errors)>0)
         <div class="card">
             <div class="card-header h5">
@@ -62,9 +71,10 @@
                         <button type="button" class="btn btn-warning">
                             <i class="fa fa-eye" aria-hidden="true"></i>
                         </button>
-                        <button type="button" class="btn btn-primary">
-                            <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                        </button>
+
+                        <a class="btn btn-primary" href="{{ route('employeeEdit', $employee->id)}}">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
                         <button type="button" class="btn btn-danger">
                             <i class="fas fa-trash-alt" aria-hidden="true"></i>
                         </button>

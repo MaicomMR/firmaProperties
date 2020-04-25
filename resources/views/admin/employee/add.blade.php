@@ -31,10 +31,22 @@
     <h1>Adicionar novo colaborador</h1>
 @stop
 
+
+@if (isset($employee))
+
+    {!! Form::model($employee, [
+    'route' => ['employeeUpdate', $employee->id],
+    'class' => 'form',
+    'method' => 'PUT',
+    'files' => true
+    ]) !!}
+
+@else
+
 {!! Form::open([
 'route' => 'employeeStore',
 'class' => 'form']) !!}
-
+@endif
 
 
 @if(session()->has('message'))

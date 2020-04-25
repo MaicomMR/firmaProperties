@@ -19,7 +19,7 @@ class Employee extends Controller
 
         return view('admin.employee.index')->with([
             'employees'=>$employees
-        ]);;
+        ]);
     }
 
     /**
@@ -87,7 +87,11 @@ class Employee extends Controller
      */
     public function edit($id)
     {
-        //
+        $Employee = \App\EmployeeModel::find($id);
+
+        return view('admin.employee.add')->with([
+            'employee' => $Employee
+        ]);
     }
 
     /**
@@ -99,7 +103,33 @@ class Employee extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $validator = Validator::make($request->all(), [ // <---
+            'name' => 'required|max:255|min:10',
+            'cpf' => 'numeric|digits:11',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+
+            $employee = EmployeeModel::find($id);
+
+            $employee->name = $request->name;
+            $employee->cpf = $request->cpf;
+            $employee->email = $request->email;
+            $employee->phone = $request->phone;
+            $employee->adress = $request->adress;
+            $employee->adressNumber = $request->adressNumber;
+            $employee->adressNumberInfo = $request->adressNumberInfo;
+
+            $employee->save();
+
+
+            return redirect('employee/index')->with('message', 'Dados do colaborador '. $employee->name . ' editados com sucesso.');
+        }
     }
 
     /**
