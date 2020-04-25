@@ -211,7 +211,7 @@ return [
                 ],
                 [
                     'text' => 'Listar Colaboradores',
-                    'url'  => '#',
+                    'url'  => 'employee/index',
                 ],
             ],
         ],
@@ -235,23 +235,23 @@ return [
         ],
         ['header' => 'NOTAS FISCAIS'],
         [
-            'text' => 'Adicionar Nota Fiscal',
+            'text' => '[WIP] Adicionar Nota Fiscal',
             'url'  => 'bill-of-sale',
             'icon' => 'fas fa-file-alt',
         ],
         [
-            'text' => 'Adicionar Fornecedor',
+            'text' => '[WIP] Adicionar Fornecedor',
             'url'  => 'seller',
             'icon' => 'fas fa-file-alt',
         ],
         [
-            'text' => 'Listar',
+            'text' => '[WIP] Listar',
             'url'  => '#',
             'icon' => 'far fa-file-alt',
         ],
         ['header' => 'CONFIGURAÇÕES'],
         [
-            'text' => 'Configurações',
+            'text' => '[WIP] Configurações',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
         ],

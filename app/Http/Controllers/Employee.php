@@ -15,7 +15,11 @@ class Employee extends Controller
      */
     public function index()
     {
-        //
+        $employees = EmployeeModel::all()->sortBy("name");
+
+        return view('admin.employee.index')->with([
+            'employees'=>$employees
+        ]);;
     }
 
     /**

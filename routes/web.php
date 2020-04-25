@@ -41,5 +41,7 @@ Route::get('employee/add', 'Employee@create')->name('employeeCreate');
 
 Route::post('employee/store', 'Employee@store')->name('employeeStore');
 
+Route::get('employee/index', 'Employee@index')->name('employeeIndex');
+
 
 
