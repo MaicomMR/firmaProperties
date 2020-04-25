@@ -207,7 +207,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Adicionar Colaborador',
-                    'url'  => '#',
+                    'url'  => 'employee/add',
                 ],
                 [
                     'text' => 'Listar Colaboradores',

@@ -39,7 +39,6 @@
                     </thead>
 
 
-
                     @foreach($EstateList as $Estate)
 
                         <th scope="row">{{$Estate->label_id}}</th>
@@ -48,9 +47,9 @@
                         <th scope="row">{{$Estate->category->name}}</th>
                         <th scope="row">{{$Estate->subcategory->name}}</th>
                         <th scope="row">
-                        @if($Estate->seller)
-                            {{$Estate->seller->name}}
-                        @endif
+                            @if($Estate->seller)
+                                {{$Estate->seller->name}}
+                            @endif
 
                         </th>
 
@@ -67,7 +66,7 @@
                             </a>
                             <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#exampleModal"
 
-                                onclick="deleteData({{$Estate}})">
+                               onclick="deleteData({{$Estate}})">
 
                                 <i class="fas fa-trash-alt"></i>
 
@@ -77,9 +76,8 @@
 
                             {{--   MODAL PARA CONFIRMAR A DELEÇÃO DO ÍTEM   --}}
                             {{--              REFACTOR IS COMING            --}}
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
 
 
                                 <div class="modal-dialog" role="document">
@@ -105,13 +103,13 @@
                                                 <br></h5>
 
 
-
                                         </div>
                                         <div class="modal-footer">
                                             <a href="#" onclick="confirmDelete()" value="teste" id="confirmDelete">
                                                 <button class="btn btn-danger">REMOVER</button>
                                             </a>
-                                            <button type="button" class="btn btn-info" data-dismiss="modal">CANCELAR</button>
+                                            <button type="button" class="btn btn-info" data-dismiss="modal">CANCELAR
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -140,8 +138,7 @@
     <script type="text/javascript">
         let itemId = "";
 
-        function deleteData(EstateObject)
-        {
+        function deleteData(EstateObject) {
             var id = EstateObject.id;
             var itemName = EstateObject.name;
             var labelId = EstateObject.label_id;
@@ -149,9 +146,9 @@
             itemId = id;
 
 
-            var codigoDoItem =  document.getElementById("itemId");
-            var nomeDoItemElement =  document.getElementById("nomeDoItem");
-            var numeroDaEtiquetaElement =  document.getElementById("label_id");
+            var codigoDoItem = document.getElementById("itemId");
+            var nomeDoItemElement = document.getElementById("nomeDoItem");
+            var numeroDaEtiquetaElement = document.getElementById("label_id");
             nomeDoItemElement.innerHTML = itemName;
             numeroDaEtiquetaElement.innerHTML = labelId;
             codigoDoItem.innerHTML = id;
@@ -160,7 +157,7 @@
         function confirmDelete() {
             let url = "{{ route('estateDelete', ':id') }}";
             url = url.replace(':id', itemId);
-            document.location.href=url;
+            document.location.href = url;
         }
 
     </script>

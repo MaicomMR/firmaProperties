@@ -37,4 +37,9 @@ Route::get('bill-of-sale', 'BillController@index');
 Route::post('bill-of-sale/save', 'BillController@store')->name('saveBill');
 
 
+Route::get('employee/add', 'Employee@create')->name('employeeCreate');
+
+Route::post('employee/store', 'Employee@store')->name('employeeStore');
+
+
 
