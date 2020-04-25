@@ -168,6 +168,9 @@ class Estate extends Controller
      */
     public function destroy($id)
     {
-        //
+        $estate = EstateModel::find($id);
+        $estate->delete();
+
+        return redirect()->back()->with('message', 'Patrimônio removido com sucesso.');
     }
 }

@@ -22,6 +22,8 @@ Route::get('estates/index', 'Estate@index')->name('estateIndex');
 
 Route::get('estates/add', 'Estate@create')->name('estateAdd');
 
+Route::get('estates/delete/{id}', 'Estate@destroy')->name('estateDelete');
+
 Route::post('estate-edit/store', 'Estate@store')->name('estateAdd');
 
 Route::put('estate-update/{id}', 'Estate@update')->name('estate.update');

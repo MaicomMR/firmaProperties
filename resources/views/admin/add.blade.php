@@ -127,7 +127,7 @@
         </div>
     </div>
 
-    {!! Form::submit('Click Me!', ['class' => 'btn btn-info']); !!}
+    {!! Form::submit('Salvar', ['class' => 'btn btn-info']); !!}
 
 
 

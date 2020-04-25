@@ -17,11 +17,13 @@
 
                 Número do patrimônio:<br>
                 <h5>{{$Estate->label_id}}</h5>
+                {{$Estate->id}}
 
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger">REMOVER</button>
+                <a href="{{action('Estate@destroy', $Estate->id)}}">
+                    <button type="button" class="btn btn-danger">REMOVER</button></a>
                 <button type="button" class="btn btn-info" data-dismiss="modal">CANCELAR</button>
             </div>
         </div>
