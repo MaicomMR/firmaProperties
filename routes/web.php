@@ -47,5 +47,7 @@ Route::get('employee/index', 'Employee@index')->name('employeeIndex');
 
 Route::get('employee/index/{id}', 'Employee@edit')->name('employeeEdit');
 
+Route::get('employee/delete/{id}', 'Employee@destroy')->name('employeeDelete');
+
 
 

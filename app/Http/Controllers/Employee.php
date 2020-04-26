@@ -140,6 +140,10 @@ class Employee extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = EmployeeModel::find($id);
+        $employee->delete();
+
+        return redirect('employee/index')->with('message', 'Colaborador '. $employee->name . ' removido!');
+
     }
 }
