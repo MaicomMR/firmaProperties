@@ -1,7 +1,9 @@
 .card-estate {
     display: flex;
+    padding-top: 20px;
 }
-.flex {
+.employeeData {
+    margin: 10px;
 }
 .estate-icon {
     border-radius: 10px 0px 0px 10px;
@@ -24,6 +26,7 @@
  }
 
  .estate-button-text {
+     margin-top: 1em;
      font-size: 1.1em;
  }
 .estate-button-body {

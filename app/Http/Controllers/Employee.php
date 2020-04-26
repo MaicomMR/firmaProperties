@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EstateModel;
 use Illuminate\Http\Request;
 use Validator;
 use \App\EmployeeModel;
@@ -77,9 +78,12 @@ class Employee extends Controller
     public function show($id)
     {
         $Employee = \App\EmployeeModel::find($id);
+        $EmployeeAssignedEstates = EstateModel::all()->where('employee_id', $id);
+
 
         return view('admin.employee.profile')->with([
-            'employee' => $Employee
+            'employee' => $Employee,
+            'EmployeeAssignedEstates' => $EmployeeAssignedEstates,
         ]);
     }
 
