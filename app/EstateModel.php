@@ -8,7 +8,7 @@ class EstateModel extends Model
 {
 
     protected $table = 'estates';
-    protected $fillable = ['categories_id', 'label_id'];
+    protected $fillable = ['categories_id', 'label_id', 'employee_id'];
 
     public function category()
     {
@@ -25,4 +25,8 @@ class EstateModel extends Model
         return $this->belongsTo('App\Seller', 'seller_id');
     }
 
+    public function employee()
+    {
+        return $this->belongsTo('App\EmployeeModel', 'employee_id');
+    }
 }

@@ -45,6 +45,8 @@ Route::post('employee/store', 'Employee@store')->name('employeeStore');
 
 Route::get('employee/index', 'Employee@index')->name('employeeIndex');
 
+Route::get('employee/show/{id}', 'Employee@show')->name('employeeProfile');
+
 Route::get('employee/index/{id}', 'Employee@edit')->name('employeeEdit');
 
 Route::get('employee/delete/{id}', 'Employee@destroy')->name('employeeDelete');

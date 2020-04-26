@@ -1,0 +1,39 @@
+.card-estate {
+    display: flex;
+}
+.flex {
+}
+.estate-icon {
+    border-radius: 10px 0px 0px 10px;
+    box-shadow: 0 0 1px rgba(0,0,0,0), 0 3px 1px rgba(0,0,0,0.3);
+    padding-top: 0.5em;
+    font-size: 5em;
+}
+
+.estate-info {
+    background-color: #f5f3f1;
+     box-shadow: 0 0 1px rgba(0,0,0,0), 0 3px 1px rgba(0,0,0,0.3)
+
+}.estate-options {
+
+    /*border-radius: 0px 10px 10px 0px;*/
+}
+ .estate-options-buttons {
+     font-size: 3.5em;
+     padding-top: 0.75em;
+ }
+
+ .estate-button-text {
+     font-size: 1.1em;
+ }
+.estate-button-body {
+    box-shadow: 0 0 1px rgba(0,0,0,0), 0 3px 1px rgba(0,0,0,0.3)
+}
+
+
+/*HIDE ITEM TYPE ICON IN SMALL SCREEN DEVICES*/
+@media only screen and (max-width: 1026px) {
+    .estate-icon {
+        display: none;
+    }
+}

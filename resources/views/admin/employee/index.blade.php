@@ -47,9 +47,9 @@
                     <td>{{$employee->name}}</td>
                     <td>{{$employee->cpf}}</td>
                     <td>
-                        <button type="button" class="btn btn-warning">
-                            <i class="fa fa-eye" aria-hidden="true"></i>
-                        </button>
+                        <a class="btn btn-warning" href="{{ route('employeeProfile', $employee->id)}}">
+                            <i class="fa fa-eye"></i>
+                        </a>
 
                         <a class="btn btn-primary" href="{{ route('employeeEdit', $employee->id)}}">
                             <i class="fas fa-pencil-alt"></i>

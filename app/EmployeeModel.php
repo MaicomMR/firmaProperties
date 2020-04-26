@@ -13,6 +13,16 @@ class EmployeeModel extends Model
 
     protected $table = 'employees';
     protected $fillable = ['name'];
+    private $email;
+    private $phone;
+    private $adress;
+    private $adressNumber;
+    private $adressNumberInfo;
 
+
+    public function estate()
+    {
+        return $this->hasMany('App\EstateModel', 'foreign_key');
+    }
 
 }
