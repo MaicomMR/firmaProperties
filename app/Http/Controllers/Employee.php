@@ -77,7 +77,7 @@ class Employee extends Controller
      */
     public function show($id)
     {
-        $Employee = \App\EmployeeModel::find($id);
+        $Employee = \App\EmployeeModel::withTrashed()->find($id);
         $EmployeeAssignedEstates = EstateModel::all()->where('employee_id', $id);
 
 

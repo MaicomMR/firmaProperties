@@ -28,11 +28,15 @@
         </div>
     @endif
 
-
+    @if($employee->deleted_at)
+        <div class="container btn-danger" style="padding: 10px">
+            <h4 class="text-center"><i class="fa fa-ban" style="padding: 10px"></i>Colaborador removido da base de dados</h4>
+        </div>
+    @else
     <div class="container btn-success" style="padding: 10px">
         <h4 class="text-center"><i class="fa fa-plus-circle" style="padding: 10px"></i>Adicionar patrimônio ao colaborador</h4>
     </div>
-
+    @endif
     <div class="container card text-center" style="padding: 20px">
         <h2>{{$employee->name}}</h2>
 
