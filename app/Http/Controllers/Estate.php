@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EmployeeModel;
 use \App\EstateModel;
 use \App\Category;
 use \App\SubCategory;
@@ -40,9 +41,11 @@ class Estate extends Controller
     public function index()
     {
     $EstateList = EstateModel::all();
+    $EmployeeList = EmployeeModel::all();
 
     return view('admin.estates.estateIndex')
-        ->with(['EstateList' => $EstateList]);
+        ->with(['EstateList' => $EstateList])
+        ->with(['EmployeeList' => $EmployeeList]);
     }
 
     /**

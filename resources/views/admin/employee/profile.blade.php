@@ -27,7 +27,7 @@
             </div>
         </div>
     @endif
-    
+
 
     <div class="container btn-success" style="padding: 10px">
         <h4 class="text-center"><i class="fa fa-plus-circle" style="padding: 10px"></i>Adicionar patrimônio ao colaborador</h4>

@@ -20,7 +20,7 @@ Route::get('seller', 'Sellers@index')->name('seller');
 
 Route::get('estates/index', 'Estate@index')->name('estateIndex');
 
-Route::get('estates/add', 'Estate@create')->name('estateAdd');
+Route::get('estates/add', 'Estate@create')->name('estateAddPage');
 
 Route::get('estates/delete/{id}', 'Estate@destroy')->name('estateDelete');
 

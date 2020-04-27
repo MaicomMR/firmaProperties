@@ -20,7 +20,11 @@
         </div>
     @endif
 
-
+    <a href="{{route('estateAddPage')}}">
+    <div class="container btn-success" style="padding: 10px">
+        <h4 class="text-center"><i class="fa fa-plus-circle" style="padding: 10px"></i>Adicionar patrimônio</h4>
+    </div>
+    </a>
 
     <div class="container">
         <div class="row">
@@ -41,9 +45,12 @@
 
                     @foreach($EstateList as $Estate)
 
-                        <th scope="row">{{$Estate->label_id}}</th>
+
+                        <th scope="row" class="text-right" >
+                            {{$Estate->label_id}}
+                        </th>
                         <th scope="row">{{$Estate->name}}</th>
-                        <th scope="row">{{$Estate->value}} R$</th>
+                        <th scope="row">{{number_format($Estate->value, 2, ',', ' ')}} R$</th>
                         <th scope="row">{{$Estate->category->name}}</th>
                         <th scope="row">{{$Estate->subcategory->name}}</th>
                         <th scope="row">
@@ -57,6 +64,9 @@
 
 
                         <th scope="row">
+
+
+
                             <button type="button" class="btn btn-warning">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                             </button>
@@ -64,57 +74,30 @@
                             <a class="btn btn-primary" href="{{ route('estateEdit', $Estate->id)}}">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
-                            <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#exampleModal"
+                            <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#confirmDeleteModal"
 
                                onclick="deleteData({{$Estate}})">
-
                                 <i class="fas fa-trash-alt"></i>
-
-
                             </a>
+                            @if($Estate->employee_id)
+                                <a href="{{route('employeeProfile', $Estate->employee_id)}}">
+                                <button type="button" class="btn btn-secondary">
+                                    <i class="fas fa-user-tag"></i>
+                                </button>
+                                </a>
+                                @else
 
+                                <a class="btn btn-success" href="#" data-toggle="modal" data-target="#confirmAssignModal"
+                                   onclick="">
+                                    <i class="fas fa-user-plus"></i>
+                                </a>
 
-                            {{--   MODAL PARA CONFIRMAR A DELEÇÃO DO ÍTEM   --}}
-                            {{--              REFACTOR IS COMING            --}}
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            @endif
+                            {{-- Confirm delete modal --}}
+                            @include('admin.estates.estateConfirmDeleteModal')
 
-
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">
-                                                <span id="itemId">
-
-                                                </span>
-
-                                                - Você deseja remover esse ítem?</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body text-center">
-                                            <i class="fas fa-trash-alt bg-danger rounded-circle"
-                                               style="font-size: 4em; padding: 1em;"></i>
-                                            <br>Número do patrimônio:<br>
-                                            <h5 id="label_id"></h5>
-                                            Você irá remover o patrimônio:<br>
-                                            <h5 class="text-uppercase" id="nomeDoItem">
-                                                <br></h5>
-
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a href="#" onclick="confirmDelete()" value="teste" id="confirmDelete">
-                                                <button class="btn btn-danger">REMOVER</button>
-                                            </a>
-                                            <button type="button" class="btn btn-info" data-dismiss="modal">CANCELAR
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            {{-- Confirm assign modal --}}
+                            @include('admin.estates.estateConfirmAssignModal')
                         </th>
                         </tr>
                     @endforeach
@@ -134,31 +117,4 @@
 @stop
 
 
-@section('js')
-    <script type="text/javascript">
-        let itemId = "";
 
-        function deleteData(EstateObject) {
-            var id = EstateObject.id;
-            var itemName = EstateObject.name;
-            var labelId = EstateObject.label_id;
-
-            itemId = id;
-
-
-            var codigoDoItem = document.getElementById("itemId");
-            var nomeDoItemElement = document.getElementById("nomeDoItem");
-            var numeroDaEtiquetaElement = document.getElementById("label_id");
-            nomeDoItemElement.innerHTML = itemName;
-            numeroDaEtiquetaElement.innerHTML = labelId;
-            codigoDoItem.innerHTML = id;
-        }
-
-        function confirmDelete() {
-            let url = "{{ route('estateDelete', ':id') }}";
-            url = url.replace(':id', itemId);
-            document.location.href = url;
-        }
-
-    </script>
-@stop
