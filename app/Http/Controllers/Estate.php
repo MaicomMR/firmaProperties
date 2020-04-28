@@ -8,6 +8,7 @@ use \App\EstateModel;
 use \App\Category;
 use \App\SubCategory;
 use Illuminate\Http\Request;
+use mysql_xdevapi\Exception;
 use Validator;
 
 class Estate extends Controller
@@ -175,5 +176,19 @@ class Estate extends Controller
         $estate->delete();
 
         return redirect()->back()->with('message', 'Patrimônio removido com sucesso.');
+    }
+
+    public function assignEstateToEmployee($estateId, $employeeId){
+        if ($employeeId == 'null'){
+            return redirect()->back()->with('message', 'Ops... parece que você não selecionou um colaborador para atribuir este patrimônio');
+        }
+
+            $estate = EstateModel::find($estateId);
+            $employee = EmployeeModel::find($employeeId);
+            $estate->employee_id = $employeeId;
+            $estate->save();
+
+            return redirect()->back()->with('message', 'Patrimônio ' . $estate->name . ' atribuído ao colaborador ' . $employee->name . ' com sucesso.');
+
     }
 }

@@ -3,7 +3,6 @@
 <div class="modal fade" id="confirmAssignModal" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -14,8 +13,8 @@
                 </button>
             </div>
             <div class="modal-body text-center">
-                <select class="custom-select">
-                    <option selected>Colaborador que você deseja atribuir</option>
+                <select id="employeeNameSelector" class="custom-select">
+                    <option  selected value="null">Selecione o colaborador que você deseja atribuir</option>
                     @foreach($EmployeeList as $Employee)
                         <option value="{{$Employee->id}}">{{$Employee->name}}</option>
                     @endforeach
@@ -24,37 +23,38 @@
 
             </div>
             <div class="modal-footer">
+
+                <a href="#" onclick="confirmAssignDataToEmployee()" id="confirmAssign">
+                    <button class="btn btn-success btn-lg btn-block">ATRIBUIR</button>
+                </a>
             </div>
         </div>
     </div>
 </div>
 
-
-@section('js')
+@push('js')
     <script type="text/javascript">
-        let itemId = "";
-
-        function deleteData(EstateObject) {
-            var id = EstateObject.id;
-            var itemName = EstateObject.name;
-            var labelId = EstateObject.label_id;
-
-            itemId = id;
-
-
-            var codigoDoItem = document.getElementById("itemId");
-            var nomeDoItemElement = document.getElementById("nomeDoItem");
-            var numeroDaEtiquetaElement = document.getElementById("label_id");
-            nomeDoItemElement.innerHTML = itemName;
-            numeroDaEtiquetaElement.innerHTML = labelId;
-            codigoDoItem.innerHTML = id;
+        var EstateId;
+        var employeeId;
+        function assignDataToEmployee(object) {
+            EstateId = object.id;
+            console.log(object.id);
         }
 
-        function confirmDelete() {
-            let url = "{{ route('estateDelete', ':id') }}";
-            url = url.replace(':id', itemId);
+
+        function confirmAssignDataToEmployee() {
+
+            var e = document.getElementById("employeeNameSelector");
+            var strUser = e.options[e.selectedIndex].value;
+
+            employeeId = e.options[e.selectedIndex].value;
+            console.log(strUser);
+
+            let url = "{{ route('assignEstateToEmployee', [':estate_id', ':employee_id']) }}";
+            url = url.replace(':estate_id', EstateId);
+            url = url.replace(':employee_id', employeeId);
             document.location.href = url;
         }
 
     </script>
-@stop
+@endpush

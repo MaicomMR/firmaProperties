@@ -85,10 +85,10 @@
                                     <i class="fas fa-user-tag"></i>
                                 </button>
                                 </a>
-                                @else
+                            @else
 
                                 <a class="btn btn-success" href="#" data-toggle="modal" data-target="#confirmAssignModal"
-                                   onclick="">
+                                   onclick="assignDataToEmployee({{$Estate}})">
                                     <i class="fas fa-user-plus"></i>
                                 </a>
 
@@ -96,8 +96,11 @@
                             {{-- Confirm delete modal --}}
                             @include('admin.estates.estateConfirmDeleteModal')
 
-                            {{-- Confirm assign modal --}}
+{{--                            --}}{{-- Confirm assign modal --}}
                             @include('admin.estates.estateConfirmAssignModal')
+
+
+
                         </th>
                         </tr>
                     @endforeach

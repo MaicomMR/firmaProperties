@@ -62,5 +62,6 @@
             url = url.replace(':id', itemId);
             document.location.href=url;
         }
+
     </script>
 @stop
