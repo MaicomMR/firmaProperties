@@ -83,7 +83,7 @@
             <div class="col-sm-12 text-center">
             <h2>{{$EmployeeEstate->name}}</h2>
             <i class="fa fa-tag" style="font-size: 1.2em"></i> <span style="font-size: 1.5em; padding-left: 0.2em;">Etiqueta: {{$EmployeeEstate->label_id}}</span><br>
-            <i class="fa fa-calendar" style="font-size: 1.2em"></i> <span style="font-size: 1.5em; padding-left: 0.2em;">Concessão: 12/04/2020</span><br>
+            <i class="fa fa-calendar" style="font-size: 1.2em"></i> <span style="font-size: 1.5em; padding-left: 0.2em;">Concessão: {{date('d/m/Y', strtotime($EmployeeEstate->last_assign_date))}}</span><br>
             </div>
             <div class="col-sm-6">
                 <span>Categoria: {{$EmployeeEstate->category->name}}</span><br>
