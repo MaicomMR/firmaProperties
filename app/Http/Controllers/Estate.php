@@ -187,6 +187,7 @@ class Estate extends Controller
             $estate = EstateModel::find($estateId);
             $employee = EmployeeModel::find($employeeId);
             $estate->employee_id = $employeeId;
+            $estate->last_assign_date = now();
 
             $estateHistory = new EstateHistoryModel();
             $estateHistory->employee_id = $employeeId;
