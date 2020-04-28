@@ -33,6 +33,8 @@ Route::get('estates/index/{id}', 'Estate@search')->name('estateEdit');
 
 Route::get('estates/assign/{item_id}/{employee_id}', 'Estate@assignEstateToEmployee')->name('assignEstateToEmployee');
 
+Route::get('estates/unassign/{item_id}/{employee_id}', 'Estate@unassignEstateToEmployee')->name('unassignEstateToEmployee');
+
 
 
 

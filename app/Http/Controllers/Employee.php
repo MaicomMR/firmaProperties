@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EstateHistoryModel;
 use App\EstateModel;
 use Illuminate\Http\Request;
 use Validator;
@@ -79,11 +80,12 @@ class Employee extends Controller
     {
         $Employee = \App\EmployeeModel::withTrashed()->find($id);
         $EmployeeAssignedEstates = EstateModel::all()->where('employee_id', $id);
-
+        $EmployeeAssignHistory = EstateHistoryModel::all()->where('employee_id', $id)->sortByDesc('created_at');
 
         return view('admin.employee.profile')->with([
             'employee' => $Employee,
             'EmployeeAssignedEstates' => $EmployeeAssignedEstates,
+            'EmployeeAssignHistory' => $EmployeeAssignHistory,
         ]);
     }
 

@@ -200,4 +200,22 @@ class Estate extends Controller
             return redirect()->back()->with('message', 'Patrimônio ' . $estate->name . ' atribuído ao colaborador ' . $employee->name . ' com sucesso.');
 
     }
+
+    public function unassignEstateToEmployee($estateId, $employeeId){
+
+        $estate = EstateModel::find($estateId);
+        $estate->employee_id = null;
+        $estate->last_assign_date = null;
+
+        $estateHistory = new EstateHistoryModel();
+        $estateHistory->employee_id = $employeeId;
+        $estateHistory->estate_id = $estateId;
+        $estateHistory->unassign = '1';
+
+        $estateHistory->save();
+        $estate->save();
+
+        return redirect()->back()->with('message', 'Patrimônio ' . $estate->name . ' desatribuído do colaborador com sucesso.');
+
+    }
 }

@@ -7,12 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/adminStyle.css">
 @stop
 
-@if(session()->has('message'))
 
-    <div class="alert alert-success" role="alert">
-        {{ session()->get('message') }}
-    </div>
-@endif
 
 @section('content')
     @if(count($errors)>0)
@@ -25,6 +20,13 @@
                     <li style="color: white">{{$error}}</li>
                 @endforeach
             </div>
+        </div>
+    @endif
+
+    @if(session()->has('message'))
+
+        <div class="alert alert-success" role="alert">
+            {{ session()->get('message') }}
         </div>
     @endif
 
@@ -70,8 +72,16 @@
     </div>
 
 
+
+
     @foreach($EmployeeAssignedEstates as $EmployeeEstate)
-    <div class="card-estate col-sm">
+
+
+        @include('admin.estates.estateConfirmUnassignFromEmployeeModal')
+
+
+
+        <div class="container card-estate">
         <div class="estate-icon flex col-sm-2 text-center btn-secondary">
 
         {{-- icon switch blade--}}
@@ -102,21 +112,64 @@
         </div>
 
         <div class="estate-options flex col-sm-5 row text-center">
-            <div class="col-sm-4 btn-dark  estate-button-body">
+
+
+            <a  href="{{route('estateEdit', $EmployeeEstate->id)}}"
+                class="col-sm-4 btn-dark estate-button-body">
                 <i class="fa fa-eye estate-options-buttons" aria-hidden="true"></i>
                 <p class="estate-button-text">Visualizar patrimônio</p><br>
-            </div>
-            <div class="col-sm-4 btn-warning  estate-button-body">
+            </a>
+
+            <a href="" onclick="unassignEstate({{$EmployeeEstate}}, {{$employee}})" data-toggle="modal" data-target="#confirmUnassignModal"
+               class="col-sm-4 btn-warning estate-button-body">
                 <i class="fa fa-chevron-circle-down estate-options-buttons" aria-hidden="true"></i>
                 <p class="estate-button-text">Desatribuir do colaborador</p><br>
-            </div>
-            <div class="col-sm-4 btn-danger estate-button-body" style="border-radius: 0px 10px 10px 0px;">
+            </a>
+
+            <a href=""
+               class="col-sm-4 btn-danger estate-button-body" style="border-radius: 0px 10px 10px 0px;">
                 <i class="fa fa-minus-circle estate-options-buttons" aria-hidden="true"></i>
                 <p class="estate-button-text">Dar baixa do patrimônio</p><br>
-            </div>
+            </a>
         </div>
     </div>
     @endforeach
+
+    <div class="container btn-warning" style="margin-top: 10px">
+        <h4 class="text-center"><i class="fa fa-book" style="padding: 10px"></i>Histórico</h4>
+    </div>
+        <div class="row" style="display: flex; margin-left: 5px;">
+            <div class="col-sm-12 text-center">
+                <span> Ações recentes estarão posicionadas em cima</span><br>
+            </div>
+        </div>
+    </div>
+    @foreach($EmployeeAssignHistory as $EstateHistory)
+{{--TODO: REFATORAR FRONT END--}}
+
+            <div class="container bg-gray-light" style="display: flex; align-items: flex-start;">
+                <div class="flex text-center">
+                    @if($EstateHistory->assign)
+                        <div class="btn-success" style="height: 100%; padding: 5px">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                    @else
+                        <div class="btn-danger" style="height: 100%; padding: 5px">
+                            <i class="fas fa-user-minus"></i>
+                        </div>
+                    @endif
+                </div>
+
+                <div class="row" style="display: flex; margin-left: 5px;">
+                    <div class="col-sm-12 text-center">
+                        <span>{{$EstateHistory->estate->label_id}} - {{$EstateHistory->estate->name}} - </span>
+                        <span style="">Data: {{date('d/m/Y', strtotime($EstateHistory->updated_at))}}</span><br>
+                    </div>
+                </div>
+            </div>
+    @endforeach
+
+
 
 
 @stop
