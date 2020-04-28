@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\EmployeeModel;
+use App\EstateHistoryModel;
 use \App\EstateModel;
 use \App\Category;
 use \App\SubCategory;
@@ -186,6 +187,13 @@ class Estate extends Controller
             $estate = EstateModel::find($estateId);
             $employee = EmployeeModel::find($employeeId);
             $estate->employee_id = $employeeId;
+
+            $estateHistory = new EstateHistoryModel();
+            $estateHistory->employee_id = $employeeId;
+            $estateHistory->estate_id = $estateId;
+            $estateHistory->assign = '1';
+
+            $estateHistory->save();
             $estate->save();
 
             return redirect()->back()->with('message', 'Patrimônio ' . $estate->name . ' atribuído ao colaborador ' . $employee->name . ' com sucesso.');
