@@ -173,8 +173,22 @@ class Estate extends Controller
      */
     public function destroy($id)
     {
+
+
         $estate = EstateModel::find($id);
         $estate->delete();
+
+        $estateHistory = EstateHistoryModel::find($id);
+
+        if ($estateHistory->assign == 1){
+            $unassignEstateHistory = new EstateHistoryModel();
+
+            $unassignEstateHistory->employee_id = $estateHistory->employee_id;
+            $unassignEstateHistory->estate_id = $estateHistory->estate_id;
+            $unassignEstateHistory->unassign = 1;
+
+            $unassignEstateHistory->save();
+        }
 
         return redirect()->back()->with('message', 'Patrimônio removido com sucesso.');
     }
