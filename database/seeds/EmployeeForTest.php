@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class Category extends Seeder
+class EmployeeForTest extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,11 +11,10 @@ class Category extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->insert([
+        DB::table('employees')->insert([
             [
-                'name' => 'Equipamento de TI',
-            ],[
-                'name' => 'Infraestrutura',
+                'name' => 'Exemplerino da Silva',
+                'cpf' => '00011122211',
             ]
         ]);
     }

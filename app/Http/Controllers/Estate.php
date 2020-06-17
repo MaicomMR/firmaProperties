@@ -3,10 +3,13 @@
 
 namespace App\Http\Controllers;
 
+use App\EmployeeModel;
+use App\EstateHistoryModel;
 use \App\EstateModel;
 use \App\Category;
 use \App\SubCategory;
 use Illuminate\Http\Request;
+use mysql_xdevapi\Exception;
 use Validator;
 
 class Estate extends Controller
@@ -40,9 +43,11 @@ class Estate extends Controller
     public function index()
     {
     $EstateList = EstateModel::all();
+    $EmployeeList = EmployeeModel::all();
 
     return view('admin.estates.estateIndex')
-        ->with(['EstateList' => $EstateList]);
+        ->with(['EstateList' => $EstateList])
+        ->with(['EmployeeList' => $EmployeeList]);
     }
 
     /**
@@ -168,9 +173,63 @@ class Estate extends Controller
      */
     public function destroy($id)
     {
+
+
         $estate = EstateModel::find($id);
         $estate->delete();
 
+        $estateHistory = EstateHistoryModel::find($id);
+
+        if ($estateHistory->assign == 1){
+            $unassignEstateHistory = new EstateHistoryModel();
+
+            $unassignEstateHistory->employee_id = $estateHistory->employee_id;
+            $unassignEstateHistory->estate_id = $estateHistory->estate_id;
+            $unassignEstateHistory->unassign = 1;
+
+            $unassignEstateHistory->save();
+        }
+
         return redirect()->back()->with('message', 'Patrimônio removido com sucesso.');
+    }
+
+    public function assignEstateToEmployee($estateId, $employeeId){
+        if ($employeeId == 'null'){
+            return redirect()->back()->with('message', 'Ops... parece que você não selecionou um colaborador para atribuir este patrimônio');
+        }
+
+            $estate = EstateModel::find($estateId);
+            $employee = EmployeeModel::find($employeeId);
+            $estate->employee_id = $employeeId;
+            $estate->last_assign_date = now();
+
+            $estateHistory = new EstateHistoryModel();
+            $estateHistory->employee_id = $employeeId;
+            $estateHistory->estate_id = $estateId;
+            $estateHistory->assign = '1';
+
+            $estateHistory->save();
+            $estate->save();
+
+            return redirect()->back()->with('message', 'Patrimônio ' . $estate->name . ' atribuído ao colaborador ' . $employee->name . ' com sucesso.');
+
+    }
+
+    public function unassignEstateToEmployee($estateId, $employeeId){
+
+        $estate = EstateModel::find($estateId);
+        $estate->employee_id = null;
+        $estate->last_assign_date = null;
+
+        $estateHistory = new EstateHistoryModel();
+        $estateHistory->employee_id = $employeeId;
+        $estateHistory->estate_id = $estateId;
+        $estateHistory->unassign = '1';
+
+        $estateHistory->save();
+        $estate->save();
+
+        return redirect()->back()->with('message', 'Patrimônio ' . $estate->name . ' desatribuído do colaborador com sucesso.');
+
     }
 }
