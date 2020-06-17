@@ -144,6 +144,12 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Maicom\Desktop\firmaEstate\public\icons\employee.profile" />
+      <recent name="C:\Users\Maicom\Desktop\firmaEstate\public\css\estate" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
@@ -194,6 +200,10 @@
       <workItem from="1586660816576" duration="3844000" />
       <workItem from="1586905038812" duration="7734000" />
       <workItem from="1587839860053" duration="3548000" />
+      <workItem from="1587883945800" duration="2347000" />
+      <workItem from="1587925986360" duration="18121000" />
+      <workItem from="1588025335614" duration="14257000" />
+      <workItem from="1588107822451" duration="5030000" />
     </task>
     <servers />
   </component>
@@ -201,26 +211,44 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1034" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1583713575054">
+    <state x="1026" y="313" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587956135293">
+      <screen x="0" y="0" width="2560" height="1019" />
+    </state>
+    <state x="1026" y="313" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1019@0.0.2560.1019" timestamp="1587956135293" />
+    <state x="1034" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1587877047285">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
     <state x="1034" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1583713575054" />
+    <state x="1034" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2560.1019@0.0.2560.1019" timestamp="1587877047285" />
+    <state x="1010" y="265" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1587870788482">
+      <screen x="0" y="0" width="2560" height="1019" />
+    </state>
+    <state x="1010" y="265" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.2560.1019@0.0.2560.1019" timestamp="1587870788482" />
     <state x="1042" y="324" key="NewPhpClassDialog" timestamp="1581551216813">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
     <state x="1042" y="324" key="NewPhpClassDialog/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1581551216813" />
-    <state x="975" y="334" key="com.intellij.ide.util.TipDialog" timestamp="1587839861661">
+    <state x="872" y="243" key="Vcs.Push.Dialog.v2" timestamp="1587848995409">
+      <screen x="0" y="0" width="2560" height="1019" />
+    </state>
+    <state x="872" y="243" key="Vcs.Push.Dialog.v2/0.0.2560.1019@0.0.2560.1019" timestamp="1587848995409" />
+    <state x="975" y="334" key="com.intellij.ide.util.TipDialog" timestamp="1588107824823">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
     <state x="975" y="334" key="com.intellij.ide.util.TipDialog/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1586213158125" />
-    <state x="975" y="334" key="com.intellij.ide.util.TipDialog/0.0.2560.1019@0.0.2560.1019" timestamp="1587839861661" />
+    <state x="975" y="334" key="com.intellij.ide.util.TipDialog/0.0.2560.1019@0.0.2560.1019" timestamp="1588107824823" />
+    <state x="1089" y="427" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587844111322">
+      <screen x="0" y="0" width="2560" height="1019" />
+    </state>
+    <state x="1089" y="427" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1019@0.0.2560.1019" timestamp="1587844111322" />
     <state x="977" y="107" width="736" height="804" key="find.popup" timestamp="1584300207864">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
     <state x="977" y="107" width="736" height="804" key="find.popup/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1584300207864" />
-    <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup" timestamp="1584289507768">
+    <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup" timestamp="1588108442523">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
     <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1584289507768" />
+    <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup/0.0.2560.1019@0.0.2560.1019" timestamp="1588108442523" />
   </component>
 </project>
