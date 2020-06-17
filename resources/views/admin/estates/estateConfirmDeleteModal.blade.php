@@ -41,6 +41,7 @@
         let itemId = "";
         function deleteData(EstateObject)
         {
+            console.log(EstateObject);
             var id = EstateObject.id;
             var itemName = EstateObject.name;
             var labelId = EstateObject.label_id;

@@ -64,21 +64,23 @@
 
 
                         <th scope="row">
-
-
-
+                            {{--    See estate button   --}}
                             <button type="button" class="btn btn-warning">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                             </button>
 
+                            {{--    Edit estate button   --}}
                             <a class="btn btn-primary" href="{{ route('estateEdit', $Estate->id)}}">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
-                            <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#confirmDeleteModal"
 
+                            {{--    Delete estate button   --}}
+                            <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#confirmDeleteModal"
                                onclick="deleteData({{$Estate}})">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
+
+                            {{--    Assign to employee button   --}}
                             @if($Estate->employee_id)
                                 <a href="{{route('employeeProfile', $Estate->employee_id)}}">
                                 <button type="button" class="btn btn-secondary">
@@ -86,21 +88,17 @@
                                 </button>
                                 </a>
                             @else
-
                                 <a class="btn btn-success" href="#" data-toggle="modal" data-target="#confirmAssignModal"
                                    onclick="assignDataToEmployee({{$Estate}})">
                                     <i class="fas fa-user-plus"></i>
                                 </a>
-
                             @endif
+
                             {{-- Confirm delete modal --}}
                             @include('admin.estates.estateConfirmDeleteModal')
 
-{{--                            --}}{{-- Confirm assign modal --}}
+                            {{-- Confirm assign modal --}}
                             @include('admin.estates.estateConfirmAssignModal')
-
-
-
                         </th>
                         </tr>
                     @endforeach

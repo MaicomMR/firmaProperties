@@ -3,13 +3,14 @@
 @section('title', 'Perfil do colaborador')
 
 @section('content_header')
-
-    <link rel="stylesheet" type="text/css" href="css/adminStyle.css">
 @stop
 
 
 
 @section('content')
+
+
+
     @if(count($errors)>0)
         <div class="card">
             <div class="card-header h5">
@@ -71,15 +72,11 @@
         @endif
     </div>
 
-
-
-
     @foreach($EmployeeAssignedEstates as $EmployeeEstate)
 
 
         @include('admin.estates.estateConfirmUnassignFromEmployeeModal')
-
-
+        @include('admin.estates.estateConfirmDeleteModal')
 
         <div class="container card-estate">
         <div class="estate-icon flex col-sm-2 text-center btn-secondary">
@@ -113,20 +110,22 @@
 
         <div class="estate-options flex col-sm-5 row text-center">
 
-
+            {{--    See estate data button    --}}
             <a  href="{{route('estateEdit', $EmployeeEstate->id)}}"
                 class="col-sm-4 btn-dark estate-button-body">
                 <i class="fa fa-eye estate-options-buttons" aria-hidden="true"></i>
                 <p class="estate-button-text">Visualizar patrimônio</p><br>
             </a>
 
+            {{--    Unregister estate from employee button    --}}
             <a href="" onclick="unassignEstate({{$EmployeeEstate}}, {{$employee}})" data-toggle="modal" data-target="#confirmUnassignModal"
                class="col-sm-4 btn-warning estate-button-body">
                 <i class="fa fa-chevron-circle-down estate-options-buttons" aria-hidden="true"></i>
                 <p class="estate-button-text">Desatribuir do colaborador</p><br>
             </a>
 
-            <a href=""
+            {{--    Unregister estate button    --}}
+            <a href="" onclick="writeOffEstate({{$EmployeeEstate}})" data-toggle="modal" data-target="#confirmDeleteModal"
                class="col-sm-4 btn-danger estate-button-body" style="border-radius: 0px 10px 10px 0px;">
                 <i class="fa fa-minus-circle estate-options-buttons" aria-hidden="true"></i>
                 <p class="estate-button-text">Dar baixa do patrimônio</p><br>
@@ -144,29 +143,31 @@
             </div>
         </div>
     </div>
+
+
     @foreach($EmployeeAssignHistory as $EstateHistory)
-{{--TODO: REFATORAR FRONT END--}}
+        {{--TODO: REFATORAR FRONT END--}}
 
-            <div class="container bg-gray-light" style="display: flex; align-items: flex-start;">
-                <div class="flex text-center">
-                    @if($EstateHistory->assign)
-                        <div class="btn-success" style="height: 100%; padding: 5px">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                    @else
-                        <div class="btn-danger" style="height: 100%; padding: 5px">
-                            <i class="fas fa-user-minus"></i>
-                        </div>
-                    @endif
-                </div>
-
-                <div class="row" style="display: flex; margin-left: 5px;">
-                    <div class="col-sm-12 text-center">
-                        <span>{{$EstateHistory->estate->label_id}} - {{$EstateHistory->estate->name}} - </span>
-                        <span style="">Data: {{date('d/m/Y', strtotime($EstateHistory->updated_at))}}</span><br>
+        <div class="container bg-gray-light" style="display: flex; align-items: flex-start;">
+            <div class="flex text-center">
+                @if($EstateHistory->assign)
+                    <div class="btn-success" style="height: 100%; padding: 5px">
+                        <i class="fas fa-user-plus"></i>
                     </div>
+                @else
+                    <div class="btn-danger" style="height: 100%; padding: 5px">
+                        <i class="fas fa-user-minus"></i>
+                    </div>
+                @endif
+            </div>
+
+            <div class="row" style="display: flex; margin-left: 5px;">
+                <div class="col-sm-12 text-center">
+                    <span>{{$EstateHistory->estate->label_id}} - {{$EstateHistory->estate->name}} - </span>
+                    <span style="">Data: {{date('d/m/Y', strtotime($EstateHistory->updated_at))}}</span><br>
                 </div>
             </div>
+        </div>
     @endforeach
 
 
@@ -175,9 +176,31 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
     <link rel="stylesheet" href="/css/estate/estate-card.css">
 @stop
 
-@section('js')
-@stop
+@push('js')
+    <script type="text/javascript">
+        let itemId = "";
+        function writeOffEstate(EstateObject)
+        {
+            var id = EstateObject.id;
+            var itemName = EstateObject.name;
+            var labelId = EstateObject.label_id;
+            itemId = id;
+            var codigoDoItem =  document.getElementById("itemId");
+            var nomeDoItemElement =  document.getElementById("nomeDoItem");
+            var numeroDaEtiquetaElement =  document.getElementById("label_id");
+            nomeDoItemElement.innerHTML = itemName;
+            numeroDaEtiquetaElement.innerHTML = labelId;
+            codigoDoItem.innerHTML = id;
+
+            console.log(id);
+        }
+        function confirmDelete() {
+            let url = "{{ route('estateDelete', ':id') }}";
+            url = url.replace(':id', itemId);
+            document.location.href=url;
+        }
+    </script>
+@endpush
