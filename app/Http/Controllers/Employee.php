@@ -80,7 +80,8 @@ class Employee extends Controller
     {
         $Employee = \App\EmployeeModel::withTrashed()->find($id);
         $EmployeeAssignedEstates = EstateModel::all()->where('employee_id', $id);
-        $EmployeeAssignHistory = EstateHistoryModel::all()->where('employee_id', $id)->sortByDesc('created_at');
+        $EmployeeAssignHistory = EstateHistoryModel::withTrashed()->where('employee_id', $id)->get()->sortByDesc('created_at');
+
 
         return view('admin.employee.profile')->with([
             'employee' => $Employee,

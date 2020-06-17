@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EstateModel extends Model
 {
+    use SoftDeletes;
 
     protected $table = 'estates';
     protected $fillable = ['categories_id', 'label_id', 'employee_id'];

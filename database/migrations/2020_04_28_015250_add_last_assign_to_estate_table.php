@@ -14,7 +14,7 @@ class AddLastAssignToEstateTable extends Migration
     public function up()
     {
         Schema::table('estates', function (Blueprint $table) {
-            $table->timestamp('last_assign_date')->nullable()->after('updated_at');
+            $table->timestamp('last_assign_date')->nullable()->after('deleted_at');
         });
     }
 

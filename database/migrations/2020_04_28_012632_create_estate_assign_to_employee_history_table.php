@@ -25,6 +25,7 @@ class CreateEstateAssignToEmployeeHistoryTable extends Migration
             $table->foreign('estate_id')->references('id')->on('estates');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
