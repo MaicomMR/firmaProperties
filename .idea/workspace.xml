@@ -129,6 +129,11 @@
       <path value="$PROJECT_DIR$/vendor/almasaeed2010/adminlte" />
       <path value="$PROJECT_DIR$/vendor/jeroennoten/laravel-adminlte" />
       <path value="$PROJECT_DIR$/vendor/laravelcollective/html" />
+      <path value="$PROJECT_DIR$/vendor/phenx/php-font-lib" />
+      <path value="$PROJECT_DIR$/vendor/phenx/php-svg-lib" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf" />
+      <path value="$PROJECT_DIR$/vendor/sabberworm/php-css-parser" />
+      <path value="$PROJECT_DIR$/vendor/dompdf/dompdf" />
     </include_path>
   </component>
   <component name="ProjectId" id="1Vz9RMGNK422wLyG7akZMegp8NY" />
@@ -140,12 +145,16 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/pdf" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Maicom\Desktop\firmaEstate\resources\views\pdf" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Maicom\Desktop\firmaEstate\resources\views" />
       <recent name="C:\Users\Maicom\Desktop\firmaEstate\public\icons\employee.profile" />
       <recent name="C:\Users\Maicom\Desktop\firmaEstate\public\css\estate" />
     </key>
@@ -204,6 +213,7 @@
       <workItem from="1587925986360" duration="18121000" />
       <workItem from="1588025335614" duration="14257000" />
       <workItem from="1588107822451" duration="5030000" />
+      <workItem from="1592679065170" duration="8879000" />
     </task>
     <servers />
   </component>
@@ -218,25 +228,20 @@
     <state x="1034" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1587877047285">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
-    <state x="1034" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1583713575054" />
     <state x="1034" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2560.1019@0.0.2560.1019" timestamp="1587877047285" />
     <state x="1010" y="265" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1587870788482">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
     <state x="1010" y="265" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.2560.1019@0.0.2560.1019" timestamp="1587870788482" />
-    <state x="1042" y="324" key="NewPhpClassDialog" timestamp="1581551216813">
-      <screen x="0" y="0" width="2560" height="1019" />
-    </state>
-    <state x="1042" y="324" key="NewPhpClassDialog/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1581551216813" />
     <state x="872" y="243" key="Vcs.Push.Dialog.v2" timestamp="1587848995409">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
     <state x="872" y="243" key="Vcs.Push.Dialog.v2/0.0.2560.1019@0.0.2560.1019" timestamp="1587848995409" />
-    <state x="975" y="334" key="com.intellij.ide.util.TipDialog" timestamp="1588107824823">
+    <state x="975" y="334" key="com.intellij.ide.util.TipDialog" timestamp="1592679065869">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
     <state x="975" y="334" key="com.intellij.ide.util.TipDialog/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1586213158125" />
-    <state x="975" y="334" key="com.intellij.ide.util.TipDialog/0.0.2560.1019@0.0.2560.1019" timestamp="1588107824823" />
+    <state x="975" y="334" key="com.intellij.ide.util.TipDialog/0.0.2560.1019@0.0.2560.1019" timestamp="1592679065869" />
     <state x="1089" y="427" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587844111322">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
@@ -245,10 +250,10 @@
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
     <state x="977" y="107" width="736" height="804" key="find.popup/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1584300207864" />
-    <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup" timestamp="1588108442523">
+    <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup" timestamp="1592680591749">
       <screen x="0" y="0" width="2560" height="1019" />
     </state>
     <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup/0.0.2560.1019/2560.312.1360.738@0.0.2560.1019" timestamp="1584289507768" />
-    <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup/0.0.2560.1019@0.0.2560.1019" timestamp="1588108442523" />
+    <state x="1276" y="199" width="672" height="678" key="search.everywhere.popup/0.0.2560.1019@0.0.2560.1019" timestamp="1592680591749" />
   </component>
 </project>
