@@ -5,12 +5,35 @@
 @section('content_header')
 
     <link rel="stylesheet" type="text/css" href="css/adminStyle.css">
-    <h1>Listagem de Patrimônios</h1>
+
 @stop
 
 
 
 @section('content')
+    <h1>Listagem de Patrimônios</h1>
+
+
+    <!-- Download PDF options-->
+    <div class="container" style="margin: 5px;">
+        <div class="row" >
+            <a href="{{route('printActiveEstates')}}">
+                <button type="button" class="container btn btn-primary">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                    Baixar relatório em PDF de patrimônios ativos
+                </button>
+            </a>
+            <a href="{{route('printDeletedEstates')}}">
+                <button type="button" class="container btn btn-danger">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                    Baixar relatório de patrimônios descartados
+                </button>
+            </a>
+        </div>
+    </div>
+
+
+
 
 
     @if(session()->has('message'))

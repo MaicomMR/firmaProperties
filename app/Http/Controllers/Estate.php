@@ -8,8 +8,12 @@ use App\EstateHistoryModel;
 use \App\EstateModel;
 use \App\Category;
 use \App\SubCategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Validator;
+use function Illuminate\Support\Facades\Blade;
+use PDF;
+
 
 class Estate extends Controller
 {
@@ -231,4 +235,31 @@ class Estate extends Controller
         return redirect()->back()->with('message', 'Patrimônio ' . $estate->name . ' desatribuído do colaborador com sucesso.');
 
     }
+
+    public function printEstateList(){
+
+        $estateList = EstateModel::all()->sortByDesc('employee_id');
+
+        $data = date('d/m/Y : H:m');
+        $dateQuery = $data;
+
+        $pdf = PDF::loadView('pdf.estate-active-list-pdf', compact('estateList'), compact('dateQuery'));
+
+        return $pdf->stream();
+
+    }
+
+    public function printDeletedEstateList(){
+
+        $estateList = EstateModel::onlyTrashed()->get();
+
+        $data = date('d/m/Y : H:m');
+        $dateQuery = $data;
+
+        $pdf = PDF::loadView('pdf.estate-deleted-list-pdf', compact('estateList'), compact('dateQuery'));
+
+        return $pdf->stream();
+
+    }
+
 }

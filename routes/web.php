@@ -60,5 +60,13 @@ Route::get('employee/index/{id}', 'Employee@edit')->name('employeeEdit');
 
 Route::get('employee/delete/{id}', 'Employee@destroy')->name('employeeDelete');
 
+//PDF Relatories for download
+Route::get('pdf/print/activeEstates', 'Estate@printEstateList')->name('printActiveEstates');
+
+Route::get('pdf/print/deletedEstates', 'Estate@printDeletedEstateList')->name('printDeletedEstates');
+
+//Just for developer test
+//Route::get('tt', 'Estate@printWriteOffEstateList');
+
 
 
