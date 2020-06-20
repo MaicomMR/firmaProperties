@@ -38,6 +38,7 @@
             <tr>
                 <th scope="col">Nome</th>
                 <th scope="col">CPF</th>
+                <th scope="col">Telefone</th>
                 <th scope="col">Ações</th>
             </tr>
             </thead>
@@ -46,6 +47,7 @@
                 @foreach($employees as $employee)
                     <td>{{$employee->name}}</td>
                     <td>{{$employee->cpf}}</td>
+                    <td>{{$employee->phone}}</td>
                     <td>
                         <a class="btn btn-warning" href="{{ route('employeeProfile', $employee->id)}}">
                             <i class="fa fa-eye"></i>
@@ -107,6 +109,7 @@
             </tr>
             </tbody>
         </table>
+    {{ $employees->links() }}
 
 @stop
 
