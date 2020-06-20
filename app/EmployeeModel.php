@@ -18,6 +18,9 @@ class EmployeeModel extends Model
     private $adress;
     private $adressNumber;
     private $adressNumberInfo;
+    private $district;
+    private $city;
+    private $zipCode;
 
 
     public function estate()
