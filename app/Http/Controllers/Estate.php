@@ -8,8 +8,12 @@ use App\EstateHistoryModel;
 use \App\EstateModel;
 use \App\Category;
 use \App\SubCategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Validator;
+use function Illuminate\Support\Facades\Blade;
+use PDF;
+
 
 class Estate extends Controller
 {
@@ -173,21 +177,21 @@ class Estate extends Controller
     public function destroy($id)
     {
 
-
         $estate = EstateModel::find($id);
-        $estate->delete();
-
         $estateHistory = EstateHistoryModel::find($id);
 
-        if ($estateHistory->assign == 1){
+        if ($estateHistory->assign = 1){
             $unassignEstateHistory = new EstateHistoryModel();
 
             $unassignEstateHistory->employee_id = $estateHistory->employee_id;
-            $unassignEstateHistory->estate_id = $estateHistory->estate_id;
+            $unassignEstateHistory->estate_id = $estate->id;
             $unassignEstateHistory->unassign = 1;
 
             $unassignEstateHistory->save();
         }
+
+
+        $estate->delete();
 
         return redirect()->back()->with('message', 'Patrimônio removido com sucesso.');
     }
@@ -231,4 +235,31 @@ class Estate extends Controller
         return redirect()->back()->with('message', 'Patrimônio ' . $estate->name . ' desatribuído do colaborador com sucesso.');
 
     }
+
+    public function printEstateList(){
+
+        $estateList = EstateModel::all()->sortByDesc('employee_id');
+
+        $data = date('d/m/Y : H:m');
+        $dateQuery = $data;
+
+        $pdf = PDF::loadView('pdf.estate-active-list-pdf', compact('estateList'), compact('dateQuery'));
+
+        return $pdf->stream();
+
+    }
+
+    public function printDeletedEstateList(){
+
+        $estateList = EstateModel::onlyTrashed()->get();
+
+        $data = date('d/m/Y : H:m');
+        $dateQuery = $data;
+
+        $pdf = PDF::loadView('pdf.estate-deleted-list-pdf', compact('estateList'), compact('dateQuery'));
+
+        return $pdf->stream();
+
+    }
+
 }
