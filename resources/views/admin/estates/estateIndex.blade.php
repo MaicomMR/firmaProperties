@@ -104,6 +104,8 @@
                     @endforeach
 
                 </table>
+                {{ $EstateList->links() }}
+
             </div>
         </div>
     </div>

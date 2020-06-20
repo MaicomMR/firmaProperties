@@ -9,7 +9,6 @@ use \App\EstateModel;
 use \App\Category;
 use \App\SubCategory;
 use Illuminate\Http\Request;
-use mysql_xdevapi\Exception;
 use Validator;
 
 class Estate extends Controller
@@ -42,7 +41,7 @@ class Estate extends Controller
 
     public function index()
     {
-    $EstateList = EstateModel::all();
+    $EstateList = EstateModel::paginate(30);
     $EmployeeList = EmployeeModel::all();
 
     return view('admin.estates.estateIndex')

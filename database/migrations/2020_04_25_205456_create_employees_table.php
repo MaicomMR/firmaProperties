@@ -23,6 +23,9 @@ class CreateEmployeesTable extends Migration
             $table->string('adress')->nullable();
             $table->string('adressNumber')->nullable();
             $table->string('adressNumberInfo')->nullable();
+            $table->string('district')->nullable();
+            $table->string('city')->nullable();
+            $table->string('zipCode')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
