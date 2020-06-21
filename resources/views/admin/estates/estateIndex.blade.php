@@ -15,7 +15,7 @@
 
 
     <!-- Download PDF options-->
-    <div class="container" style="margin: 5px;">
+    <div class="" style="margin: 5px;">
         <div class="row" >
             <a href="{{route('printActiveEstates')}}">
                 <button type="button" class="container btn btn-primary">
@@ -44,12 +44,12 @@
     @endif
 
     <a href="{{route('estateAddPage')}}">
-    <div class="container btn-success" style="padding: 10px">
+    <div class="btn-success" style="padding: 10px">
         <h4 class="text-center"><i class="fa fa-plus-circle" style="padding: 10px"></i>Adicionar patrimônio</h4>
     </div>
     </a>
 
-    <div class="container">
+    <div class="">
         <div class="row">
             <div class="col-sm-12">
                 <table class="table table-striped">
