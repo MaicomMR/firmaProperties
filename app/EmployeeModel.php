@@ -12,7 +12,7 @@ class EmployeeModel extends Model
     use SoftDeletes;
 
     protected $table = 'employees';
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'cpf', 'email', 'phone', 'adress', 'adressNumber', 'adressNumberInfo', 'district', 'city', 'zipCode'];
     private $email;
     private $phone;
     private $adress;
