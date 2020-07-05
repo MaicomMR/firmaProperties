@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BillOfSale;
 use App\EmployeeModel;
 use App\EstateHistoryModel;
 use \App\EstateModel;
@@ -35,11 +36,13 @@ class Estate extends Controller
 
         $categoriesPlucked = Category::pluck('name', 'id');
         $subCategoriesPlucked = SubCategory::pluck('name', 'id');
+        $billOfSalePlucked = BillOfSale::whereDate('updated_at', '>=', now()->subDays(7))->pluck('billNumber', 'id');
 
         return view('admin.add')->with([
             'categoriesPlucked' => $categoriesPlucked,
             'subCategoriesPlucked' => $subCategoriesPlucked,
             'estate_object'=>$Estate,
+            'billOfSale'=>$billOfSalePlucked,
         ]);
     }
 
@@ -62,10 +65,12 @@ class Estate extends Controller
     {
         $categoriesPlucked = Category::pluck('name', 'id');
         $subCategoriesPlucked = SubCategory::pluck('name', 'id');
+        $billOfSalePlucked = BillOfSale::whereDate('updated_at', '>=', now()->subDays(7))->pluck('billNumber', 'id');
 
         return view('admin.add')->with([
             'categoriesPlucked' => $categoriesPlucked,
             'subCategoriesPlucked' => $subCategoriesPlucked,
+            'billOfSale'=>$billOfSalePlucked,
         ]);
     }
 
