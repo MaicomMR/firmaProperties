@@ -233,11 +233,20 @@ return [
                 ],
             ],
         ],
-        ['header' => 'NOTAS FISCAIS'],
+        ['header' => 'DOCUMENTOS'],
         [
-            'text' => '[WIP] Adicionar Nota Fiscal',
-            'url'  => 'bill-of-sale',
-            'icon' => 'fas fa-file-alt',
+            'text'    => 'Notas Fiscais',
+            'icon'    => 'fa fa-tags',
+            'submenu' => [
+                [
+                    'text' => 'Adicionar Nota Fiscal',
+                    'url'  => 'bill-of-sale/new',
+                ],
+                [
+                    'text' => 'Listar Notas Fiscais',
+                    'url'  => 'bill-of-sale/index',
+                ],
+            ],
         ],
         [
             'text' => '[WIP] Adicionar Fornecedor',

@@ -53,13 +53,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-2">
-            {!! Form::label('id', 'Código Interno'); !!}
-            {!! Form::text('id', null, [
-                                'class' => 'form-control',
-                                'placeholder' => '0',
-                                'disabled']); !!}
-        </div>
+
         <div class="col-2">
             {!! Form::label('label_id', 'Código Etiqueta'); !!}
             {!! Form::text('label_id', null, [
@@ -75,18 +69,6 @@
             <small id="emailHelp" class="form-text text-muted">Este nome será exibido na listagem de
                 patrimônios.</small>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="form-group col-2">
-            {!! Form::label('billOfSale', 'Nota Fiscal'); !!}
-            {!! Form::text('billOfSale', null, [
-    'class' => 'form-control',
-     'placeholder' => '4320 0261 5858 6519 9306 6500 2000 0280 6311 3041 1317']); !!}
-            <small id="emailHelp" class="form-text text-muted">
-                Você pode adicionar uma nova nota fiscal clicando aqui.
-            </small>
-        </div>
 
         <div class="form-group col-2">
             {!! Form::label('value', 'Valor do bem'); !!}
@@ -95,6 +77,35 @@
      'placeholder' => '1278,97',
      'step' => '.01']); !!}
         </div>
+    </div>
+
+
+
+    <div class="row">
+
+
+        <div class="dropdown col-4">
+            {!! Form::label('billOfSale', 'Nota Fiscal'); !!}
+            <div class="input-group">
+                {!! Form::select('bill_of_sales', $billOfSale, null,[
+                        'class' => 'custom-select',
+                        'placeholder' => 'Selecione uma Nota Fiscal'
+
+                        ]); !!}
+            </div>
+        </div>
+
+{{--        <div class="form-group col-4">--}}
+{{--            {!! Form::label('billOfSale', 'Nota Fiscal'); !!}--}}
+{{--            {!! Form::text('billOfSale', null, [--}}
+{{--    'class' => 'form-control',--}}
+{{--     'placeholder' => '4320 0261 5858 6519 9306 6500 2000 0280 6311 3041 1317']); !!}--}}
+{{--            <small id="emailHelp" class="form-text text-muted">--}}
+{{--                Você pode adicionar uma nova nota fiscal clicando aqui.--}}
+{{--            </small>--}}
+{{--        </div>--}}
+
+
 
         <div class="dropdown col-3">
             {!! Form::label('categories_id', 'Categoria'); !!}
@@ -127,8 +138,9 @@
         </div>
     </div>
 
+    <div style="margin-top: 20px;">
     {!! Form::submit('Salvar', ['class' => 'btn btn-info']); !!}
-
+    </div>
 
 
 

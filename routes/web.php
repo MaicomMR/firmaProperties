@@ -41,9 +41,7 @@ Route::get('estates/unassign/{item_id}/{employee_id}', 'Estate@unassignEstateToE
 
 Route::get('categories', 'Categories@index');
 
-Route::get('bill-of-sale', 'BillController@index');
 
-Route::post('bill-of-sale/save', 'BillController@store')->name('saveBill');
 
 
 Route::get('employee/add', 'Employee@create')->name('employeeCreate');
@@ -67,6 +65,11 @@ Route::get('pdf/print/deletedEstates', 'Estate@printDeletedEstateList')->name('p
 
 //Just for developer test
 //Route::get('tt', 'Estate@printWriteOffEstateList');
+
+//Routes for bill of sales
+Route::get('bill-of-sale/index', 'BillController@index')->name('billIndex');
+Route::get('bill-of-sale/new', 'BillController@create')->name('billAdd');
+Route::post('bill-of-sale/save', 'BillController@store')->name('billSave');
 
 
 
