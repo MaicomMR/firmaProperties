@@ -187,23 +187,31 @@ class Estate extends Controller
     {
 
         $estate = EstateModel::find($id);
-        $estateHistory = EstateHistoryModel::find($id);
 
+        // Faz a busca pelo último histórico do bem
+        // Do a search for the last history from this estate
+        $estateHistory = EstateHistoryModel::where('estate_id', '=', $id)->latest('created_at')->first();
 
-        if(!empty($estateHistory)){
+        if(!empty($estateHistory->assign)){
+
             if ($estateHistory->assign = 1){
                 $unassignEstateHistory = new EstateHistoryModel();
-
                 $unassignEstateHistory->employee_id = $estateHistory->employee_id;
                 $unassignEstateHistory->estate_id = $estate->id;
                 $unassignEstateHistory->unassign = 1;
 
                 $unassignEstateHistory->save();
             }
+
+        } else {
+            $unassignEstateHistory = new EstateHistoryModel();
+            $unassignEstateHistory->estate_id = $estate->id;
+            $unassignEstateHistory->unassign = 1;
+
+            $unassignEstateHistory->save();
         }
 
         $estate->delete();
-
         return redirect()->back()->with('message', 'Patrimônio removido com sucesso.');
     }
 
@@ -271,6 +279,15 @@ class Estate extends Controller
 
         return $pdf->stream();
 
+    }
+
+    public function historyIndex()
+    {
+        $estateHistories = EstateHistoryModel::all()->sortByDesc('created_at');
+
+        return view('admin.estates.estateHistory')->with([
+            'estateHistories' => $estateHistories
+        ]);
     }
 
 }
