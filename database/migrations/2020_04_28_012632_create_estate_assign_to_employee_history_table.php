@@ -15,7 +15,7 @@ class CreateEstateAssignToEmployeeHistoryTable extends Migration
     {
         Schema::create('estate_history', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('employee_id')->nullable();
             $table->unsignedBigInteger('estate_id');
 
             $table->tinyInteger('assign')->nullable();

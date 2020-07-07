@@ -15,26 +15,34 @@
 
 
     <!-- Download PDF options-->
-    <div class="" style="margin: 5px;">
-        <div class="row" >
-            <a href="{{route('printActiveEstates')}}">
-                <button type="button" class="container btn btn-primary">
-                    <i class="fa fa-download" aria-hidden="true"></i>
-                    Baixar relatório em PDF de patrimônios ativos
-                </button>
-            </a>
-            <a href="{{route('printDeletedEstates')}}">
-                <button type="button" class="container btn btn-danger">
-                    <i class="fa fa-download" aria-hidden="true"></i>
-                    Baixar relatório de patrimônios descartados
-                </button>
-            </a>
+    <div class="row">
+        <div class="info-box col-sm-3" onclick="window.open('{{route('printActiveEstates')}}');"
+             style="cursor: pointer;">
+            <span class="info-box-icon bg-success"><i class="fas fa-file-pdf"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">PDF Patrimônios Ativos</span>
+                <span class="info-box-number">{{$activeEstateCount}} itens</span>
+            </div>
+        </div>
+
+        <div class="info-box col-sm-3" onclick="window.open('{{route('printDeletedEstates')}}');"
+             style="cursor: pointer; margin-left: 10px;">
+            <span class="info-box-icon bg-danger"><i class="fas fa-file-pdf"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">PDF Patrimônios Inativos</span>
+                <span class="info-box-number">{{$inactiveEstateCount}} itens</span>
+            </div>
+        </div>
+
+
+        <div class="info-box col-sm-3" onclick="window.location=('{{route('historyIndex')}}');"
+             style="cursor: pointer; margin-left: 10px;">
+            <span class="info-box-icon bg-dark"><i class="fas fa-book"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Histórico</span>
+            </div>
         </div>
     </div>
-
-
-
-
 
     @if(session()->has('message'))
 
@@ -44,9 +52,9 @@
     @endif
 
     <a href="{{route('estateAddPage')}}">
-    <div class="btn-success" style="padding: 10px">
-        <h4 class="text-center"><i class="fa fa-plus-circle" style="padding: 10px"></i>Adicionar patrimônio</h4>
-    </div>
+        <div class="btn-success" style="padding: 10px">
+            <h4 class="text-center"><i class="fa fa-plus-circle" style="padding: 10px"></i>Adicionar patrimônio</h4>
+        </div>
     </a>
 
     <div class="">
@@ -69,7 +77,7 @@
                     @foreach($EstateList as $Estate)
 
 
-                        <th scope="row" class="text-right" >
+                        <th scope="row" class="text-right">
                             {{$Estate->label_id}}
                         </th>
                         <th scope="row">{{$Estate->name}}</th>
@@ -106,12 +114,13 @@
                             {{--    Assign to employee button   --}}
                             @if($Estate->employee_id)
                                 <a href="{{route('employeeProfile', $Estate->employee_id)}}">
-                                <button type="button" class="btn btn-secondary">
-                                    <i class="fas fa-user-tag"></i>
-                                </button>
+                                    <button type="button" class="btn btn-secondary">
+                                        <i class="fas fa-user-tag"></i>
+                                    </button>
                                 </a>
                             @else
-                                <a class="btn btn-success" href="#" data-toggle="modal" data-target="#confirmAssignModal"
+                                <a class="btn btn-success" href="#" data-toggle="modal"
+                                   data-target="#confirmAssignModal"
                                    onclick="assignDataToEmployee({{$Estate}})">
                                     <i class="fas fa-user-plus"></i>
                                 </a>

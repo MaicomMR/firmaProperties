@@ -19,6 +19,7 @@ Route::get('home', 'Estate@home')->name('home');
 Route::get('seller', 'Sellers@index')->name('seller');
 
 Route::get('estates/index', 'Estate@index')->name('estateIndex');
+Route::get('estates/history', 'Estate@historyIndex')->name('historyIndex');
 
 Route::get('estates/add', 'Estate@create')->name('estateAddPage');
 
