@@ -10,7 +10,8 @@ class EstateModel extends Model
     use SoftDeletes;
 
     protected $table = 'estates';
-    protected $fillable = ['categories_id', 'label_id', 'employee_id'];
+    protected $fillable = [
+        'last_assign_date', 'name', 'estate_photo', 'value', 'label_id', 'categories_id', 'sub_categories_id', 'seller_id', 'employee_id'];
 
     public function category()
     {

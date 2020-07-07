@@ -15,14 +15,15 @@ class CreateBillOfSalesTable extends Migration
     {
         Schema::create('bill_of_sales', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
 
             $table->string('billNumber');
             $table->string('OnlineAcessCode');
             $table->double('totalValue');
-            $table->string('billCopyPath');
-            $table->string('billPhotoPath');
+            $table->string('billPDFPath')->nullable();
+            $table->string('billPhotoPath')->nullable();
 
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

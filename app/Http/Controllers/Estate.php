@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BillOfSale;
 use App\EmployeeModel;
 use App\EstateHistoryModel;
 use \App\EstateModel;
@@ -35,22 +36,28 @@ class Estate extends Controller
 
         $categoriesPlucked = Category::pluck('name', 'id');
         $subCategoriesPlucked = SubCategory::pluck('name', 'id');
+        $billOfSalePlucked = BillOfSale::whereDate('updated_at', '>=', now()->subDays(7))->pluck('billNumber', 'id');
 
         return view('admin.add')->with([
             'categoriesPlucked' => $categoriesPlucked,
             'subCategoriesPlucked' => $subCategoriesPlucked,
             'estate_object'=>$Estate,
+            'billOfSale'=>$billOfSalePlucked,
         ]);
     }
 
     public function index()
     {
     $EstateList = EstateModel::paginate(30);
+    $activeEstateCount = EstateModel::all()->count();
+    $inactiveEstateCount = EstateModel::onlyTrashed()->count();
     $EmployeeList = EmployeeModel::all();
 
     return view('admin.estates.estateIndex')
         ->with(['EstateList' => $EstateList])
-        ->with(['EmployeeList' => $EmployeeList]);
+        ->with(['EmployeeList' => $EmployeeList])
+        ->with(['activeEstateCount' => $activeEstateCount])
+        ->with(['inactiveEstateCount' => $inactiveEstateCount]);
     }
 
     /**
@@ -62,10 +69,12 @@ class Estate extends Controller
     {
         $categoriesPlucked = Category::pluck('name', 'id');
         $subCategoriesPlucked = SubCategory::pluck('name', 'id');
+        $billOfSalePlucked = BillOfSale::whereDate('updated_at', '>=', now()->subDays(7))->pluck('billNumber', 'id');
 
         return view('admin.add')->with([
             'categoriesPlucked' => $categoriesPlucked,
             'subCategoriesPlucked' => $subCategoriesPlucked,
+            'billOfSale'=>$billOfSalePlucked,
         ]);
     }
 
@@ -180,16 +189,18 @@ class Estate extends Controller
         $estate = EstateModel::find($id);
         $estateHistory = EstateHistoryModel::find($id);
 
-        if ($estateHistory->assign = 1){
-            $unassignEstateHistory = new EstateHistoryModel();
 
-            $unassignEstateHistory->employee_id = $estateHistory->employee_id;
-            $unassignEstateHistory->estate_id = $estate->id;
-            $unassignEstateHistory->unassign = 1;
+        if(!empty($estateHistory)){
+            if ($estateHistory->assign = 1){
+                $unassignEstateHistory = new EstateHistoryModel();
 
-            $unassignEstateHistory->save();
+                $unassignEstateHistory->employee_id = $estateHistory->employee_id;
+                $unassignEstateHistory->estate_id = $estate->id;
+                $unassignEstateHistory->unassign = 1;
+
+                $unassignEstateHistory->save();
+            }
         }
-
 
         $estate->delete();
 
