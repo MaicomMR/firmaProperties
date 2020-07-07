@@ -18,9 +18,11 @@ Route::get('home', 'Estate@home')->name('home');
 
 Route::get('seller', 'Sellers@index')->name('seller');
 
+// Estate Routes
 Route::get('estates/index', 'Estate@index')->name('estateIndex');
+Route::get('estates/index/available', 'Estate@availableEstatesIndex')->name('estateAvailable');
+Route::get('estates/index/highValue', 'Estate@highValueEstates')->name('estateHighValue');
 Route::get('estates/history', 'Estate@historyIndex')->name('historyIndex');
-
 Route::get('estates/add', 'Estate@create')->name('estateAddPage');
 
 //TODO: change method to delete
