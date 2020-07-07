@@ -11,38 +11,10 @@
 
 
 @section('content')
-    <h1>Listagem de Patrimônios</h1>
+    <h2>Listagem de Patrimônios</h2>
 
-
-    <!-- Download PDF options-->
-    <div class="row">
-        <div class="info-box col-sm-3" onclick="window.open('{{route('printActiveEstates')}}');"
-             style="cursor: pointer;">
-            <span class="info-box-icon bg-success"><i class="fas fa-file-pdf"></i></span>
-            <div class="info-box-content">
-                <span class="info-box-text">PDF Patrimônios Ativos</span>
-                <span class="info-box-number">{{$activeEstateCount}} itens</span>
-            </div>
-        </div>
-
-        <div class="info-box col-sm-3" onclick="window.open('{{route('printDeletedEstates')}}');"
-             style="cursor: pointer; margin-left: 10px;">
-            <span class="info-box-icon bg-danger"><i class="fas fa-file-pdf"></i></span>
-            <div class="info-box-content">
-                <span class="info-box-text">PDF Patrimônios Inativos</span>
-                <span class="info-box-number">{{$inactiveEstateCount}} itens</span>
-            </div>
-        </div>
-
-
-        <div class="info-box col-sm-3" onclick="window.location=('{{route('historyIndex')}}');"
-             style="cursor: pointer; margin-left: 10px;">
-            <span class="info-box-icon bg-dark"><i class="fas fa-book"></i></span>
-            <div class="info-box-content">
-                <span class="info-box-text">Histórico</span>
-            </div>
-        </div>
-    </div>
+    <!-- Header Menu -->
+    @include('admin.estates.headerMenu')
 
     @if(session()->has('message'))
 
@@ -90,9 +62,6 @@
                             @endif
 
                         </th>
-
-
-
 
                         <th scope="row">
                             {{--    See estate button   --}}

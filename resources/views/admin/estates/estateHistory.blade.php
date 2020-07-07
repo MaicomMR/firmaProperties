@@ -9,7 +9,7 @@
 
 
 @section('content')
-    <h1>Histórico de atribuições/desatribuições de Patrimônios</h1>
+    <h2>Histórico de atribuições/desatribuições de Patrimônios</h2>
 
 
 

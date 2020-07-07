@@ -26,7 +26,7 @@ class Estate extends Controller
      */
     public function home()
     {
-        return view('home');
+        return view('home.homeBasePage');
     }
 
 
@@ -58,6 +58,34 @@ class Estate extends Controller
         ->with(['EmployeeList' => $EmployeeList])
         ->with(['activeEstateCount' => $activeEstateCount])
         ->with(['inactiveEstateCount' => $inactiveEstateCount]);
+    }
+
+    public function availableEstatesIndex()
+    {
+        $EstateList = EstateModel::where('employee_id','=', null)->paginate(30);
+        $activeEstateCount = EstateModel::all()->count();
+        $inactiveEstateCount = EstateModel::onlyTrashed()->count();
+        $EmployeeList = EmployeeModel::all();
+
+        return view('admin.estates.estateIndex')
+            ->with(['EstateList' => $EstateList])
+            ->with(['EmployeeList' => $EmployeeList])
+            ->with(['activeEstateCount' => $activeEstateCount])
+            ->with(['inactiveEstateCount' => $inactiveEstateCount]);
+    }
+
+    public function highValueEstates()
+    {
+        $EstateList = EstateModel::where('value','>=', 3000)->paginate(30);
+        $activeEstateCount = EstateModel::all()->count();
+        $inactiveEstateCount = EstateModel::onlyTrashed()->count();
+        $EmployeeList = EmployeeModel::all();
+
+        return view('admin.estates.estateIndex')
+            ->with(['EstateList' => $EstateList])
+            ->with(['EmployeeList' => $EmployeeList])
+            ->with(['activeEstateCount' => $activeEstateCount])
+            ->with(['inactiveEstateCount' => $inactiveEstateCount]);
     }
 
     /**
