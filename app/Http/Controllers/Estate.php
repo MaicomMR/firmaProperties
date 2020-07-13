@@ -212,6 +212,7 @@ class Estate extends Controller
             $estate->categories_id = $request->categories_id;
             $estate->sub_categories_id = $request->sub_categories_id;
             $estate->seller_id = $request->seller_id;
+            $estate->observation = $request->observation;
             $estate->estate_photo = null;
 
             $estate->save();
@@ -271,6 +272,7 @@ class Estate extends Controller
             $estate->categories_id = $request->categories_id;
             $estate->sub_categories_id = $request->sub_categories_id;
             $estate->seller_id = $request->seller_id;
+            $estate->observation = $request->observation;
             $estate->estate_photo = null;
 
             $estate->save();
