@@ -138,7 +138,7 @@
         </div>
         <div class="form-group col-sm-10">
             {!! Form::label('name', 'Observações'); !!}
-            {!! Form::textarea('obs', null, [
+            {!! Form::textarea('observation', null, [
                 'class' => 'form-control',
                 'cols' => 3,
                 'rows' => 3,
