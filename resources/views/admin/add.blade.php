@@ -54,14 +54,14 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-2">
+        <div class="col-sm-2">
             {!! Form::label('label_id', 'Código Etiqueta'); !!}
             {!! Form::text('label_id', null, [
                                 'class' => 'form-control',
                                 'placeholder' => '0430']); !!}
         </div>
 
-        <div class="form-group col-6">
+        <div class="form-group col-sm-6">
             {!! Form::label('name', 'Nome do patrimônio'); !!}
             {!! Form::text('name', null, [
     'class' => 'form-control',
@@ -70,7 +70,7 @@
                 patrimônios.</small>
         </div>
 
-        <div class="form-group col-2">
+        <div class="form-group col-sm-2">
             {!! Form::label('value', 'Valor do bem'); !!}
             {!! Form::number('value', null, [
     'class' => 'form-control',
@@ -84,7 +84,7 @@
     <div class="row">
 
 
-        <div class="dropdown col-4">
+        <div class="dropdown col-sm-4">
             {!! Form::label('billOfSale', 'Nota Fiscal'); !!}
             <div class="input-group">
                 {!! Form::select('bill_of_sales', $billOfSale, null,[
@@ -107,7 +107,7 @@
 
 
 
-        <div class="dropdown col-3">
+        <div class="dropdown col-sm-3">
             {!! Form::label('categories_id', 'Categoria'); !!}
             <div class="input-group">
                 {!! Form::select('categories_id', $categoriesPlucked, null,[
@@ -122,7 +122,7 @@
                 </div>
             </div>
         </div>
-        <div class="dropdown col-3">
+        <div class="dropdown col-sm-3">
             {!! Form::label('sub_categories_id', 'Sub-Categoria'); !!}
 
             <div class="input-group">
@@ -136,6 +136,15 @@
                 </div>
             </div>
         </div>
+        <div class="form-group col-sm-10">
+            {!! Form::label('name', 'Observações'); !!}
+            {!! Form::textarea('obs', null, [
+                'class' => 'form-control',
+                'cols' => 3,
+                'rows' => 3,
+                'placeholder' => 'Observações sobre o objeto']); !!}
+        </div>
+
     </div>
 
     <div style="margin-top: 20px;">
