@@ -38,28 +38,28 @@ Route::middleware(['auth'])->group(function () {
 
 // Estate Routes
 Route::middleware(['auth'])->group(function () {
-Route::get('employee/add', 'Employee@create')->name('employeeCreate');
-Route::put('employee/update/{id}', 'Employee@update')->name('employeeUpdate');
-Route::post('employee/store', 'Employee@store')->name('employeeStore');
-Route::get('employee/index', 'Employee@index')->name('employeeIndex');
-Route::get('employee/show/{id}', 'Employee@show')->name('employeeProfile');
-Route::get('employee/index/{id}', 'Employee@edit')->name('employeeEdit');
-Route::get('employee/delete/{id}', 'Employee@destroy')->name('employeeDelete');
+    Route::get('employee/add', 'Employee@create')->name('employeeCreate');
+    Route::put('employee/update/{id}', 'Employee@update')->name('employeeUpdate');
+    Route::post('employee/store', 'Employee@store')->name('employeeStore');
+    Route::get('employee/index', 'Employee@index')->name('employeeIndex');
+    Route::get('employee/show/{id}', 'Employee@show')->name('employeeProfile');
+    Route::get('employee/index/{id}', 'Employee@edit')->name('employeeEdit');
+    Route::get('employee/delete/{id}', 'Employee@destroy')->name('employeeDelete');
 });
 
-Route::get('seller', 'Sellers@index')->name('seller');
-
-Route::get('categories', 'Categories@index');
-
-
-
-
-
-
 //PDF Relatories for download
-Route::get('pdf/print/activeEstates', 'Estate@printEstateList')->name('printActiveEstates');
+Route::middleware(['auth'])->group(function () {
+    Route::get('pdf/print/activeEstates', 'Estate@printEstateList')->name('printActiveEstates');
+    Route::get('pdf/print/deletedEstates', 'Estate@printDeletedEstateList')->name('printDeletedEstates');
+});
 
-Route::get('pdf/print/deletedEstates', 'Estate@printDeletedEstateList')->name('printDeletedEstates');
+
+// -------------------------------------------------
+// BELOW WORK IN PROGRESS ROUTES, METHODS AND BLADES
+// -------------------------------------------------
+
+Route::get('seller', 'Sellers@index')->name('seller');
+Route::get('categories', 'Categories@index');
 
 //Just for developer test
 //Route::get('tt', 'Estate@printWriteOffEstateList');
