@@ -54,6 +54,13 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+//Admin routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('admin/config/home', 'Admin@home')->name('adminConfigHome');
+});
+
+
+
 // -------------------------------------------------
 // BELOW WORK IN PROGRESS ROUTES, METHODS AND BLADES
 // -------------------------------------------------

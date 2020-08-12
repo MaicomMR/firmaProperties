@@ -264,6 +264,11 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
         ],
+        [
+            'text' => 'Acessos',
+            'url'  => 'admin/config/home',
+            'icon' => 'fas fa-fw fa-user',
+        ],
     ],
 
     /*
