@@ -260,14 +260,9 @@ return [
         ],
         ['header' => 'CONFIGURAÇÕES'],
         [
-            'text' => '[WIP] Configurações',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Acessos',
+            'text' => 'Configurações',
             'url'  => 'admin/config/home',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-cog',
         ],
     ],
 
