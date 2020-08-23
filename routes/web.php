@@ -56,7 +56,8 @@ Route::middleware(['auth'])->group(function () {
 
 //Admin routes
 Route::middleware(['auth'])->group(function () {
-    Route::get('admin/config/home', 'Admin@home')->name('adminConfigHome');
+    Route::get('admin/config/home', 'AdminConfigController@home')->name('adminConfigHome');
+    Route::post('admin/config/home/', 'AdminConfigController@updateConfigValues')->name('updateAdminAlertValues');
 });
 
 
