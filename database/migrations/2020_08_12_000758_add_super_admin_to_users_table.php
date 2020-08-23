@@ -14,7 +14,7 @@ class AddSuperAdminToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('adminLevel');
+            $table->integer('admin_level')->default(0);
         });
     }
 
@@ -26,7 +26,7 @@ class AddSuperAdminToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['adminLevel']);
+            $table->dropColumn(['admin_level']);
         });
     }
 }
