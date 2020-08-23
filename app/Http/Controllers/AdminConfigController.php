@@ -13,7 +13,7 @@ class AdminConfigController extends Controller
     {
         $users = User::all();
         $alertValues = AlertValuesModel::all();
-        return(view('admin.config', compact(['users', 'alertValues'])));
+        return(view('admin.adminSettings.config', compact(['users', 'alertValues'])));
     }
 
     public function updateConfigValues(Request $request)
