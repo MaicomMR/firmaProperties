@@ -11,14 +11,11 @@
                 Opss... houve algum erro no preenchimento
             </div>
             <div class="card-body alert-danger">
-                    @foreach($errors->all() as $error)
-                        <li style="color: white">{{$error}}</li>
-                    @endforeach
+                @foreach($errors->all() as $error)
+                    <li style="color: white">{{$error}}</li>
+                @endforeach
             </div>
         </div>
-        <ul>
-
-        </ul>
     @endif
 
     @if (isset($estate_object))

@@ -134,7 +134,7 @@ return [
 
     'use_route_url' => false,
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'homeDashboard',
 
     'logout_url' => 'logout',
 
@@ -260,9 +260,9 @@ return [
         ],
         ['header' => 'CONFIGURAÇÕES'],
         [
-            'text' => '[WIP] Configurações',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'Configurações',
+            'url'  => 'admin/config/home',
+            'icon' => 'fas fa-cog',
         ],
     ],
 
