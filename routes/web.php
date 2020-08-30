@@ -56,8 +56,26 @@ Route::middleware(['auth'])->group(function () {
 
 //Admin routes
 Route::middleware(['auth'])->group(function () {
+    //home
     Route::get('admin/config/home', 'AdminConfigController@home')->name('adminConfigHome');
     Route::post('admin/config/home/', 'AdminConfigController@updateConfigValues')->name('updateAdminAlertValues');
+
+    //Accounts routes CRUD
+    Route::get('admin/config/acess/{id?}', 'AdminConfigController@acessIndex')->name('adminAcessIndex');
+    Route::put('admin/config/acess/update/{id?}', 'AdminConfigController@updateAcessData')->name('updateAcessData');
+    Route::post('admin/config/store/acess', 'AdminConfigController@createAcessIndex')->name('createAcessIndex');
+    Route::get('admin/config/delete/acess/{id}', 'AdminConfigController@deleteAcess')->name('removeUserAcess');
+
+    //Account level related routes
+    Route::get('admin/config/upgradeAcess/{id}', 'AdminConfigController@giveSuperAdminToUser')->name('giveSuperAdminToUser');
+    Route::get('admin/config/downgradeAcess/{id}', 'AdminConfigController@revokeSuperAdminToUser')->name('revokeSuperAdminToUser');
+
+    //E-mail list routes
+    Route::get('admin/config/mail/', 'AdminConfigController@mailListIndexAndEditor')->name('mailListIndex');
+    Route::post('admin/config/mail/', 'AdminConfigController@storeEmailOnMailingList')->name('storeEmailOnMailingList');
+    Route::get('admin/config/mail/edit/{id?}', 'AdminConfigController@mailListIndexAndEditor')->name('editEmailOnMailingList');
+    Route::put('admin/config/mail/update/{id}', 'AdminConfigController@updateEmailOnMailingList')->name('updateEmailOnMailingList');
+    Route::get('admin/config/mail/delete/{id?}', 'AdminConfigController@deleteEmailFromNotificationList')->name('deleteEmailingFromList');
 });
 
 

@@ -31,6 +31,7 @@
 
     <h3> Olá {{Auth::user()->name}}</h3>
 
+    @if(Auth::user()->admin_level == 1)
     <div class="card card-primary">
         <div class="card-header">
             <h3 class="card-title"><i class="fa fa-cog" aria-hidden="true"></i>
@@ -97,6 +98,7 @@
             </form>
         </div>
     </div>
+    @endif
 
     <div class="card card-green">
         <div class="card-header">
@@ -124,9 +126,11 @@
                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                         aria-label="Engine version: activate to sort column ascending">Cadastrado em:
                     </th>
+                    @if(Auth::user()->admin_level == 1)
                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                         aria-label="Engine version: activate to sort column ascending">Ações:
                     </th>
+                    @endif
                 </thead>
                 <tbody>
                 @foreach($users as $user)
@@ -146,32 +150,41 @@
                             @else
                                 -
                         @endif
+                        @if(Auth::user()->admin_level == 1)
+
                         <td>
-                            <button type="button" class="btn btn-primary btn-flat"><i class="fas fa-user-edit"></i>
-                            </button>
-                            <button type="button" class="btn btn-danger btn-flat"><i class="fas fa-trash-alt"></i>
-                            </button>
-                            <button type="button" class="btn btn-warning btn-flat">Tornar Super Admin</button>
+                            <a type="button" class="btn btn-primary btn-flat" href="{{ route('adminAcessIndex', ['id' => $user->id])}}"><i class="fas fa-user-edit"></i>
+                            </a>
+                            @if($user->admin_level == 0)
+                                <a type="button" class="btn btn-warning btn-flat" href="{{route('giveSuperAdminToUser', ['id' => $user->id])}}">Tornar Super Admin</a>
+                            @else
+                                <a type="button" class="btn btn-danger btn-flat" href="{{route('revokeSuperAdminToUser', ['id' => $user->id])}}">Remover Super Admin</a>
+                            @endif
+
                         </td>
+                        @endif
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-            <button type="button" class="btn btn-block bg-gradient-success btn-lg col-sm-3" style="margin-top: 10px">
-                Cadastrar novo acesso
-            </button>
+            <a type="button" class="btn btn-block bg-gradient-success btn-lg col-sm-4" style="margin-top: 10px" href="{{route('adminAcessIndex')}}">
+                Cadastro e edição de acessos
+            </a>
         </div>
     </div>
+
 
     <div class="card card-warning">
         <div class="card-header">
             <h3 class="card-title"><i class="fa fa-envelope" aria-hidden="true"></i>
-                Lista de e-mail de Relatórios Mensais:</h3>
+                Lista de e-mail (Relatórios e Alertas):</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                 </button>
             </div>
         </div>
+
+        @if($emailsList != null)
         <div class="card-body">
             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid"
                    aria-describedby="example2_info">
@@ -186,72 +199,77 @@
                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                         aria-label="Engine version: activate to sort column ascending">Cadastrado em:
                     </th>
+
+                    @if(Auth::user()->admin_level == 1)
                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                         aria-label="Engine version: activate to sort column ascending">Ações:
                     </th>
+                    @endif
                 </thead>
                 <tbody>
+                @foreach($emailsList as $email)
                 <tr role="row" class="odd">
-                    <td class="" tabindex="0">Isis Alícia Viana</td>
-                    <td>isisaliciaviana@goldfinger.com.br</td>
-                    <td>16 de Ago de 2020</td>
-                    <td>
-                        <button type="button" class="btn btn-primary btn-flat"><i class="fas fa-user-edit"></i></button>
-                        <button type="button" class="btn btn-danger btn-flat"><i class="fas fa-trash-alt"></i></button>
+                    <td class="" tabindex="0">
+                        @if($email->name)
+                            {{$email->name}}
+                        @else
+                            -
+                        @endif
                     </td>
+                    <td>{{$email->email}}</td>
+                    <td>
+                        {{($email->created_at)->diffForHumans()}}
+                    </td>
+                    @if(Auth::user()->admin_level == 1)
+                    <td>
+                        <a type="button" class="btn btn-primary btn-flat" href="{{ route('editEmailOnMailingList', ['id' => $email->id])}}"><i class="fas fa-user-edit"></i></a>
+                        <a type="button" class="btn btn-danger btn-flat" onclick="openDeleteModal({{$email->id}})" data-toggle="modal" data-target="#modal-danger"><i class="fas fa-trash-alt" style="color: white;"></i></a>
+                    </td>
+                    @endif
                 </tr>
+                @endforeach
                 </tbody>
             </table>
-            <button type="button" class="btn btn-block bg-gradient-warning btn-lg col-sm-3" style="margin-top: 10px">
+            @endif
+            <a type="button" class="btn btn-block bg-gradient-warning btn-lg col-sm-3" style="margin: 10px" href="{{ route('mailListIndex') }}">
                 Adicionar e-mail
-            </button>
+            </a>
         </div>
     </div>
 
-    <div class="card card-danger">
-        <div class="card-header">
-            <h3 class="card-title"><i class="fa fa-envelope" aria-hidden="true"></i>
-                Lista de e-mail de Alerta:</h3>
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                </button>
+    <div class="modal fade" id="modal-danger" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-danger">
+                <div class="modal-header">
+                    <h4 class="modal-title">Você tem certeza que deseja remover esse e-mail?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <i class="fas fa-trash-alt text-center" style="margin: 80px; font-size: 10vw"></i>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Cancelar</button>
+                    @if(isset($email))
+                    <a type="button" class="btn btn-outline-light" onclick="confirmDelete({{$email->id}})">DELETAR</a>
+                    @endif
+                </div>
             </div>
         </div>
-        <div class="card-body">
-            <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid"
-                   aria-describedby="example2_info">
-                <thead>
-                <tr role="row">
-                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
-                        aria-label="Rendering engine: activate to sort column ascending">Nome
-                    </th>
-                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
-                        aria-label="Browser: activate to sort column ascending">E-mail
-                    </th>
-                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
-                        aria-label="Engine version: activate to sort column ascending">Cadastrado em:
-                    </th>
-                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
-                        aria-label="Engine version: activate to sort column ascending">Ações:
-                    </th>
-                </thead>
-                <tbody>
-                <tr role="row" class="odd">
-                    <td class="" tabindex="0">Isis Alícia Viana</td>
-                    <td>isisaliciaviana@goldfinger.com.br</td>
-                    <td>16 de Ago de 2020</td>
-                    <td>
-                        <button type="button" class="btn btn-primary btn-flat"><i class="fas fa-user-edit"></i></button>
-                        <button type="button" class="btn btn-danger btn-flat"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <button type="button" class="btn btn-block bg-gradient-danger btn-lg col-sm-3" style="margin-top: 10px">
-                Adicionar e-mail
-            </button>
-        </div>
     </div>
+
+    <script type=text/javascript>
+        let itemId = "";
+        function openDeleteModal(id)
+        {
+            itemId = id;
+        }
+        function confirmDelete()
+        {
+            let url = "{{ route('deleteEmailingFromList', ':id') }}";
+            url = url.replace(':id', itemId);
+            document.location.href=url;
+        }
+    </script>
     {{--    TODO: TRABALHAR NA RESPONSIVIDADE--}}
 @stop
 
