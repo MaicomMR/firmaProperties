@@ -249,9 +249,11 @@ class AdminConfigController extends Controller
             } else {
                 $user = User::where('id', '=', $id)->first();
 
+                $hashPassword = bcrypt($request->password);
+
                 $user->name = $request->name;
                 $user->email = $request->email;
-                $user->password = $request->password;
+                $user->password = $hashPassword;
                 $user->name = $request->name;
 
 
