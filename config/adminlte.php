@@ -215,8 +215,28 @@ return [
                 ],
             ],
         ],
+
+        ['header' => 'CONFIGURAÇÕES'],
         [
             'text'    => 'Categorias',
+            'icon'    => 'fa fa-tags',
+            'submenu' => [
+                [
+                    'text' => 'Adicionar Categoria',
+                    'url'  => 'categories/create',
+                ],
+                [
+                    'text' => 'Adicionar Sub-Categoria',
+                    'url'  => 'subcategories/create',
+                ],
+                [
+                    'text' => 'Listar',
+                    'url'  => 'categories',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Fornecedores',
             'icon'    => 'fa fa-tags',
             'submenu' => [
                 [
@@ -229,22 +249,7 @@ return [
                 ],
                 [
                     'text' => 'Listar',
-                    'url'  => 'categories',
-                ],
-            ],
-        ],
-        ['header' => 'DOCUMENTOS'],
-        [
-            'text'    => 'Notas Fiscais',
-            'icon'    => 'fa fa-tags',
-            'submenu' => [
-                [
-                    'text' => 'Adicionar Nota Fiscal',
-                    'url'  => 'bill-of-sale/new',
-                ],
-                [
-                    'text' => 'Listar Notas Fiscais',
-                    'url'  => 'bill-of-sale/index',
+                    'url'  => 'lero lero',
                 ],
             ],
         ],
