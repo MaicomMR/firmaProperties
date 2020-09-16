@@ -79,13 +79,17 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-
 // -------------------------------------------------
 // BELOW WORK IN PROGRESS ROUTES, METHODS AND BLADES
 // -------------------------------------------------
-
-Route::get('seller', 'Sellers@index')->name('seller');
-Route::get('categories', 'Categories@index');
+Route::middleware(['auth'])->group(function () {
+    Route::get('seller', 'Sellers@index')->name('seller');
+    Route::get('categories', 'Categories@index');
+    Route::get('categories/create', 'Categories@create')->name('categoriesCreateForm');
+    Route::post('categories/store', 'Categories@store')->name('categoriesStore');
+    Route::get('subcategories/create', 'SubCategories@create')->name('subcategoriesCreateForm');
+    Route::post('subcategories/store', 'SubCategories@store')->name('subcategoriesStore');
+});
 
 //Just for developer test
 //Route::get('tt', 'Estate@printWriteOffEstateList');
@@ -94,8 +98,6 @@ Route::get('categories', 'Categories@index');
 Route::get('bill-of-sale/index', 'BillController@index')->name('billIndex');
 Route::get('bill-of-sale/new', 'BillController@create')->name('billAdd');
 Route::post('bill-of-sale/save', 'BillController@store')->name('billSave');
-
-
 
 
 Auth::routes();

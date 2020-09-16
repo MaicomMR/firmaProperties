@@ -3,28 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class Categories extends Controller
+class SubCategories extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function index()
-    {
-        $categories = \App\Category::all();
-        $subCategories = \App\SubCategory::all();
-
-
-        return view('admin.categoriesAndSubCategories.categoriesIndex')->with([
-            'categories'=>$categories,
-            'subCategories'=>$subCategories
-        ]);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -35,7 +19,7 @@ class Categories extends Controller
         $categories = \App\Category::all();
         $subCategories = \App\SubCategory::all();
 
-        return view('admin.categoriesAndSubCategories.categoriesForm')->with([
+        return view('admin.categoriesAndSubCategories.subCategoriesForm')->with([
             'categories'=>$categories,
             'subCategories'=>$subCategories
         ]);
@@ -50,19 +34,19 @@ class Categories extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'category' => 'required|min:6',
+            'subCategory' => 'required|min:6',
         ]);
         if ($validator->fails()) {
             return back()
                 ->withErrors($validator)
                 ->withInput();
         } else {
-            $category = new Category();
+            $subCategory = new SubCategory();
 
-            $category->name = $request->category;
-            $category->save();
+            $subCategory->name = $request->subCategory;
+            $subCategory->save();
 
-            return redirect()->back()->with('message', 'Categoria cadastrada com sucesso.');
+            return redirect()->back()->with('message', 'Sub-categoria cadastrada com sucesso.');
         }
     }
 }
