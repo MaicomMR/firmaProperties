@@ -216,7 +216,7 @@ return [
             ],
         ],
 
-        ['header' => 'CONFIGURAÇÕES'],
+        ['header' => 'CATEGORIAS E FORNECEDORES'],
         [
             'text'    => 'Categorias',
             'icon'    => 'fa fa-tags',
@@ -237,7 +237,7 @@ return [
         ],
         [
             'text'    => 'Fornecedores',
-            'icon'    => 'fa fa-tags',
+            'icon'    => 'fas fa-file-alt',
             'submenu' => [
                 [
                     'text' => 'Adicionar Categoria',
@@ -252,16 +252,6 @@ return [
                     'url'  => 'lero lero',
                 ],
             ],
-        ],
-        [
-            'text' => '[WIP] Adicionar Fornecedor',
-            'url'  => 'seller',
-            'icon' => 'fas fa-file-alt',
-        ],
-        [
-            'text' => '[WIP] Listar',
-            'url'  => '#',
-            'icon' => 'far fa-file-alt',
         ],
         ['header' => 'CONFIGURAÇÕES'],
         [
