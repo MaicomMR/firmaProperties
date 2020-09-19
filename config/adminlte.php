@@ -134,7 +134,7 @@ return [
 
     'use_route_url' => false,
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'homeDashboard',
 
     'logout_url' => 'logout',
 
@@ -215,17 +215,19 @@ return [
                 ],
             ],
         ],
+
+        ['header' => 'CATEGORIAS E FORNECEDORES'],
         [
             'text'    => 'Categorias',
             'icon'    => 'fa fa-tags',
             'submenu' => [
                 [
                     'text' => 'Adicionar Categoria',
-                    'url'  => '#',
+                    'url'  => 'categories/create',
                 ],
                 [
                     'text' => 'Adicionar Sub-Categoria',
-                    'url'  => '#',
+                    'url'  => 'subcategories/create',
                 ],
                 [
                     'text' => 'Listar',
@@ -233,27 +235,16 @@ return [
                 ],
             ],
         ],
-        ['header' => 'NOTAS FISCAIS'],
         [
-            'text' => '[WIP] Adicionar Nota Fiscal',
-            'url'  => 'bill-of-sale',
-            'icon' => 'fas fa-file-alt',
-        ],
-        [
-            'text' => '[WIP] Adicionar Fornecedor',
-            'url'  => 'seller',
-            'icon' => 'fas fa-file-alt',
-        ],
-        [
-            'text' => '[WIP] Listar',
-            'url'  => '#',
-            'icon' => 'far fa-file-alt',
+            'text'        => 'Fornecedores',
+            'url'         => 'seller',
+            'icon'        => 'fas fa-file-alt',
         ],
         ['header' => 'CONFIGURAÇÕES'],
         [
-            'text' => '[WIP] Configurações',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'Configurações',
+            'url'  => 'admin/config/home',
+            'icon' => 'fas fa-cog',
         ],
     ],
 

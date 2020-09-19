@@ -5,13 +5,16 @@
 @section('content_header')
 
     <link rel="stylesheet" type="text/css" href="css/adminStyle.css">
-    <h1>Listagem de Patrimônios</h1>
+
 @stop
 
 
 
 @section('content')
+    <h2>Listagem de Patrimônios</h2>
 
+    <!-- Header Menu -->
+    @include('admin.estates.headerMenu')
 
     @if(session()->has('message'))
 
@@ -21,12 +24,12 @@
     @endif
 
     <a href="{{route('estateAddPage')}}">
-    <div class="container btn-success" style="padding: 10px">
-        <h4 class="text-center"><i class="fa fa-plus-circle" style="padding: 10px"></i>Adicionar patrimônio</h4>
-    </div>
+        <div class="btn-success" style="padding: 10px">
+            <h4 class="text-center"><i class="fa fa-plus-circle" style="padding: 10px"></i>Adicionar patrimônio</h4>
+        </div>
     </a>
 
-    <div class="container">
+    <div class="">
         <div class="row">
             <div class="col-sm-12">
                 <table class="table table-striped">
@@ -46,7 +49,7 @@
                     @foreach($EstateList as $Estate)
 
 
-                        <th scope="row" class="text-right" >
+                        <th scope="row" class="text-right">
                             {{$Estate->label_id}}
                         </th>
                         <th scope="row">{{$Estate->name}}</th>
@@ -59,9 +62,6 @@
                             @endif
 
                         </th>
-
-
-
 
                         <th scope="row">
                             {{--    See estate button   --}}
@@ -83,12 +83,13 @@
                             {{--    Assign to employee button   --}}
                             @if($Estate->employee_id)
                                 <a href="{{route('employeeProfile', $Estate->employee_id)}}">
-                                <button type="button" class="btn btn-secondary">
-                                    <i class="fas fa-user-tag"></i>
-                                </button>
+                                    <button type="button" class="btn btn-secondary">
+                                        <i class="fas fa-user-tag"></i>
+                                    </button>
                                 </a>
                             @else
-                                <a class="btn btn-success" href="#" data-toggle="modal" data-target="#confirmAssignModal"
+                                <a class="btn btn-success" href="#" data-toggle="modal"
+                                   data-target="#confirmAssignModal"
                                    onclick="assignDataToEmployee({{$Estate}})">
                                     <i class="fas fa-user-plus"></i>
                                 </a>

@@ -3,13 +3,20 @@
 
 namespace App\Http\Controllers;
 
+use App\BillOfSale;
 use App\EmployeeModel;
 use App\EstateHistoryModel;
 use \App\EstateModel;
 use \App\Category;
+use App\Seller;
 use \App\SubCategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Validator;
+use function Illuminate\Support\Facades\Blade;
+use PDF;
+
 
 class Estate extends Controller
 {
@@ -21,7 +28,79 @@ class Estate extends Controller
      */
     public function home()
     {
-        return view('home');
+
+        //TODO: CRIAR QUERY >> DECENTE << PARA POPULAR OS GRÁFICOS
+        $categoryCount = EstateModel::select('categories_id', DB::raw('count(*) as total'))
+        ->groupBy('categories_id')
+        ->get();
+
+        $subCategoryCount = EstateModel::select('sub_categories_id', DB::raw('count(*) as total'))
+            ->groupBy('sub_categories_id')
+            ->get();
+
+        $totalEstatesValue = EstateModel::sum('value');
+        $totalEstatesCount = EstateModel::count('id');
+        $totalAssignedEstatesCount = EstateModel::where('employee_id', '!=', null)->count();
+        $totalUnassignedEstatesCount = EstateModel::where('employee_id', '=', null)->count();
+        $totalDisabledEstatesCount = EstateModel::onlyTrashed()->count();
+
+        //dd($totalDisabledEstatesCount);
+
+        $categoryNumber = [];
+        $categoryLabel = [];
+        $categoryColor = [];
+
+        $subCategoryNumber = [];
+        $subCategoryLabel = [];
+        $subCategoryColor = [];
+
+        foreach ($categoryCount as $category){
+            array_push($categoryNumber, $category->total);
+            $estateLabelQuery = Category::all()->where('id', '=', $category->categories_id)->first();
+            array_push($categoryLabel, $estateLabelQuery->name);
+        }
+
+        foreach ($subCategoryCount as $subCategory){
+            array_push($subCategoryNumber, $subCategory->total);
+            $subCategoryLabelQuery = SubCategory::all()->where('id', '=', $subCategory->sub_categories_id)->first();
+            array_push($subCategoryLabel, $subCategoryLabelQuery->name);
+        }
+
+        function generateColor($NumberOfColors){
+            $colorsArray = [];
+
+            for ($color = 0; $color < $NumberOfColors; $color++){
+                $colorRed = rand (40 , 240 );
+                $colorGreen = rand (40 , 240 );
+                $colorBlue = rand (40 , 240 );
+                $alpha = 0.75;
+
+                $finalColor= 'rgba('.$colorRed.', '.$colorGreen.', '.$colorBlue.', '.$alpha.')';
+                array_push($colorsArray, $finalColor);
+            }
+
+            return $colorsArray;
+        }
+
+        $categoryColor = generateColor(count($categoryNumber));
+        $subCategoryColor = generateColor(count($subCategoryNumber));
+
+        //dd($subCategoryColor);
+
+
+        return view('home.homeBasePage')->with([
+                'categoryNumber' => $categoryNumber,
+                'categoryLabel' => $categoryLabel,
+                'categoryColor' => $categoryColor,
+                'subCategoryNumber' => $subCategoryNumber,
+                'subCategoryLabel' => $subCategoryLabel,
+                'subCategoryColor' => $subCategoryColor,
+                'totalEstatesValue' => $totalEstatesValue,
+                'totalEstatesCount' => $totalEstatesCount,
+                'totalAssignedEstatesCount' => $totalAssignedEstatesCount,
+                'totalUnassignedEstatesCount' => $totalUnassignedEstatesCount,
+                'totalDisabledEstatesCount' => $totalDisabledEstatesCount,
+            ]);
     }
 
 
@@ -31,22 +110,58 @@ class Estate extends Controller
 
         $categoriesPlucked = Category::pluck('name', 'id');
         $subCategoriesPlucked = SubCategory::pluck('name', 'id');
+        $sellersPlucked = Seller::pluck('name', 'id');
+        $billOfSalePlucked = BillOfSale::whereDate('updated_at', '>=', now()->subDays(7))->pluck('billNumber', 'id');
 
         return view('admin.add')->with([
             'categoriesPlucked' => $categoriesPlucked,
             'subCategoriesPlucked' => $subCategoriesPlucked,
             'estate_object'=>$Estate,
+            'billOfSale'=>$billOfSalePlucked,
+            'sellersPlucked'=>$sellersPlucked,
         ]);
     }
 
     public function index()
     {
     $EstateList = EstateModel::paginate(30);
+    $activeEstateCount = EstateModel::all()->count();
+    $inactiveEstateCount = EstateModel::onlyTrashed()->count();
     $EmployeeList = EmployeeModel::all();
 
     return view('admin.estates.estateIndex')
         ->with(['EstateList' => $EstateList])
-        ->with(['EmployeeList' => $EmployeeList]);
+        ->with(['EmployeeList' => $EmployeeList])
+        ->with(['activeEstateCount' => $activeEstateCount])
+        ->with(['inactiveEstateCount' => $inactiveEstateCount]);
+    }
+
+    public function availableEstatesIndex()
+    {
+        $EstateList = EstateModel::where('employee_id','=', null)->paginate(30);
+        $activeEstateCount = EstateModel::all()->count();
+        $inactiveEstateCount = EstateModel::onlyTrashed()->count();
+        $EmployeeList = EmployeeModel::all();
+
+        return view('admin.estates.estateIndex')
+            ->with(['EstateList' => $EstateList])
+            ->with(['EmployeeList' => $EmployeeList])
+            ->with(['activeEstateCount' => $activeEstateCount])
+            ->with(['inactiveEstateCount' => $inactiveEstateCount]);
+    }
+
+    public function highValueEstates()
+    {
+        $EstateList = EstateModel::where('value','>=', 3000)->paginate(30);
+        $activeEstateCount = EstateModel::all()->count();
+        $inactiveEstateCount = EstateModel::onlyTrashed()->count();
+        $EmployeeList = EmployeeModel::all();
+
+        return view('admin.estates.estateIndex')
+            ->with(['EstateList' => $EstateList])
+            ->with(['EmployeeList' => $EmployeeList])
+            ->with(['activeEstateCount' => $activeEstateCount])
+            ->with(['inactiveEstateCount' => $inactiveEstateCount]);
     }
 
     /**
@@ -58,10 +173,14 @@ class Estate extends Controller
     {
         $categoriesPlucked = Category::pluck('name', 'id');
         $subCategoriesPlucked = SubCategory::pluck('name', 'id');
+        $billOfSalePlucked = BillOfSale::whereDate('updated_at', '>=', now()->subDays(7))->pluck('billNumber', 'id');
+        $sellersPlucked = Seller::pluck('name', 'id');
 
         return view('admin.add')->with([
             'categoriesPlucked' => $categoriesPlucked,
             'subCategoriesPlucked' => $subCategoriesPlucked,
+            'billOfSale'=>$billOfSalePlucked,
+            'sellersPlucked'=>$sellersPlucked,
         ]);
     }
 
@@ -98,6 +217,7 @@ class Estate extends Controller
             $estate->categories_id = $request->categories_id;
             $estate->sub_categories_id = $request->sub_categories_id;
             $estate->seller_id = $request->seller_id;
+            $estate->observation = $request->observation;
             $estate->estate_photo = null;
 
             $estate->save();
@@ -157,6 +277,7 @@ class Estate extends Controller
             $estate->categories_id = $request->categories_id;
             $estate->sub_categories_id = $request->sub_categories_id;
             $estate->seller_id = $request->seller_id;
+            $estate->observation = $request->observation;
             $estate->estate_photo = null;
 
             $estate->save();
@@ -173,22 +294,32 @@ class Estate extends Controller
     public function destroy($id)
     {
 
-
         $estate = EstateModel::find($id);
-        $estate->delete();
 
-        $estateHistory = EstateHistoryModel::find($id);
+        // Faz a busca pelo último histórico do bem
+        // Do a search for the last history from this estate
+        $estateHistory = EstateHistoryModel::where('estate_id', '=', $id)->latest('created_at')->first();
 
-        if ($estateHistory->assign == 1){
+        if(!empty($estateHistory->assign)){
+
+            if ($estateHistory->assign = 1){
+                $unassignEstateHistory = new EstateHistoryModel();
+                $unassignEstateHistory->employee_id = $estateHistory->employee_id;
+                $unassignEstateHistory->estate_id = $estate->id;
+                $unassignEstateHistory->unassign = 1;
+
+                $unassignEstateHistory->save();
+            }
+
+        } else {
             $unassignEstateHistory = new EstateHistoryModel();
-
-            $unassignEstateHistory->employee_id = $estateHistory->employee_id;
-            $unassignEstateHistory->estate_id = $estateHistory->estate_id;
+            $unassignEstateHistory->estate_id = $estate->id;
             $unassignEstateHistory->unassign = 1;
 
             $unassignEstateHistory->save();
         }
 
+        $estate->delete();
         return redirect()->back()->with('message', 'Patrimônio removido com sucesso.');
     }
 
@@ -231,4 +362,40 @@ class Estate extends Controller
         return redirect()->back()->with('message', 'Patrimônio ' . $estate->name . ' desatribuído do colaborador com sucesso.');
 
     }
+
+    public function printEstateList(){
+
+        $estateList = EstateModel::all()->sortByDesc('employee_id');
+
+        $data = date('d/m/Y : H:m');
+        $dateQuery = $data;
+
+        $pdf = PDF::loadView('pdf.estate-active-list-pdf', compact('estateList'), compact('dateQuery'));
+
+        return $pdf->stream();
+
+    }
+
+    public function printDeletedEstateList(){
+
+        $estateList = EstateModel::onlyTrashed()->get();
+
+        $data = date('d/m/Y : H:m');
+        $dateQuery = $data;
+
+        $pdf = PDF::loadView('pdf.estate-deleted-list-pdf', compact('estateList'), compact('dateQuery'));
+
+        return $pdf->stream();
+
+    }
+
+    public function historyIndex()
+    {
+        $estateHistories = EstateHistoryModel::all()->sortByDesc('created_at');
+
+        return view('admin.estates.estateHistory')->with([
+            'estateHistories' => $estateHistories
+        ]);
+    }
+
 }

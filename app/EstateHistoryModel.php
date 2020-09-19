@@ -11,7 +11,7 @@ class EstateHistoryModel extends Model
     use SoftDeletes;
 
     protected $table = 'estate_history';
-    protected $fillable = ['name'];
+    protected $fillable = ['employee_id', 'estate_id', 'assign', 'unassign'];
 
 
     public function employee()

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BillOfSale;
+use App\Seller;
 use Illuminate\Http\Request;
 
 class BillController extends Controller
@@ -14,7 +15,9 @@ class BillController extends Controller
      */
     public function index()
     {
-        return view('admin.billOfSaleAdd');
+        $billOfSales = BillOfSale::all();
+
+        return view('admin.billOfSale.billOfSaleIndex', compact('billOfSales'));
     }
 
     /**
@@ -24,7 +27,9 @@ class BillController extends Controller
      */
     public function create()
     {
-        //
+        $sellers = Seller::all();
+
+        return view('admin.billOfSale.billOfSaleAdd', compact('sellers'));
     }
 
     /**
@@ -35,19 +40,23 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
+        //TODO: ADICIONAR VALIDATOR AOS CAMPOS
+
         $billOfSale = new BillOfSale;
 
 
         $billOfSale->billNumber = $request->billNumber;
         $billOfSale->OnlineAcessCode = $request->billAcessKey;
         $billOfSale->totalValue = $request->totalValue;
-        $billOfSale->billCopyPath = $request->billCopyPath;
+        $billOfSale->billPDFPath = $request->billPDFPath;
         $billOfSale->billPhotoPath = $request->billPhotoPath;
+        $billOfSale->seller_id = $request->seller_id;
+        $billOfSale->totalValue = $request->totalValue;
 
+        $billOfSale->save();
 
-
-        dd($billOfSale);
-        return view('home');
+        //return redirect('employee/index')->with('message', 'Dados do colaborador '. $employee->name . ' editados com sucesso.');
+        return redirect('bill-of-sale/index')->with('message', 'Nota fiscal adicionada com sucesso!');
     }
 
     /**
