@@ -8,6 +8,7 @@ use App\EmployeeModel;
 use App\EstateHistoryModel;
 use \App\EstateModel;
 use \App\Category;
+use App\Seller;
 use \App\SubCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -109,6 +110,7 @@ class Estate extends Controller
 
         $categoriesPlucked = Category::pluck('name', 'id');
         $subCategoriesPlucked = SubCategory::pluck('name', 'id');
+        $sellersPlucked = Seller::pluck('name', 'id');
         $billOfSalePlucked = BillOfSale::whereDate('updated_at', '>=', now()->subDays(7))->pluck('billNumber', 'id');
 
         return view('admin.add')->with([
@@ -116,6 +118,7 @@ class Estate extends Controller
             'subCategoriesPlucked' => $subCategoriesPlucked,
             'estate_object'=>$Estate,
             'billOfSale'=>$billOfSalePlucked,
+            'sellersPlucked'=>$sellersPlucked,
         ]);
     }
 
@@ -171,11 +174,13 @@ class Estate extends Controller
         $categoriesPlucked = Category::pluck('name', 'id');
         $subCategoriesPlucked = SubCategory::pluck('name', 'id');
         $billOfSalePlucked = BillOfSale::whereDate('updated_at', '>=', now()->subDays(7))->pluck('billNumber', 'id');
+        $sellersPlucked = Seller::pluck('name', 'id');
 
         return view('admin.add')->with([
             'categoriesPlucked' => $categoriesPlucked,
             'subCategoriesPlucked' => $subCategoriesPlucked,
             'billOfSale'=>$billOfSalePlucked,
+            'sellersPlucked'=>$sellersPlucked,
         ]);
     }
 
