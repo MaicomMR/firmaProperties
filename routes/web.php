@@ -79,17 +79,20 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-// -------------------------------------------------
-// BELOW WORK IN PROGRESS ROUTES, METHODS AND BLADES
-// -------------------------------------------------
 Route::middleware(['auth'])->group(function () {
     Route::get('seller', 'Sellers@index')->name('seller');
+    Route::post('seller/store', 'Sellers@store')->name('sellerStore');
     Route::get('categories', 'Categories@index');
     Route::get('categories/create', 'Categories@create')->name('categoriesCreateForm');
     Route::post('categories/store', 'Categories@store')->name('categoriesStore');
     Route::get('subcategories/create', 'SubCategories@create')->name('subcategoriesCreateForm');
     Route::post('subcategories/store', 'SubCategories@store')->name('subcategoriesStore');
 });
+
+// -------------------------------------------------
+// BELOW WORK IN PROGRESS ROUTES, METHODS AND BLADES
+// -------------------------------------------------
+
 
 //Just for developer test
 //Route::get('tt', 'Estate@printWriteOffEstateList');

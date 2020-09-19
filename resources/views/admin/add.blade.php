@@ -81,27 +81,6 @@
     <div class="row">
 
 
-        <div class="dropdown col-sm-4">
-            {!! Form::label('billOfSale', 'Nota Fiscal'); !!}
-            <div class="input-group">
-                {!! Form::select('bill_of_sales', $billOfSale, null,[
-                        'class' => 'custom-select',
-                        'placeholder' => 'Selecione uma Nota Fiscal'
-
-                        ]); !!}
-            </div>
-        </div>
-
-{{--        <div class="form-group col-4">--}}
-{{--            {!! Form::label('billOfSale', 'Nota Fiscal'); !!}--}}
-{{--            {!! Form::text('billOfSale', null, [--}}
-{{--    'class' => 'form-control',--}}
-{{--     'placeholder' => '4320 0261 5858 6519 9306 6500 2000 0280 6311 3041 1317']); !!}--}}
-{{--            <small id="emailHelp" class="form-text text-muted">--}}
-{{--                Você pode adicionar uma nova nota fiscal clicando aqui.--}}
-{{--            </small>--}}
-{{--        </div>--}}
-
 
 
         <div class="dropdown col-sm-3">
@@ -133,6 +112,23 @@
                 </div>
             </div>
         </div>
+        <div class="dropdown col-sm-4">
+            {!! Form::label('seller_id', 'Fornecedor'); !!}
+            <div class="input-group">
+                {!! Form::select('seller_id', $sellersPlucked, null,[
+                        'class' => 'custom-select',
+                        'placeholder' => 'Selecione um fornecedor'
+
+                        ]); !!}
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary bg-green" type="button">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
         <div class="form-group col-sm-10">
             {!! Form::label('name', 'Observações'); !!}
             {!! Form::textarea('observation', null, [

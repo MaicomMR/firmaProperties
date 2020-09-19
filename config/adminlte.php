@@ -236,22 +236,9 @@ return [
             ],
         ],
         [
-            'text'    => 'Fornecedores',
-            'icon'    => 'fas fa-file-alt',
-            'submenu' => [
-                [
-                    'text' => 'Adicionar Categoria',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'Adicionar Sub-Categoria',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'Listar',
-                    'url'  => 'lero lero',
-                ],
-            ],
+            'text'        => 'Fornecedores',
+            'url'         => 'seller',
+            'icon'        => 'fas fa-file-alt',
         ],
         ['header' => 'CONFIGURAÇÕES'],
         [
