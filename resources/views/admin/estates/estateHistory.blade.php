@@ -21,6 +21,7 @@
             <th scope="col">Código Patrimônio</th>
             <th scope="col">Nome Patrimônio</th>
             <th scope="col">Colaborador</th>
+            <th scope="col">Concedido por</th>
             <th scope="col">Data:</th>
             <th scope="col">Ações:</th>
         </tr>
@@ -55,20 +56,17 @@
             @else
                 <td> - </td>
             @endif
-
+            <td>{{$EstateHistory->admin->name}}</td>
             <td>{{date('d/m/Y', strtotime($EstateHistory->updated_at))}}</td>
             <td>
 
-
-{{--                TODO: LINK DIRECIONANDO PARA O COLABORADOR--}}
-                <button type="button" class="btn btn-info">
+                <a type="button" class="btn btn-info" href="{{ route('employeeProfile', $EstateHistory->employee_id)}}">
                     <i class="fas fa-user-tag button"></i>
-                </button>
+                </a>
 
-{{--                TODO: LINK DIRECIONANDO PARA O PATRIMÔNIO--}}
-                <button type="button" class="btn btn-success">
+                <a type="button" class="btn btn-success" href="{{ route('estateEdit', $EstateHistory->estate_id)}}">
                     <i class="fas fa-archive"></i>
-                </button>
+                </a>
             </td>
         </tr>
     @endforeach
