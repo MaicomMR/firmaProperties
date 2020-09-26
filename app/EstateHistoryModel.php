@@ -22,4 +22,9 @@ class EstateHistoryModel extends Model
     {
         return $this->belongsTo('App\EstateModel', 'estate_id')->withTrashed();
     }
+
+    public function admin()
+    {
+        return $this->belongsTo('App\User', 'admin_id');
+    }
 }

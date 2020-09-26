@@ -10,8 +10,10 @@ use \App\EstateModel;
 use \App\Category;
 use App\Seller;
 use \App\SubCategory;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Validator;
 use function Illuminate\Support\Facades\Blade;
@@ -289,33 +291,34 @@ class Estate extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-
         $estate = EstateModel::find($id);
 
         // Faz a busca pelo último histórico do bem
         // Do a search for the last history from this estate
         $estateHistory = EstateHistoryModel::where('estate_id', '=', $id)->latest('created_at')->first();
 
+        $unassignEstateHistory = new EstateHistoryModel();
+        $unassignEstateHistory->admin_id = Auth::user()->id;
+
+        //Se o patrimônio já registro de atribuiçção
         if(!empty($estateHistory->assign)){
 
+            //Se ele estiver atribuído a algum colaborador
             if ($estateHistory->assign = 1){
-                $unassignEstateHistory = new EstateHistoryModel();
                 $unassignEstateHistory->employee_id = $estateHistory->employee_id;
                 $unassignEstateHistory->estate_id = $estate->id;
                 $unassignEstateHistory->unassign = 1;
-
                 $unassignEstateHistory->save();
             }
 
+        //Se o patrimônio nunca foi atribuído a ninguém
         } else {
-            $unassignEstateHistory = new EstateHistoryModel();
             $unassignEstateHistory->estate_id = $estate->id;
             $unassignEstateHistory->unassign = 1;
-
             $unassignEstateHistory->save();
         }
 
@@ -335,6 +338,7 @@ class Estate extends Controller
 
             $estateHistory = new EstateHistoryModel();
             $estateHistory->employee_id = $employeeId;
+            $estateHistory->admin_id = Auth::user()->id;
             $estateHistory->estate_id = $estateId;
             $estateHistory->assign = '1';
 
@@ -354,6 +358,7 @@ class Estate extends Controller
         $estateHistory = new EstateHistoryModel();
         $estateHistory->employee_id = $employeeId;
         $estateHistory->estate_id = $estateId;
+        $estateHistory->admin_id = Auth::user()->id;
         $estateHistory->unassign = '1';
 
         $estateHistory->save();
