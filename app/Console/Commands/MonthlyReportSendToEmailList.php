@@ -13,7 +13,7 @@ class MonthlyReportSendToEmailList extends Command
      *
      * @var string
      */
-    protected $signature = 'email';
+    protected $signature = 'send-mensal-report-email';
 
     /**
      * The console command description.
