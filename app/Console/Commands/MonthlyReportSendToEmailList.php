@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\DayEstateValueAlert;
 use App\Mail\MonthlyReport;
+use App\MailingListModel;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 
@@ -39,6 +41,11 @@ class MonthlyReportSendToEmailList extends Command
      */
     public function handle()
     {
-        Mail::send(new MonthlyReport());
+
+        $emails = MailingListModel::all()->where('monthReports', '=', '1');
+
+        foreach ($emails as $email) {
+            Mail::to($email->email)->send(new MonthlyReport());
+        }
     }
 }

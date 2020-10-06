@@ -1,9 +1,3 @@
-<head>
-{{--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"--}}
-{{--          integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">--}}
-{{--    <link rel="stylesheet" type="text/css" href="css/mail/monthlyMailStyle.css">--}}
-</head>
-
 <body style="font-family: Open Sans;">
 
 <ul class="page page-portrait" style="
@@ -50,58 +44,83 @@
         </div>
     </div>
 
-    <div class="data-container" style="    display: flex;
-    flex-wrap: wrap;">
-        <div class="row">
-            <div class="card m-1 col">
-                <div class="card-body">
-                    <h5 class="card-title">Valor aproximado em bens</h5>
-                    <h4 class="card-text"><strong> {{$totalEstatesValue}} R$</strong></h4>
-                </div>
-            </div>
-
-            <div class="card m-1 col">
-                <div class="card-body">
-                    <h5 class="card-title">Total de bens cadastrados na base de dados</h5>
-                    <h4 class="card-text"><strong> {{$totalEstatesCount}} {{'(+' . $newEstatesOnLast30Days . ')'}}</strong></h4>
-                </div>
-            </div>
+    <div class="data-container">
+        <div class="info-card">
+            <h5 class="card-title">Valor aproximado em bens</h5>
+            <h4 class="card-text"><strong> {{number_format($totalEstatesValue, 2) . ' R$'}}</strong></h4>
         </div>
+
+        <div class="info-card">
+            <h5 class="card-title">Valor aproximado em bens</h5>
+            <h4 class="card-text"><strong> {{$totalEstatesCount . '(+' . $newEstatesOnLast30Days . ')'}}</strong></h4>
+        </div>
+
 
         <div class="row">
             <div class="card">
                 <div class="card-body">
+                    @if(isset($topValueEstatesAddedOnLastMonth))
                     <h5 class="card-title">Bens de maior valor adicionados no mês</h5>
 
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">Cód.</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Valor</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                        </tr>
-                        </tbody>
-                    </table>
+
+                        <table id="customers">
+                            <tr>
+                                <th>Código</th>
+                                <th>Patrimônio</th>
+                                <th>Valor</th>
+                            </tr>
+                            @foreach($topValueEstatesAddedOnLastMonth as $estate)
+                                <tr>
+                                    <td>{{$estate->label_id}}</td>
+                                    <td>{{$estate->name}}</td>
+                                    <td>{{number_format($estate->value, 2) . ' R$'}}</td>
+                                </tr>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 </ul>
 </body>
+
+
+<style>
+    .info-card {
+        margin: 10px;
+        background-color: white;
+        padding: 8px
+    }
+
+    .data-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #customers {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #customers td, #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    #customers tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #customers tr:hover {
+        background-color: #ddd;
+    }
+
+    #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #09421f;
+        color: white;
+    }
+</style>

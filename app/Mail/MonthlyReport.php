@@ -44,12 +44,21 @@ class MonthlyReport extends Mailable
         $totalEstatesCount = EstateModel::count('id');
         $newEstatesOnLast30Days = EstateModel::all()->where('created_at', '>', now()->subDays(30))->count();
 
+        $topValueEstatesAddedOnLastMonth = EstateModel::orderBy('value', 'DESC')->where('created_at', '>', now()->subDays(30))->take(10)->get();
+
         foreach ($emails as $email){
 
             $this->subject('Relatório Mensal - Estate Care');
             $this->to($email->email, 'Maicom');
             $this->from('estatecare@gmail.com', 'EstateCare');
         }
-        return $this->view('mail.monthlyReport', compact(['emails', 'reportProcessDate', 'totalEstatesValue', 'totalEstatesCount', 'newEstatesOnLast30Days', 'lastMonth']));
+        return $this->view('mail.monthlyReport', compact([
+            'emails',
+            'reportProcessDate',
+            'totalEstatesValue',
+            'totalEstatesCount',
+            'newEstatesOnLast30Days',
+            'lastMonth',
+            'topValueEstatesAddedOnLastMonth']));
     }
 }
