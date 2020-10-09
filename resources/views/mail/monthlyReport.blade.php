@@ -21,9 +21,9 @@
     <div class="header" style="color: white;
     background-color: #262626;
     padding: 20px;">
-       <h2>Estate Care</h2>
+        <h2>Estate Care</h2>
         <div class="sub-title" style="display:  inline-block">Relatório mensal de patrimônio <br>
-        Relatório referente ao mês de {{$lastMonth}}</div>
+            Relatório referente ao mês de {{$lastMonth}}</div>
     </div>
     <div>
         <div class="date" style="background-color: #cecece;">
@@ -38,54 +38,135 @@
             <p class="card-text mail-list" style="font-size: 0.7em;">
             @if(isset($emails))
                 @foreach($emails as $email)
-                {{$email->email . ', '}}
+                    {{$email->email . ', '}}
                 @endforeach
             @endif
         </div>
     </div>
 
     <div class="data-container">
-        <div class="info-card">
-            <h5 class="card-title">Valor aproximado em bens</h5>
-            <h4 class="card-text"><strong> {{number_format($totalEstatesValue, 2) . ' R$'}}</strong></h4>
-        </div>
-
-        <div class="info-card">
-            <h5 class="card-title">Valor aproximado em bens</h5>
-            <h4 class="card-text"><strong> {{$totalEstatesCount . '(+' . $newEstatesOnLast30Days . ')'}}</strong></h4>
-        </div>
-
-
         <div class="row">
             <div class="card">
-                <div class="card-body">
-                    @if(isset($topValueEstatesAddedOnLastMonth))
-                    <h5 class="card-title">Bens de maior valor adicionados no mês</h5>
-
-
-                        <table id="customers">
-                            <tr>
-                                <th>Código</th>
-                                <th>Patrimônio</th>
-                                <th>Valor</th>
-                            </tr>
-                            @foreach($topValueEstatesAddedOnLastMonth as $estate)
-                                <tr>
-                                    <td>{{$estate->label_id}}</td>
-                                    <td>{{$estate->name}}</td>
-                                    <td>{{number_format($estate->value, 2) . ' R$'}}</td>
-                                </tr>
-                        @endforeach
-                    @endif
-                </div>
             </div>
         </div>
     </div>
 </ul>
+
+
+    <div id="cardContainer" class="card-container">
+        <div class="card-grid">
+            <div class="card-header">
+                <span class="emoji-icon">💰</span>
+            </div>
+            <div class="moji-code">
+                {{number_format($totalEstatesValue, 2) . ' R$'}}
+            </div>
+            <div class="moji-description">
+                Valor aproximado de bens registrados na base de dados
+            </div>
+        </div>
+
+        <div class="card-grid">
+            <div class="card-header">
+                <span class="emoji-icon">📦</span>
+            </div>
+            <div class="moji-code">
+                {{$totalEstatesCount . '(+' . $newEstatesOnLast30Days . ')'}}
+            </div>
+            <div class="moji-description">
+                Valor aproximado de bens registrados na base de dados
+            </div>
+        </div>
+
+        <div class="card-grid">
+            <div class="card-header">
+                <span class="emoji-icon">📋</span>
+            </div>
+            <div class="moji-code">
+                {{$totalUnassignedEstatesCount}}
+            </div>
+            <div class="moji-description">
+                Patrimônios não utilizados
+            </div>
+        </div>
+
+        <div class="card-grid">
+            <div class="card-header">
+                <span class="emoji-icon">🗑️</span>
+            </div>
+            <div class="moji-code">
+                {{$lastMonthWriteOffEstates}}
+            </div>
+            <div class="moji-description">
+                Patrimônios desativados nos últimos 30 dias
+            </div>
+        </div>
+    </div>
+
+
 </body>
 
 
 <style>
+    .emoji-icon {
+        font-size: 75px;
+        transition: 0.3s;
+    }
+
+    .moji-code {
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 700;
+        padding-top: 10px;
+        font-size: 15px;
+        background-color: rgb(240, 240, 240);
+        height: 15%;
+        transition: 0.5s;
+    }
+
+    .moji-description {
+        font-family: 'Open Sans', sans-serif;
+        padding: 10px;
+        background-color: rgb(228, 228, 228);
+        height: 35%;
+        border-radius: 0px 0px 10px 10px;
+    }
+
+    .card-grid {
+        float: left;
+        text-align: center;
+        margin: 10px;
+        margin-top: 30px;
+        width: 220px;
+        height: 290px;
+        border-radius: 10px;
+        transition: 0.5s;
+    }
+
+    .card-header {
+        padding-top: 10px;
+        background-color: rgb(149, 206, 95);
+
+        height: 50%;
+        border-radius: 10px 10px 0px 0px;
+        background-color: rgb(255, 191, 174);
+    }
+
+    .cards-plane {
+        padding: 1vw;
+        margin: 0 auto;
+        background-color: rgb(255, 255, 255);
+        width: 60vw;
+
+        -webkit-box-shadow: 0px 0px 66px -10px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 0px 66px -10px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 66px -10px rgba(0, 0, 0, 0.75);
+    }
+
+    .card-container {
+        /*float: left;*/
+        justify-items: center;
+    }
+
     .info-card {
         margin: 10px;
         background-color: white;

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\EstateModel;
 use App\Mail\DayEstateValueAlert;
 use App\Mail\MonthlyReport;
 use App\MailingListModel;
@@ -44,8 +45,32 @@ class MonthlyReportSendToEmailList extends Command
 
         $emails = MailingListModel::all()->where('monthReports', '=', '1');
 
-        foreach ($emails as $email) {
-            Mail::to($email->email)->send(new MonthlyReport());
+        \Carbon\Carbon::setLocale('pt_BR');
+        $reportProcessDate = now()->timezone('America/Sao_Paulo')->isoFormat('h:mm:ss a - D MMMM YYYY');;
+        $lastMonth = now()->subMonth(1)->isoFormat('MMMM');
+
+        $dateTime = now()->isoFormat('YYYY-MM-D h:mm:ss');
+
+        $totalEstatesValue = EstateModel::sum('value');
+        $totalEstatesCount = EstateModel::count('id');
+        $newEstatesOnLast30Days = EstateModel::all()->where('created_at', '>', now()->subDays(30))->count();
+
+        $topValueEstatesAddedOnLastMonth = EstateModel::orderBy('value', 'DESC')->where('created_at', '>', now()->subDays(30))->take(10)->get();
+        $lastMonthWriteOffEstates = EstateModel::onlyTrashed()->where('deleted_at', '>', now()->subDays(30))->count();
+        $totalUnassignedEstatesCount = EstateModel::where('employee_id', '=', null)->count();
+
+        foreach ($emails as $destinationEmail) {
+            Mail::to($destinationEmail->email)->send(new MonthlyReport(
+                $emails,
+                $reportProcessDate,
+                $totalEstatesValue,
+                $totalEstatesCount,
+                $newEstatesOnLast30Days,
+                $lastMonth,
+                $topValueEstatesAddedOnLastMonth,
+                $lastMonthWriteOffEstates,
+                $totalUnassignedEstatesCount,
+                $destinationEmail));
         }
     }
 }
