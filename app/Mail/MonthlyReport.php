@@ -14,14 +14,36 @@ class MonthlyReport extends Mailable
 {
     use Queueable, SerializesModels;
 
+    private $emails;
+    private $reportProcessDate;
+    private $totalEstatesValue;
+    private $totalEstatesCount;
+    private $newEstatesOnLast30Days;
+    private $lastMonth;
+    private $topValueEstatesAddedOnLastMonth;
+    private $lastMonthWriteOffEstates;
+    private $totalUnassignedEstatesCount;
+    private $destinationEmail;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($emails, $reportProcessDate, $totalEstatesValue, $totalEstatesCount, $newEstatesOnLast30Days,
+                                $lastMonth, $topValueEstatesAddedOnLastMonth, $lastMonthWriteOffEstates, $totalUnassignedEstatesCount,
+                                $destinationEmail)
     {
-
+        $this->emails = $emails;
+        $this->reportProcessDate = $reportProcessDate;
+        $this->totalEstatesValue = $totalEstatesValue;
+        $this->totalEstatesCount = $totalEstatesCount;
+        $this->newEstatesOnLast30Days = $newEstatesOnLast30Days;
+        $this->lastMonth = $lastMonth;
+        $this->topValueEstatesAddedOnLastMonth = $topValueEstatesAddedOnLastMonth;
+        $this->lastMonthWriteOffEstates = $lastMonthWriteOffEstates;
+        $this->totalUnassignedEstatesCount = $totalUnassignedEstatesCount;
+        $this->destinationEmail = $destinationEmail;
     }
 
     /**
@@ -31,25 +53,30 @@ class MonthlyReport extends Mailable
      */
     public function build()
     {
+        $destinationEmail = $this->destinationEmail;
 
-        $emails = MailingListModel::all()->where('monthReports', '=', '1');
+        $emails = $this->emails;
+        $reportProcessDate = $this->reportProcessDate;
+        $totalEstatesValue = $this->totalEstatesValue;
+        $totalEstatesCount = $this->totalEstatesCount;
+        $newEstatesOnLast30Days = $this->newEstatesOnLast30Days;
+        $lastMonth = $this->lastMonth;
+        $topValueEstatesAddedOnLastMonth = $this->topValueEstatesAddedOnLastMonth;
+        $lastMonthWriteOffEstates = $this->lastMonthWriteOffEstates;
+        $totalUnassignedEstatesCount = $this->totalUnassignedEstatesCount;
 
-        \Carbon\Carbon::setLocale('pt_BR');
-        $reportProcessDate = now()->timezone('America/Sao_Paulo')->isoFormat('h:mm:ss a - D MMMM YYYY');;
-        $lastMonth = now()->subMonth(1)->isoFormat('MMMM');
+        $this->subject('Relatório Mensal - Estate Care');
+        $this->from('estatecare@gmail.com', 'EstateCare');
 
-        $dateTime = now()->isoFormat('YYYY-MM-D h:mm:ss');
-
-        $totalEstatesValue = EstateModel::sum('value');
-        $totalEstatesCount = EstateModel::count('id');
-        $newEstatesOnLast30Days = EstateModel::all()->where('created_at', '>', now()->subDays(30))->count();
-
-        foreach ($emails as $email){
-
-            $this->subject('Relatório Mensal - Estate Care');
-            $this->to($email->email, 'Maicom');
-            $this->from('estatecare@gmail.com', 'EstateCare');
-        }
-        return $this->view('mail.monthlyReport', compact(['emails', 'reportProcessDate', 'totalEstatesValue', 'totalEstatesCount', 'newEstatesOnLast30Days', 'lastMonth']));
+        return $this->view('mail.monthlyReport', compact([
+            'emails',
+            'reportProcessDate',
+            'totalEstatesValue',
+            'totalEstatesCount',
+            'newEstatesOnLast30Days',
+            'lastMonth',
+            'topValueEstatesAddedOnLastMonth',
+            'lastMonthWriteOffEstates',
+            'totalUnassignedEstatesCount']));
     }
 }

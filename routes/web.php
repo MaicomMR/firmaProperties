@@ -53,14 +53,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('pdf/print/deletedEstates', 'Estate@printDeletedEstateList')->name('printDeletedEstates');
 });
 
-//PDF Relatories for download
-
-    Route::get('report-mail-sender', function (){
-        return new \App\Mail\monthlyReport();
-    })->name('sendMonthlyMail');
-
-
-
 //Admin routes
 Route::middleware(['auth'])->group(function () {
     //home

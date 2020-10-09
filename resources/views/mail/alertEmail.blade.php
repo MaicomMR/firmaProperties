@@ -50,6 +50,6 @@
                 <td>{{number_format($estate->value, 2) . ' R$'}}</td>
             </tr>
         @endforeach
-        @endif
+@endif
     </table>
 

@@ -40,13 +40,11 @@ class DayEstateValueAlert extends Mailable
     {
 
         $estates = $this->estatesObject;
-        $emails = MailingListModel::all()->where('monthReports', '=', '1');
 
-            $this->subject($this->emailSubject);
-            $this->to($this->email, 'Maicom');
-            $this->from('estatecare@gmail.com', $this->emailTitle);
+        $this->subject($this->emailSubject);
+        $this->to($this->email, 'Maicom');
+        $this->from('estatecare@gmail.com', $this->emailTitle);
 
         return $this->view('mail.alertEmail', compact(['estates']));
-
     }
 }
