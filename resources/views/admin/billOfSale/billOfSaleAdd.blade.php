@@ -10,7 +10,14 @@
 
 @section('content')
 
-<form method="POST" action="bill-of-sale/save">
+    @if(session()->has('message'))
+
+        <div class="alert alert-warning" role="alert">
+            {{ session()->get('message') }}
+        </div>
+    @endif
+
+<form method="POST" action="save">
     @csrf
 
     <div class="container">
@@ -25,21 +32,21 @@
                 <input type="text" class="form-control" id="billAcessKey" name="billAcessKey"
                        placeholder="3513 0305 5707 1400 0159 5500 1001 9567 9010 2577 0000">
             </div>
+
             <div class="dropdown col-3">
                 <label for="exampleInputEmail1">Fornecedor:</label><br/>
                 <div class="input-group">
-                    <select class="custom-select" id="inputGroupSelect04" name="productProvider">
-                            <option value="">Não informado</option>
-                            <option value="Kabum"> Kabum</option>
-                            <option value="Pichau"> Pichau</option>
-                            <option value="Mercado Livre"> Mercado Livre</option>
-                            <option value="outros"> Outro...</option>
+                    <select class="custom-select" id="inputGroupSelect04" name="seller_id">
+                        @foreach($sellers as $seller)
+                            <option value="{{$seller->id}}">{{$seller->name}}</option>
+                        @endforeach
+                            <option value="0"> Outro...</option>
                     </select>
                 </div>
             </div>
             <div class="col-2">
                 <label for="billValue">Valor Total da nota:</label>
-                <input type="text" class="form-control" id="billValue" name="billValue"
+                <input type="text" class="form-control" id="billValue" name="totalValue"
                        placeholder="1504,00 R$">
             </div>
 

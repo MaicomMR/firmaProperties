@@ -7,6 +7,8 @@ use App\EstateModel;
 use Illuminate\Http\Request;
 use Validator;
 use \App\EmployeeModel;
+use Illuminate\Support\Facades\DB;
+
 
 class Employee extends Controller
 {
@@ -17,7 +19,7 @@ class Employee extends Controller
      */
     public function index()
     {
-        $employees = EmployeeModel::all()->sortBy("name");
+        $employees = EmployeeModel::paginate(24);
 
         return view('admin.employee.index')->with([
             'employees'=>$employees

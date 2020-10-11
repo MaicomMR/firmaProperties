@@ -1,0 +1,86 @@
+
+.form-box {
+    /*background-color: rgba(255, 255, 255, 0.1);*/
+    width: 400px;
+    height: 10vh;
+    margin: auto;
+    margin-top: 20%;
+}
+
+.login-screen {
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}
+
+.login-background {
+    left: 0;
+    top: 0;
+    background-image: url("/../images/login_hd.jpg");
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+}
+
+.login-dark-bar {
+    position: absolute;
+    margin-top: 8%;
+    width: 100%;
+    height: 20vh;
+    background-color: rgba(3, 6, 47, 0.3);
+}
+
+.logo-img {
+    margin-top: 2em;
+    width: 18vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-buttons {
+ width: 80%;
+}
+
+.login-button {
+    background-color:#ededed;
+    border-radius:20px;
+    border:1px solid #dcdcdc;
+    display:inline-block;
+    cursor:pointer;
+    color: #292929;
+    font-size:15px;
+    font-weight:bold;
+    padding:6px 24px;
+    text-decoration:none;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.login-button:focus {
+    background-color: #ffffff;
+    outline: none;
+}
+
+.login-input {
+    width: 100%;
+    font-size: 1.2em;
+    margin-top: 5px;
+    background-color: white;
+    color: #5c5c5c;
+    border-radius: 20px;
+    border: none;
+    padding: 5px;
+    padding-left: 20px;
+
+}
+
+.login-input:focus {
+    outline: none;
+    color: #171717;
+}
+
+
+

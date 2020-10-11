@@ -11,7 +11,7 @@ class EstateHistoryModel extends Model
     use SoftDeletes;
 
     protected $table = 'estate_history';
-    protected $fillable = ['name'];
+    protected $fillable = ['employee_id', 'estate_id', 'assign', 'unassign'];
 
 
     public function employee()
@@ -21,5 +21,10 @@ class EstateHistoryModel extends Model
     public function estate()
     {
         return $this->belongsTo('App\EstateModel', 'estate_id')->withTrashed();
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo('App\User', 'admin_id');
     }
 }

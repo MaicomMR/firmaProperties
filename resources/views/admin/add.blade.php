@@ -11,14 +11,11 @@
                 Opss... houve algum erro no preenchimento
             </div>
             <div class="card-body alert-danger">
-                    @foreach($errors->all() as $error)
-                        <li style="color: white">{{$error}}</li>
-                    @endforeach
+                @foreach($errors->all() as $error)
+                    <li style="color: white">{{$error}}</li>
+                @endforeach
             </div>
         </div>
-        <ul>
-
-        </ul>
     @endif
 
     @if (isset($estate_object))
@@ -53,21 +50,15 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-2">
-            {!! Form::label('id', 'Código Interno'); !!}
-            {!! Form::text('id', null, [
-                                'class' => 'form-control',
-                                'placeholder' => '0',
-                                'disabled']); !!}
-        </div>
-        <div class="col-2">
+
+        <div class="col-sm-2">
             {!! Form::label('label_id', 'Código Etiqueta'); !!}
             {!! Form::text('label_id', null, [
                                 'class' => 'form-control',
                                 'placeholder' => '0430']); !!}
         </div>
 
-        <div class="form-group col-6">
+        <div class="form-group col-sm-6">
             {!! Form::label('name', 'Nome do patrimônio'); !!}
             {!! Form::text('name', null, [
     'class' => 'form-control',
@@ -75,28 +66,24 @@
             <small id="emailHelp" class="form-text text-muted">Este nome será exibido na listagem de
                 patrimônios.</small>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="form-group col-2">
-            {!! Form::label('billOfSale', 'Nota Fiscal'); !!}
-            {!! Form::text('billOfSale', null, [
-    'class' => 'form-control',
-     'placeholder' => '4320 0261 5858 6519 9306 6500 2000 0280 6311 3041 1317']); !!}
-            <small id="emailHelp" class="form-text text-muted">
-                Você pode adicionar uma nova nota fiscal clicando aqui.
-            </small>
-        </div>
-
-        <div class="form-group col-2">
+        <div class="form-group col-sm-2">
             {!! Form::label('value', 'Valor do bem'); !!}
             {!! Form::number('value', null, [
     'class' => 'form-control',
      'placeholder' => '1278,97',
      'step' => '.01']); !!}
         </div>
+    </div>
 
-        <div class="dropdown col-3">
+
+
+    <div class="row">
+
+
+
+
+        <div class="dropdown col-sm-3">
             {!! Form::label('categories_id', 'Categoria'); !!}
             <div class="input-group">
                 {!! Form::select('categories_id', $categoriesPlucked, null,[
@@ -111,7 +98,7 @@
                 </div>
             </div>
         </div>
-        <div class="dropdown col-3">
+        <div class="dropdown col-sm-3">
             {!! Form::label('sub_categories_id', 'Sub-Categoria'); !!}
 
             <div class="input-group">
@@ -125,10 +112,42 @@
                 </div>
             </div>
         </div>
+        <div class="dropdown col-sm-2">
+            {!! Form::label('seller_id', 'Fornecedor'); !!}
+            <div class="input-group">
+                {!! Form::select('seller_id', $sellersPlucked, null,[
+                        'class' => 'custom-select',
+                        'placeholder' => 'Selecione um fornecedor'
+
+                        ]); !!}
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary bg-green" type="button">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="dropdown col-sm-1">
+            {!! Form::label('assurance_cover_date', 'Garantia'); !!}
+            <div class="input-group" style="height: calc(2.25rem + 2px);">
+                {{Form::date('assurance_cover_date', null)}}
+            </div>
+        </div>
+
+        <div class="form-group col-sm-10">
+            {!! Form::label('name', 'Observações'); !!}
+            {!! Form::textarea('observation', null, [
+                'class' => 'form-control',
+                'cols' => 3,
+                'rows' => 3,
+                'placeholder' => 'Observações sobre o objeto']); !!}
+        </div>
+
     </div>
 
+    <div style="margin-top: 20px;">
     {!! Form::submit('Salvar', ['class' => 'btn btn-info']); !!}
-
+    </div>
 
 
 

@@ -17,11 +17,12 @@
         <div class="row">
             <div class="col-sm-6">
 
-
+                <a href="{{route('categoriesCreateForm')}}">
                 <div class="topTable">
                     <i class="fa fa-tag" aria-hidden="true"></i>
                     ADICIONAR NOVA CATEGORIA
                 </div>
+                </a>
 
 
 
@@ -45,11 +46,12 @@
 
             </div>
             <div class="col-sm-6">
-
+                <a href="{{route('subcategoriesCreateForm')}}">
                 <div class="topTable">
                     <i class="fa fa-tags" aria-hidden="true"></i>
                     ADICIONAR NOVA SUB-CATEGORIA
                 </div>
+                </a>
 
                 <table class="table table-striped">
 
