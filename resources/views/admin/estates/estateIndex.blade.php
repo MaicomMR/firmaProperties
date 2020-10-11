@@ -65,7 +65,7 @@
 
                         <th scope="row" class="text-right">
                             {{--    Assurance cover estate icon   --}}
-                            @if($Estate->assurance_cover_date)
+                            @if($Estate->assurance_cover_date > now())
                             <button type="button" class="btn btn-warning">
                                 <i class="fas fa-shield-alt" aria-hidden="true"></i>
                             </button>
