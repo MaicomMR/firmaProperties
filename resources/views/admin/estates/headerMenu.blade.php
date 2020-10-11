@@ -43,9 +43,9 @@
 
     <div class="info-box col-sm m-1" onclick=""
          style="cursor: pointer">
-        <span class="info-box-icon bg-blue"><i class="fas fa-globe-americas"></i></span>
+        <span class="info-box-icon bg-warning"><i class="fas fa-shield-alt"></i></span>
         <div class="info-box-content">
-            <span class="info-box-text">Bens fora de Pelotas</span>
+            <span class="info-box-text">Itens na garantia</span>
         </div>
     </div>
 

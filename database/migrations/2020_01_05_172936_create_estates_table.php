@@ -18,6 +18,7 @@ class CreateEstatesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+            $table->date('assurance_cover_date')->nullable()->default(null);
             $table->string('name');
             $table->string('estate_photo')->nullable(true);
             $table->double('value');
