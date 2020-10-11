@@ -41,7 +41,7 @@
         </div>
     </div>
 
-    <div class="info-box col-sm m-1" onclick=""
+    <div class="info-box col-sm m-1" onclick="window.location=('{{route('activeAssurance')}}');"
          style="cursor: pointer">
         <span class="info-box-icon bg-warning"><i class="fas fa-shield-alt"></i></span>
         <div class="info-box-content">

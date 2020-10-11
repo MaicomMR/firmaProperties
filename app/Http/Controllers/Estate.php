@@ -478,4 +478,13 @@ class Estate extends Controller
         ]);
     }
 
+    public function activeAssurance()
+    {
+        $estatesWithActiveAssurance = EstateModel::all()->where('assurance_cover_date', '>', now());
+
+        return view('admin.estates.estateWithActiveAssurance')->with([
+            'estatesWithActiveAssurance' => $estatesWithActiveAssurance
+        ]);
+    }
+
 }
