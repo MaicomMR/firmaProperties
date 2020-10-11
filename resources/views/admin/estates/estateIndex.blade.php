@@ -63,11 +63,13 @@
 
                         </th>
 
-                        <th scope="row">
-                            {{--    See estate button   --}}
+                        <th scope="row" class="text-right">
+                            {{--    Assurance cover estate icon   --}}
+                            @if($Estate->assurance_cover_date > now())
                             <button type="button" class="btn btn-warning">
-                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                <i class="fas fa-shield-alt" aria-hidden="true"></i>
                             </button>
+                            @endif
 
                             {{--    Edit estate button   --}}
                             <a class="btn btn-primary" href="{{ route('estateEdit', $Estate->id)}}">

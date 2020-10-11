@@ -201,7 +201,6 @@ class Estate extends Controller
     public function store(Request $request)
     {
 
-
         $validator = Validator::make($request->all(), [ // <---
             'name' => 'required|max:255|min:2',
             'label_id' => 'required|unique:estates|numeric',
@@ -210,7 +209,8 @@ class Estate extends Controller
             'sub_categories_id' => 'required',
         ]);
 
-        if ($validator->fails()) {
+        if ($validator->fails())
+        {
             return back()
                 ->withErrors($validator)
                 ->withInput();
@@ -225,6 +225,7 @@ class Estate extends Controller
             $estate->sub_categories_id = $request->sub_categories_id;
             $estate->seller_id = $request->seller_id;
             $estate->observation = $request->observation;
+            $estate->assurance_cover_date = $request->assurance_cover_date;
             $estate->estate_photo = null;
 
             $estate->save();
@@ -285,6 +286,7 @@ class Estate extends Controller
             $estate->sub_categories_id = $request->sub_categories_id;
             $estate->seller_id = $request->seller_id;
             $estate->observation = $request->observation;
+            $estate->assurance_cover_date = $request->assurance_cover_date;
             $estate->estate_photo = null;
 
             $estate->save();
@@ -473,6 +475,15 @@ class Estate extends Controller
 
         return view('admin.estates.estateHistory')->with([
             'estateHistories' => $estateHistories
+        ]);
+    }
+
+    public function activeAssurance()
+    {
+        $estatesWithActiveAssurance = EstateModel::all()->where('assurance_cover_date', '>', now());
+
+        return view('admin.estates.estateWithActiveAssurance')->with([
+            'estatesWithActiveAssurance' => $estatesWithActiveAssurance
         ]);
     }
 

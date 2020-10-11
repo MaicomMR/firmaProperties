@@ -26,6 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('estates/index/available', 'Estate@availableEstatesIndex')->name('estateAvailable');
     Route::get('estates/index/highValue', 'Estate@highValueEstates')->name('estateHighValue');
     Route::get('estates/history', 'Estate@historyIndex')->name('historyIndex');
+    Route::get('estates/activeAssurance', 'Estate@activeAssurance')->name('activeAssurance');
     Route::get('estates/add', 'Estate@create')->name('estateAddPage');
 
     Route::get('estates/delete/{id}', 'Estate@destroy')->name('estateDelete');
