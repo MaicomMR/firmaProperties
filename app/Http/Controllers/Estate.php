@@ -144,6 +144,20 @@ class Estate extends Controller
             ->with(['inactiveEstateCount' => $inactiveEstateCount]);
     }
 
+    public function searchByName(Request $request)
+    {
+        $EstateList = EstateModel::where('name', 'like', '%' . $request->estateNameLike . '%')->paginate(30);
+        $activeEstateCount = EstateModel::all()->count();
+        $inactiveEstateCount = EstateModel::onlyTrashed()->count();
+        $EmployeeList = EmployeeModel::all();
+
+        return view('admin.estates.estateIndex')
+            ->with(['EstateList' => $EstateList])
+            ->with(['EmployeeList' => $EmployeeList])
+            ->with(['activeEstateCount' => $activeEstateCount])
+            ->with(['inactiveEstateCount' => $inactiveEstateCount]);
+    }
+
     public function availableEstatesIndex()
     {
         $EstateList = EstateModel::where('employee_id', '=', null)->paginate(30);
