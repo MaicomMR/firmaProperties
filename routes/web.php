@@ -23,6 +23,7 @@ Route::middleware(['auth'])->group(function () {
 // Estate Routes
 Route::middleware(['auth'])->group(function () {
     Route::get('estates/index', 'Estate@index')->name('estateIndex');
+    Route::get('estates/index/search-by-name', 'Estate@searchByName')->name('estateSearchByName');
     Route::get('estates/index/available', 'Estate@availableEstatesIndex')->name('estateAvailable');
     Route::get('estates/index/highValue', 'Estate@highValueEstates')->name('estateHighValue');
     Route::get('estates/history', 'Estate@historyIndex')->name('historyIndex');
