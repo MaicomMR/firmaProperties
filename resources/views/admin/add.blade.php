@@ -112,7 +112,7 @@
                 </div>
             </div>
         </div>
-        <div class="dropdown col-sm-4">
+        <div class="dropdown col-sm-2">
             {!! Form::label('seller_id', 'Fornecedor'); !!}
             <div class="input-group">
                 {!! Form::select('seller_id', $sellersPlucked, null,[
@@ -127,7 +127,12 @@
                 </div>
             </div>
         </div>
-
+        <div class="dropdown col-sm-1">
+            {!! Form::label('assurance_cover_date', 'Garantia'); !!}
+            <div class="input-group" style="height: calc(2.25rem + 2px);">
+                {{Form::date('assurance_cover_date', null)}}
+            </div>
+        </div>
 
         <div class="form-group col-sm-10">
             {!! Form::label('name', 'Observações'); !!}

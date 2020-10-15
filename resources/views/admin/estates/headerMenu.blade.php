@@ -1,4 +1,11 @@
 <div class="row">
+    <a href="{{route('estateAddPage')}}" class="info-box col-sm m-1 link-muted" onclick=""
+         style="cursor: pointer">
+        <span class="info-box-icon bg-success"><i class="fa fa-plus-circle"></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">Adicionar patrimônio</span>
+        </div>
+    </a>
     <div class="info-box col-sm m-1" onclick="window.location=('{{route('estateAvailable')}}');"
          style="cursor: pointer;">
         <span class="info-box-icon bg-success"><i class="fas fa-box"></i></span>
@@ -41,11 +48,11 @@
         </div>
     </div>
 
-    <div class="info-box col-sm m-1" onclick=""
+    <div class="info-box col-sm m-1" onclick="window.location=('{{route('activeAssurance')}}');"
          style="cursor: pointer">
-        <span class="info-box-icon bg-blue"><i class="fas fa-globe-americas"></i></span>
+        <span class="info-box-icon bg-warning"><i class="fas fa-shield-alt"></i></span>
         <div class="info-box-content">
-            <span class="info-box-text">Bens fora de Pelotas</span>
+            <span class="info-box-text">Itens na garantia</span>
         </div>
     </div>
 
@@ -56,14 +63,4 @@
             <span class="info-box-text">Bens > 3.000R$</span>
         </div>
     </div>
-
-    <div class="info-box col-sm m-1" onclick=""
-         style="cursor: pointer">
-        <span class="info-box-icon bg-danger"><i class="fas fa-minus-circle"></i></span>
-        <div class="info-box-content">
-            <span class="info-box-text">Bens Baixados</span>
-        </div>
-    </div>
-
-
 </div>

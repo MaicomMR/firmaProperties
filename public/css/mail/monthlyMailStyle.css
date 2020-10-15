@@ -1,0 +1,66 @@
+:root{
+    --paper-size: 50vw;
+    --A4-width: var(--paper-size);
+    --A4-height: calc(var(--A4-width) * 1.4142);
+}
+
+body{
+    background-color: gainsboro;
+    font-family: "Open Sans";
+}
+
+.header {
+    color: white;
+    background-color: #262626;
+    display: flex;
+    flex-flow: column wrap;
+    padding: 20px;
+}
+.title {
+    /*padding: 20px 0px 20px 20px;*/
+    font-size: 1.5em;
+}
+.date {
+    background-color: #cecece;
+}
+
+.mail-list {
+    font-size: 0.7em;
+}
+
+.mail-list .icon {
+    padding: 0px 20px 0px 20px;
+    height: 100%;
+}
+
+.data-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.page {
+    user-select: none;
+    box-sizing: border-box;
+    width: var(--A4-height);
+    height: var(--A4-width);
+    position: relative;
+    list-style: none;
+    padding: 3px;
+    font-size: 16px;
+    font-family: sans-serif;
+    overflow: hidden;
+    background-color: #eee;
+    background-position: 0 0;
+    background-size: 100% 100%;
+    background-clip: content-box;
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.2) 0, transparent 1px), linear-gradient(to top, rgba(0, 0, 0, 0.2) 0, transparent 1px);
+    counter-reset: tag;
+}
+.page-letter {
+    width: var(--Letter-height);
+    height: var(--Letter-width);
+}
+.page-portrait {
+    width: var(--A4-width);
+    height: var(--A4-height);
+}
