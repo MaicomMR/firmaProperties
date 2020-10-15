@@ -19,10 +19,10 @@ class EmployeeForTest extends Seeder
     {
         $faker = Faker::create('pt_BR');
 
-        for ($insertData = 0; $insertData < 100; $insertData++){
+        for ($insertData = 0; $insertData < 10; $insertData++){
         $randomPerson = [
             [
-                'name' => $faker->name,
+                'name' => 'Maicom Rodeghiero',
                 'cpf' => $faker->cpf(false),
                 'phone' => $faker->phone,
                 'adress' => $faker->streetName,
@@ -31,32 +31,32 @@ class EmployeeForTest extends Seeder
                 'city' => $faker->city,
                 'zipCode' => $faker->postcode,
             ], [
-                'name' => $faker->name,
+                'name' => 'Edécio Iepsen',
                 'cpf' => $faker->cpf(false),
             ],               [
-                'name' => $faker->name,
+                'name' => 'Ângelo Luz',
                 'cpf' => $faker->cpf(false),
                 'phone' => $faker->phone,
             ],               [
-                'name' => $faker->name,
+                'name' => 'Gladimir Catarino',
                 'cpf' => $faker->cpf(false),
                 'phone' => $faker->phone,
                 'adress' => $faker->streetName,
             ],               [
-                'name' => $faker->name,
+                'name' => 'Tom Cruise',
                 'cpf' => $faker->cpf(false),
                 'phone' => $faker->phone,
                 'adress' => $faker->streetName,
                 'adressNumber' => rand(0, 9999),
             ],               [
-                'name' => $faker->name,
+                'name' => 'Chuck Norris',
                 'cpf' => $faker->cpf(false),
                 'phone' => $faker->phone,
                 'adress' => $faker->streetName,
                 'adressNumber' => rand(0, 9999),
                 'district' => $faker->firstNameMale,
             ],               [
-                'name' => $faker->name,
+                'name' => 'Jhon Wick',
                 'cpf' => $faker->cpf(false),
                 'adress' => $faker->streetName,
                 'district' => $faker->firstNameMale,
