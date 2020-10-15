@@ -31,7 +31,7 @@
             <td>{{$Estate->label_id}}</td>
             <td>{{$Estate->name}}</td>
             <td>{{$Estate->created_at->format('m-d-Y')}}</td>
-            <td>{{\Carbon\Carbon::parse($Estate->assurance_cover_date)->format('m-d-Y') . ' (' . \Carbon\Carbon::parse($Estate->assurance_cover_date)->diffForHumans() . ')'}}</td>
+            <td>{{\Carbon\Carbon::parse($Estate->assurance_cover_date)->format('d-m-Y') . ' (' . \Carbon\Carbon::parse($Estate->assurance_cover_date)->diffForHumans() . ')'}}</td>
 
             <td class="text-right">
             @if(isset($Estate->employee_id))
