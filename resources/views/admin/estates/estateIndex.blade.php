@@ -29,6 +29,15 @@
         </div>
     </a>
 
+    <form action="{{route('estateSearchByName')}}">
+        <div class="input-group mb-3 m-1">
+            <input type="text" class="form-control" placeholder="Buscar patrimônio por nome" aria-label="" aria-describedby="basic-addon1" name="estateNameLike">
+            <div class="input-group-append">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </div>
+        </div>
+    </form>
+
     <div class="">
         <div class="row">
             <div class="col-sm-12">
@@ -63,11 +72,13 @@
 
                         </th>
 
-                        <th scope="row">
-                            {{--    See estate button   --}}
+                        <th scope="row" class="text-right">
+                            {{--    Assurance cover estate icon   --}}
+                            @if($Estate->assurance_cover_date > now())
                             <button type="button" class="btn btn-warning">
-                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                <i class="fas fa-shield-alt" aria-hidden="true"></i>
                             </button>
+                            @endif
 
                             {{--    Edit estate button   --}}
                             <a class="btn btn-primary" href="{{ route('estateEdit', $Estate->id)}}">

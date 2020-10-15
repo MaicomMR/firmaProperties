@@ -60,9 +60,11 @@
             <td>{{date('d/m/Y', strtotime($EstateHistory->updated_at))}}</td>
             <td>
 
+                @if(isset($EstateHistory->employee_id))
                 <a type="button" class="btn btn-info" href="{{ route('employeeProfile', $EstateHistory->employee_id)}}">
                     <i class="fas fa-user-tag button"></i>
                 </a>
+                @endif
 
                 <a type="button" class="btn btn-success" href="{{ route('estateEdit', $EstateHistory->estate_id)}}">
                     <i class="fas fa-archive"></i>
