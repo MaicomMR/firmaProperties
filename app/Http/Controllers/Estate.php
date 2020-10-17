@@ -125,10 +125,11 @@ class Estate extends Controller
             'employeeList' => $employeeList];
     }
 
+
     public function store(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [ // <---
+        $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|min:2',
             'label_id' => 'required|unique:estates|numeric',
             'value' => 'required|numeric',
@@ -137,9 +138,7 @@ class Estate extends Controller
         ]);
 
         if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
+            $this->returnWithError($validator);
         } else {
 
             $estate = new EstateModel();
@@ -159,7 +158,6 @@ class Estate extends Controller
         }
     }
 
-
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [ // <---
@@ -171,9 +169,7 @@ class Estate extends Controller
         ]);
 
         if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
+            $this->returnWithError($validator);
         } else {
             $estate = EstateModel::find($id);
 
@@ -193,99 +189,88 @@ class Estate extends Controller
     }
 
 
+    public function returnWithError($error)
+    {
+        return back()
+            ->withErrors($error)
+            ->withInput();
+    }
+
     public function destroy($id)
     {
         \Carbon\Carbon::setLocale('pt_BR');
 
         $estate = EstateModel::find($id);
 
-        // Faz a busca pelo último histórico do bem
-        // Do a search for the last history from this estate
         $estateHistory = EstateHistoryModel::where('estate_id', '=', $id)->latest('created_at')->first();
 
         $unassignEstateHistory = new EstateHistoryModel();
-        $unassignEstateHistory->admin_id = Auth::user()->id;
+        $unassignEstateHistory->admin_id = Auth::id();
 
-        //Se o patrimônio já registro de atribuiçção
-        if (!empty($estateHistory->assign)) {
+        $unassignEstateHistory->estate_id = $estate->id;
+        $unassignEstateHistory->unassign = 1;
 
-            //Se ele estiver atribuído a algum colaborador
-            if ($estateHistory->assign = 1) {
-                $unassignEstateHistory->employee_id = $estateHistory->employee_id;
-                $unassignEstateHistory->estate_id = $estate->id;
-                $unassignEstateHistory->unassign = 1;
-                $unassignEstateHistory->save();
-            }
-
-            //Se o patrimônio nunca foi atribuído a ninguém
-        } else {
-            $unassignEstateHistory->estate_id = $estate->id;
-            $unassignEstateHistory->unassign = 1;
-            $unassignEstateHistory->save();
+        if (!empty($estateHistory->assign) && $estateHistory->assign = 1) {
+            $unassignEstateHistory->employee_id = $estateHistory->employee_id;
         }
 
-        //E-mail Alert system
-        $alertValues = AlertValuesModel::all()->first();
+        $unassignEstateHistory->save();
 
-        $valueAlert = $alertValues->write_off_value_alert;
-        $dayoffAlert = $alertValues->day_write_off_value_alert;
-        $monthAlertValue = $alertValues->month_write_off_value_alert;
+        $alertValues = $this->getAlertValues();
 
         $todayDeletedEstatesValue = EstateModel::onlyTrashed()->where('deleted_at', '>=', now()->startOfDay())->sum('value');
         $thisMonthDeletedEstatesValue = EstateModel::onlyTrashed()->where('deleted_at', '>=', now()->startOfMonth())->sum('value');
 
-
-        if ($valueAlert > 0 && $estate->value >= $valueAlert) {
-            $estatesObject = $estate;
-
-            $emailTitle = "EstateCare - Alerta";
-            $emailSubject = "Alerta de baixa a cima do valor de avisos";
-            $emails = MailingListModel::all()->where('alertAboveValues', '=', '1');
-
-            foreach ($emails as $email) {
-                Mail::to($email->email)->send(new DayEstateValueAlert($email->email, $emailTitle, $emailSubject, null));
-            }
-        }
-
-        if ($dayoffAlert > 0 && $todayDeletedEstatesValue >= $dayoffAlert) {
-            if ($estate->value >= $valueAlert) {
-                $estatesObject = EstateModel::onlyTrashed()->where('deleted_at', '>=', now()->startOfDay())->get();
-
-                $emailTitle = "EstateCare - Alerta";
-                $emailSubject = "Alerta Diário - baixa de bem a cima do valor de alerta foi removido da base de dados";
-                $emails = MailingListModel::all()->where('alertAboveValues', '=', '1');
-
-
-                foreach ($emails as $email) {
-                    Mail::to($email->email)->send(new DayEstateValueAlert($email->email, $emailTitle, $emailSubject, $estatesObject));
-                }
-            }
-        }
-
-
-        if ($monthAlertValue > 0) {
-            if ($thisMonthDeletedEstatesValue >= $monthAlertValue) {
-                if ($todayDeletedEstatesValue >= $dayoffAlert) {
-                    if ($estate->value >= $valueAlert) {
-                        $emailTitle = "EstateCare - Alerta";
-                        $emailSubject = "Alerta Mensal - baixa de bem a cima do valor de alerta foi removido da base de dados";
-                        $estatesObject = EstateModel::onlyTrashed()->where('deleted_at', '>=', now()->startOfMonth())->get();
-
-                        $emails = MailingListModel::all()->where('alertAboveValues', '=', '1');
-
-                        foreach ($emails as $email) {
-                            Mail::to($email->email)->send(new DayEstateValueAlert($email->email, $emailTitle, $emailSubject, $estatesObject));
-                        }
-                    }
-                }
-            }
-        }
-        //End of E-mail Alert system
-
         $estate->delete();
 
+        if ($alertValues['valueAlert'] > 0 && $estate->value >= $alertValues['valueAlert']) {
+            $this->mailSender(
+                'EstateCare - Alerta',
+                'Alerta de baixa a cima do valor de avisos',
+                null);
+        }
+
+        if ($alertValues['dayoffAlert'] > 0 && $todayDeletedEstatesValue >= $alertValues['dayoffAlert']) {
+            $estatesObject = EstateModel::onlyTrashed()->where('deleted_at', '>=', now()->startOfDay())->get();
+
+            $this->mailSender(
+                'EstateCare - Alerta',
+                'Alerta Diário - Valor de baixas diário excedido',
+                $estatesObject);
+        }
+
+        if ($alertValues['monthAlertValue'] > 0 && $thisMonthDeletedEstatesValue >= $alertValues['monthAlertValue']) {
+            $estatesObject = EstateModel::onlyTrashed()->where('deleted_at', '>=', now()->startOfMonth())->get();
+
+            $this->mailSender(
+                'EstateCare - Alerta',
+                'Alerta - Valor de baixas mensal excedido',
+                $estatesObject);
+        }
 
         return redirect()->back()->with('message', 'Patrimônio removido com sucesso.');
+    }
+
+
+    public function getAlertValues()
+    {
+        $alertValues = AlertValuesModel::all()->first();
+
+        return [
+            'valueAlert' => $alertValues->write_off_value_alert,
+            'dayoffAlert' => $alertValues->day_write_off_value_alert,
+            'monthAlertValue' => $alertValues->month_write_off_value_alert
+        ];
+    }
+
+
+    public function mailSender(string $mailTitle, string $mailSubject, object $estates)
+    {
+        $emails = MailingListModel::all()->where('alertAboveValues', '=', '1');
+
+        foreach ($emails as $email) {
+            Mail::to($email->email)->send(new DayEstateValueAlert($email->email, $mailTitle, $mailSubject, $estates));
+        }
     }
 
 
@@ -302,7 +287,7 @@ class Estate extends Controller
 
         $estateHistory = new EstateHistoryModel();
         $estateHistory->employee_id = $employeeId;
-        $estateHistory->admin_id = Auth::user()->id;
+        $estateHistory->admin_id = Auth::id();
         $estateHistory->estate_id = $estateId;
         $estateHistory->assign = '1';
 
@@ -380,5 +365,4 @@ class Estate extends Controller
             'estatesWithActiveAssurance' => $estatesWithActiveAssurance
         ]);
     }
-
 }
