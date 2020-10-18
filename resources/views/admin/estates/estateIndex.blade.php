@@ -11,7 +11,7 @@
 
 
 @section('content')
-    <h2>Listagem de Patrimônios</h2>
+    <h3>Listagem de Patrimônios</h3>
 
     <!-- Header Menu -->
     @include('admin.estates.headerMenu')
@@ -23,13 +23,16 @@
         </div>
     @endif
 
-    <a href="{{route('estateAddPage')}}">
-        <div class="btn-success" style="padding: 10px">
-            <h4 class="text-center"><i class="fa fa-plus-circle" style="padding: 10px"></i>Adicionar patrimônio</h4>
+    <form action="{{route('estateSearchByName')}}">
+        <div class="input-group mb-3 m-1">
+            <input type="text" class="form-control" placeholder="Buscar patrimônio por nome" aria-label="" aria-describedby="basic-addon1" name="estateNameLike">
+            <div class="input-group-append">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </div>
         </div>
-    </a>
+    </form>
 
-    <div class="">
+    <div>
         <div class="row">
             <div class="col-sm-12">
                 <table class="table table-striped">
@@ -48,22 +51,22 @@
 
                     @foreach($EstateList as $Estate)
 
-
-                        <th scope="row" class="text-right">
+                        <tr>
+                        <td scope="row" class="text-right">
                             {{$Estate->label_id}}
-                        </th>
-                        <th scope="row">{{$Estate->name}}</th>
-                        <th scope="row">{{number_format($Estate->value, 2, ',', ' ')}} R$</th>
-                        <th scope="row">{{$Estate->category->name}}</th>
-                        <th scope="row">{{$Estate->subcategory->name}}</th>
-                        <th scope="row">
+                        </td>
+                        <td scope="row">{{$Estate->name}}</td>
+                        <td scope="row">{{number_format($Estate->value, 2, ',', ' ')}} R$</td>
+                        <td scope="row">{{$Estate->category->name}}</td>
+                        <td scope="row">{{$Estate->subcategory->name}}</td>
+                        <td scope="row">
                             @if($Estate->seller)
                                 {{$Estate->seller->name}}
                             @endif
 
-                        </th>
+                        </td>
 
-                        <th scope="row" class="text-right">
+                        <td scope="row" class="text-right">
                             {{--    Assurance cover estate icon   --}}
                             @if($Estate->assurance_cover_date > now())
                             <button type="button" class="btn btn-warning">
@@ -102,7 +105,7 @@
 
                             {{-- Confirm assign modal --}}
                             @include('admin.estates.estateConfirmAssignModal')
-                        </th>
+                        </td>
                         </tr>
                     @endforeach
 
@@ -119,7 +122,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="/css/adminStyle.css">
 @stop
 
 

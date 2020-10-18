@@ -13,11 +13,8 @@ use App\Mail\DayEstateValueAlert;
 use App\MailingListModel;
 use App\Seller;
 use \App\SubCategory;
-use App\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Validator;
 use function Illuminate\Support\Facades\Blade;
@@ -26,108 +23,40 @@ use PDF;
 
 class Estate extends Controller
 {
-
-
-    /**
-     * Display the specified resource.
-     *
-     */
-    public function home()
+    public function search($id)
     {
+        $Estate = \App\EstateModel::find($id);
+        $estateFormData = $this->provideEstateFormData();
 
-        //TODO: CRIAR QUERY >> DECENTE << PARA POPULAR OS GRÁFICOS
-        $categoryCount = EstateModel::select('categories_id', DB::raw('count(*) as total'))
-            ->groupBy('categories_id')
-            ->get();
-
-        $subCategoryCount = EstateModel::select('sub_categories_id', DB::raw('count(*) as total'))
-            ->groupBy('sub_categories_id')
-            ->get();
-
-        $totalEstatesValue = EstateModel::sum('value');
-        $totalEstatesCount = EstateModel::count('id');
-        $totalAssignedEstatesCount = EstateModel::where('employee_id', '!=', null)->count();
-        $totalUnassignedEstatesCount = EstateModel::where('employee_id', '=', null)->count();
-        $totalDisabledEstatesCount = EstateModel::onlyTrashed()->count();
-
-        //dd($totalDisabledEstatesCount);
-
-        $categoryNumber = [];
-        $categoryLabel = [];
-        $categoryColor = [];
-
-        $subCategoryNumber = [];
-        $subCategoryLabel = [];
-        $subCategoryColor = [];
-
-        foreach ($categoryCount as $category) {
-            array_push($categoryNumber, $category->total);
-            $estateLabelQuery = Category::all()->where('id', '=', $category->categories_id)->first();
-            array_push($categoryLabel, $estateLabelQuery->name);
-        }
-
-        foreach ($subCategoryCount as $subCategory) {
-            array_push($subCategoryNumber, $subCategory->total);
-            $subCategoryLabelQuery = SubCategory::all()->where('id', '=', $subCategory->sub_categories_id)->first();
-            array_push($subCategoryLabel, $subCategoryLabelQuery->name);
-        }
-
-        function generateColor($NumberOfColors)
-        {
-            $colorsArray = [];
-
-            for ($color = 0; $color < $NumberOfColors; $color++) {
-                $colorRed = rand(40, 240);
-                $colorGreen = rand(40, 240);
-                $colorBlue = rand(40, 240);
-                $alpha = 0.75;
-
-                $finalColor = 'rgba(' . $colorRed . ', ' . $colorGreen . ', ' . $colorBlue . ', ' . $alpha . ')';
-                array_push($colorsArray, $finalColor);
-            }
-
-            return $colorsArray;
-        }
-
-        $categoryColor = generateColor(count($categoryNumber));
-        $subCategoryColor = generateColor(count($subCategoryNumber));
-
-        //dd($subCategoryColor);
-
-
-        return view('home.homeBasePage')->with([
-            'categoryNumber' => $categoryNumber,
-            'categoryLabel' => $categoryLabel,
-            'categoryColor' => $categoryColor,
-            'subCategoryNumber' => $subCategoryNumber,
-            'subCategoryLabel' => $subCategoryLabel,
-            'subCategoryColor' => $subCategoryColor,
-            'totalEstatesValue' => $totalEstatesValue,
-            'totalEstatesCount' => $totalEstatesCount,
-            'totalAssignedEstatesCount' => $totalAssignedEstatesCount,
-            'totalUnassignedEstatesCount' => $totalUnassignedEstatesCount,
-            'totalDisabledEstatesCount' => $totalDisabledEstatesCount,
+        return view('admin.add')->with([
+            'estate_object' => $Estate,
+            'categoriesPlucked' => $estateFormData[0],
+            'subCategoriesPlucked' => $estateFormData[1],
+            'billOfSale' => $estateFormData[2],
+            'sellersPlucked' => $estateFormData[3],
         ]);
     }
 
-
-    public function search($id)
+    public function create()
     {
+        $estateFormData = $this->provideEstateFormData();
 
-        $Estate = \App\EstateModel::find($id);
+        return view('admin.add')->with([
+            'categoriesPlucked' => $estateFormData[0],
+            'subCategoriesPlucked' => $estateFormData[1],
+            'sellersPlucked' => $estateFormData[2],
+            'billOfSale' => $estateFormData[3],
+        ]);
+    }
 
+    public function provideEstateFormData()
+    {
         $categoriesPlucked = Category::pluck('name', 'id');
         $subCategoriesPlucked = SubCategory::pluck('name', 'id');
         $sellersPlucked = Seller::pluck('name', 'id');
         $billOfSalePlucked = BillOfSale::whereDate('updated_at', '>=', now()->subDays(7))->pluck('billNumber', 'id');
 
-        return view('admin.add')->with([
-            'categoriesPlucked' => $categoriesPlucked,
-            'subCategoriesPlucked' => $subCategoriesPlucked,
-            'estate_object' => $Estate,
-            'billOfSale' => $billOfSalePlucked,
-            'sellersPlucked' => $sellersPlucked,
-        ]);
+        return [$categoriesPlucked, $subCategoriesPlucked, $sellersPlucked, $billOfSalePlucked];
     }
 
     public function index()
@@ -144,9 +73,10 @@ class Estate extends Controller
             ->with(['inactiveEstateCount' => $inactiveEstateCount]);
     }
 
-    public function availableEstatesIndex()
+
+    public function searchByName(Request $request)
     {
-        $EstateList = EstateModel::where('employee_id', '=', null)->paginate(30);
+        $EstateList = EstateModel::where('name', 'like', '%' . $request->estateNameLike . '%')->paginate(30);
         $activeEstateCount = EstateModel::all()->count();
         $inactiveEstateCount = EstateModel::onlyTrashed()->count();
         $EmployeeList = EmployeeModel::all();
@@ -156,52 +86,50 @@ class Estate extends Controller
             ->with(['EmployeeList' => $EmployeeList])
             ->with(['activeEstateCount' => $activeEstateCount])
             ->with(['inactiveEstateCount' => $inactiveEstateCount]);
+    }
+
+
+    public function availableEstatesIndex()
+    {
+        $EstateList = EstateModel::where('employee_id', '=', null)->paginate(30);
+
+        $estatesDataToPopulateHeaderMenu = $this->getEstateDataForHeaderMenu();
+
+        return view('admin.estates.estateIndex')
+            ->with(['EstateList' => $EstateList])
+            ->with(['activeEstateCount' => $estatesDataToPopulateHeaderMenu['activeEstateCount']])
+            ->with(['inactiveEstateCount' => $estatesDataToPopulateHeaderMenu['inactiveEstateCount']])
+            ->with(['EmployeeList' => $estatesDataToPopulateHeaderMenu['employeeList']]);
     }
 
     public function highValueEstates()
     {
         $EstateList = EstateModel::where('value', '>=', 3000)->paginate(30);
-        $activeEstateCount = EstateModel::all()->count();
-        $inactiveEstateCount = EstateModel::onlyTrashed()->count();
-        $EmployeeList = EmployeeModel::all();
+        $estatesDataToPopulateHeaderMenu = $this->getEstateDataForHeaderMenu();
 
         return view('admin.estates.estateIndex')
             ->with(['EstateList' => $EstateList])
-            ->with(['EmployeeList' => $EmployeeList])
-            ->with(['activeEstateCount' => $activeEstateCount])
-            ->with(['inactiveEstateCount' => $inactiveEstateCount]);
+            ->with(['activeEstateCount' => $estatesDataToPopulateHeaderMenu['activeEstateCount']])
+            ->with(['inactiveEstateCount' => $estatesDataToPopulateHeaderMenu['inactiveEstateCount']])
+            ->with(['EmployeeList' => $estatesDataToPopulateHeaderMenu['employeeList']]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function getEstateDataForHeaderMenu()
     {
-        $categoriesPlucked = Category::pluck('name', 'id');
-        $subCategoriesPlucked = SubCategory::pluck('name', 'id');
-        $billOfSalePlucked = BillOfSale::whereDate('updated_at', '>=', now()->subDays(7))->pluck('billNumber', 'id');
-        $sellersPlucked = Seller::pluck('name', 'id');
+        $activeEstateCount = EstateModel::all()->count();
+        $inactiveEstateCount = EstateModel::onlyTrashed()->count();
+        $employeeList = EmployeeModel::all();
 
-        return view('admin.add')->with([
-            'categoriesPlucked' => $categoriesPlucked,
-            'subCategoriesPlucked' => $subCategoriesPlucked,
-            'billOfSale' => $billOfSalePlucked,
-            'sellersPlucked' => $sellersPlucked,
-        ]);
+        return ['activeEstateCount' => $activeEstateCount,
+            'inactiveEstateCount' => $inactiveEstateCount,
+            'employeeList' => $employeeList];
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [ // <---
+        $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|min:2',
             'label_id' => 'required|unique:estates|numeric',
             'value' => 'required|numeric',
@@ -209,11 +137,8 @@ class Estate extends Controller
             'sub_categories_id' => 'required',
         ]);
 
-        if ($validator->fails())
-        {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
+        if ($validator->fails()) {
+            $this->returnWithError($validator);
         } else {
 
             $estate = new EstateModel();
@@ -233,35 +158,6 @@ class Estate extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [ // <---
@@ -273,9 +169,7 @@ class Estate extends Controller
         ]);
 
         if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
+            $this->returnWithError($validator);
         } else {
             $estate = EstateModel::find($id);
 
@@ -294,108 +188,93 @@ class Estate extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
+
+    public function returnWithError($error)
+    {
+        return back()
+            ->withErrors($error)
+            ->withInput();
+    }
+
     public function destroy($id)
     {
         \Carbon\Carbon::setLocale('pt_BR');
 
         $estate = EstateModel::find($id);
 
-        // Faz a busca pelo último histórico do bem
-        // Do a search for the last history from this estate
         $estateHistory = EstateHistoryModel::where('estate_id', '=', $id)->latest('created_at')->first();
 
         $unassignEstateHistory = new EstateHistoryModel();
-        $unassignEstateHistory->admin_id = Auth::user()->id;
+        $unassignEstateHistory->admin_id = Auth::id();
 
-        //Se o patrimônio já registro de atribuiçção
-        if (!empty($estateHistory->assign)) {
+        $unassignEstateHistory->estate_id = $estate->id;
+        $unassignEstateHistory->unassign = 1;
 
-            //Se ele estiver atribuído a algum colaborador
-            if ($estateHistory->assign = 1) {
-                $unassignEstateHistory->employee_id = $estateHistory->employee_id;
-                $unassignEstateHistory->estate_id = $estate->id;
-                $unassignEstateHistory->unassign = 1;
-                $unassignEstateHistory->save();
-            }
-
-        //Se o patrimônio nunca foi atribuído a ninguém
-        } else {
-            $unassignEstateHistory->estate_id = $estate->id;
-            $unassignEstateHistory->unassign = 1;
-            $unassignEstateHistory->save();
+        if (!empty($estateHistory->assign) && $estateHistory->assign = 1) {
+            $unassignEstateHistory->employee_id = $estateHistory->employee_id;
         }
 
-        //E-mail Alert system
-        $alertValues = AlertValuesModel::all()->first();
+        $unassignEstateHistory->save();
 
-        $valueAlert = $alertValues->write_off_value_alert;
-        $dayoffAlert = $alertValues->day_write_off_value_alert;
-        $monthAlertValue = $alertValues->month_write_off_value_alert;
+        $alertValues = $this->getAlertValues();
 
-
-        $todayDeletedEstatesValue = EstateModel::onlyTrashed()->where('deleted_at', '>=', now()->startOfDay())->sum('value');
-        $thisMonthDeletedEstatesValue = EstateModel::onlyTrashed()->where('deleted_at', '>=', now()->startOfMonth())->sum('value');
-
-        if ($valueAlert > 0) {
-            if ($estate->value >= $valueAlert) {
-                $emailTitle = "EstateCare - Alerta";
-                $emailSubject = "Alerta de baixa a cima do valor de avisos";
-                $estatesObject = $estate;
-
-                $emails = MailingListModel::all()->where('alertAboveValues', '=', '1');
-
-                foreach ($emails as $email) {
-                    Mail::to($email->email)->send(new DayEstateValueAlert($email->email, $emailTitle, $emailSubject, null));
-                }
-            }
-        }
-
-        if ($dayoffAlert > 0) {
-            if ($todayDeletedEstatesValue >= $dayoffAlert) {
-                if ($estate->value >= $valueAlert) {
-                    $emailTitle = "EstateCare - Alerta";
-                    $emailSubject = "Alerta Diário - baixa de bem a cima do valor de alerta foi removido da base de dados";
-                    $estatesObject = EstateModel::onlyTrashed()->where('deleted_at', '>=', now()->startOfDay())->get();
-
-                    $emails = MailingListModel::all()->where('alertAboveValues', '=', '1');
-
-                    foreach ($emails as $email) {
-                        Mail::to($email->email)->send(new DayEstateValueAlert($email->email, $emailTitle, $emailSubject, $estatesObject));
-                    }
-                }
-            }
-        }
-
-        if ($monthAlertValue > 0) {
-            if ($thisMonthDeletedEstatesValue >= $monthAlertValue) {
-                if ($todayDeletedEstatesValue >= $dayoffAlert) {
-                    if ($estate->value >= $valueAlert) {
-                        $emailTitle = "EstateCare - Alerta";
-                        $emailSubject = "Alerta Mensal - baixa de bem a cima do valor de alerta foi removido da base de dados";
-                        $estatesObject = EstateModel::onlyTrashed()->where('deleted_at', '>=', now()->startOfMonth())->get();
-
-                        $emails = MailingListModel::all()->where('alertAboveValues', '=', '1');
-
-                        foreach ($emails as $email) {
-                            Mail::to($email->email)->send(new DayEstateValueAlert($email->email, $emailTitle, $emailSubject, $estatesObject));
-                        }
-                    }
-                }
-            }
-        }
-        //End of E-mail Alert system
+        $todayDeletedEstatesValue = EstateModel::onlyTrashed()
+            ->where('deleted_at', '>=', now()->startOfDay())->sum('value');
+        $thisMonthDeletedEstatesValue = EstateModel::onlyTrashed()
+            ->where('deleted_at', '>=', now()->startOfMonth())->sum('value');
 
         $estate->delete();
 
+        if ($alertValues['valueAlert'] > 0 && $estate->value >= $alertValues['valueAlert']) {
+            $this->mailSender(
+                'EstateCare - Alerta',
+                'Alerta de baixa a cima do valor de avisos',
+                null);
+        }
+
+        if ($alertValues['dayoffAlert'] > 0 && $todayDeletedEstatesValue >= $alertValues['dayoffAlert']) {
+            $estatesObject = EstateModel::onlyTrashed()->where('deleted_at', '>=', now()->startOfDay())->get();
+
+            $this->mailSender(
+                'EstateCare - Alerta',
+                'Alerta Diário - Valor de baixas diário excedido',
+                $estatesObject);
+        }
+
+        if ($alertValues['monthAlertValue'] > 0 && $thisMonthDeletedEstatesValue >= $alertValues['monthAlertValue']) {
+            $estatesObject = EstateModel::onlyTrashed()->where('deleted_at', '>=', now()->startOfMonth())->get();
+
+            $this->mailSender(
+                'EstateCare - Alerta',
+                'Alerta - Valor de baixas mensal excedido',
+                $estatesObject);
+        }
 
         return redirect()->back()->with('message', 'Patrimônio removido com sucesso.');
     }
+
+
+    public function getAlertValues()
+    {
+        $alertValues = AlertValuesModel::all()->first();
+
+        return [
+            'valueAlert' => $alertValues->write_off_value_alert,
+            'dayoffAlert' => $alertValues->day_write_off_value_alert,
+            'monthAlertValue' => $alertValues->month_write_off_value_alert
+        ];
+    }
+
+
+    public function mailSender(string $mailTitle, string $mailSubject, object $estates)
+    {
+        $emails = MailingListModel::all()->where('alertAboveValues', '=', '1');
+
+        foreach ($emails as $email) {
+            Mail::to($email->email)->send(new DayEstateValueAlert($email->email, $mailTitle, $mailSubject, $estates));
+        }
+    }
+
 
     public function assignEstateToEmployee($estateId, $employeeId)
     {
@@ -410,7 +289,7 @@ class Estate extends Controller
 
         $estateHistory = new EstateHistoryModel();
         $estateHistory->employee_id = $employeeId;
-        $estateHistory->admin_id = Auth::user()->id;
+        $estateHistory->admin_id = Auth::id();
         $estateHistory->estate_id = $estateId;
         $estateHistory->assign = '1';
 
@@ -418,8 +297,8 @@ class Estate extends Controller
         $estate->save();
 
         return redirect()->back()->with('message', 'Patrimônio ' . $estate->name . ' atribuído ao colaborador ' . $employee->name . ' com sucesso.');
-
     }
+
 
     public function unassignEstateToEmployee($estateId, $employeeId)
     {
@@ -438,36 +317,35 @@ class Estate extends Controller
         $estate->save();
 
         return redirect()->back()->with('message', 'Patrimônio ' . $estate->name . ' desatribuído do colaborador com sucesso.');
-
     }
+
 
     public function printEstateList()
     {
-
         $estateList = EstateModel::all()->sortByDesc('employee_id');
-
-        $data = date('d/m/Y : H:m');
-        $dateQuery = $data;
-
+        $dateQuery = $this->getActualFormatedDate();
         $pdf = PDF::loadView('pdf.estate-active-list-pdf', compact('estateList'), compact('dateQuery'));
 
         return $pdf->stream();
-
     }
+
 
     public function printDeletedEstateList()
     {
-
         $estateList = EstateModel::onlyTrashed()->get();
-
-        $data = date('d/m/Y : H:m');
-        $dateQuery = $data;
-
+        $dateQuery = $this->getActualFormatedDate();
         $pdf = PDF::loadView('pdf.estate-deleted-list-pdf', compact('estateList'), compact('dateQuery'));
 
         return $pdf->stream();
-
     }
+
+
+    public function getActualFormatedDate()
+    {
+        $date = date('d/m/Y : H:m');
+        return $date;
+    }
+
 
     public function historyIndex()
     {
@@ -478,6 +356,7 @@ class Estate extends Controller
         ]);
     }
 
+
     public function activeAssurance()
     {
         $estatesWithActiveAssurance = EstateModel::all()->where('assurance_cover_date', '>', now());
@@ -486,5 +365,4 @@ class Estate extends Controller
             'estatesWithActiveAssurance' => $estatesWithActiveAssurance
         ]);
     }
-
 }

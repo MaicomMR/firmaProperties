@@ -130,7 +130,8 @@
         <div class="dropdown col-sm-1">
             {!! Form::label('assurance_cover_date', 'Garantia'); !!}
             <div class="input-group" style="height: calc(2.25rem + 2px);">
-                {{Form::date('assurance_cover_date', null)}}
+                {{Form::date('assurance_cover_date', null, [
+                'style' => 'border: 1px solid #ced4da;'])}}
             </div>
         </div>
 

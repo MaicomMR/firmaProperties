@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SubCategory::class);
         $this->call(Sellers::class);
         $this->call(DefaultValue::class);
-        $this->call(EstatesForTest::class); //JUST FOR LOCAL TEST
         $this->call(EmployeeForTest::class); //JUST FOR LOCAL TEST
         $this->call(UserForTest::class); //JUST FOR LOCAL TEST
+        $this->call(EstatesForTest::class); //JUST FOR LOCAL TEST
     }
 }
