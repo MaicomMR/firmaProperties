@@ -187,8 +187,6 @@ return [
             'text'        => 'Home',
             'url'         => 'home',
             'icon'        => 'fa fa-home',
-            'label'       => 4,
-            'label_color' => 'success',
         ],
         ['header' => 'PATRIMÔNIO'],
         [

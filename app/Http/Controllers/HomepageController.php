@@ -20,6 +20,20 @@ class HomepageController extends Controller
             ->groupBy('sub_categories_id')
             ->get();
 
+
+        $esatatesByCategory = [];
+        $esatatesAssignedByCategory = [];
+        $subCategory = SubCategory::all();
+        foreach ($subCategory as $sub){
+            $result = EstateModel::all()->where('sub_categories_id', '=', $sub->id)->count();
+            array_push($esatatesByCategory, $result);
+        }
+        foreach ($subCategory as $sub){
+            $result = EstateModel::all()->where('sub_categories_id', '=', $sub->id)->where('employee_id', '!=', null)->count();
+            array_push($esatatesAssignedByCategory, $result);
+        }
+
+
         $totalEstatesValue = EstateModel::sum('value');
         $totalEstatesCount = EstateModel::count('id');
         $totalAssignedEstatesCount = EstateModel::where('employee_id', '!=', null)->count();
@@ -61,6 +75,8 @@ class HomepageController extends Controller
             'totalAssignedEstatesCount' => $totalAssignedEstatesCount,
             'totalUnassignedEstatesCount' => $totalUnassignedEstatesCount,
             'totalDisabledEstatesCount' => $totalDisabledEstatesCount,
+            'esatatesByCategory' => $esatatesByCategory,
+            'esatatesAssignedByCategory' => $esatatesAssignedByCategory,
         ]);
     }
 
