@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('homeDashboard');
+    return redirect('home');
 });
 
 //Generic Dashboard pages
