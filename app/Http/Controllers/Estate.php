@@ -218,8 +218,10 @@ class Estate extends Controller
 
         $alertValues = $this->getAlertValues();
 
-        $todayDeletedEstatesValue = EstateModel::onlyTrashed()->where('deleted_at', '>=', now()->startOfDay())->sum('value');
-        $thisMonthDeletedEstatesValue = EstateModel::onlyTrashed()->where('deleted_at', '>=', now()->startOfMonth())->sum('value');
+        $todayDeletedEstatesValue = EstateModel::onlyTrashed()
+            ->where('deleted_at', '>=', now()->startOfDay())->sum('value');
+        $thisMonthDeletedEstatesValue = EstateModel::onlyTrashed()
+            ->where('deleted_at', '>=', now()->startOfMonth())->sum('value');
 
         $estate->delete();
 
@@ -295,7 +297,6 @@ class Estate extends Controller
         $estate->save();
 
         return redirect()->back()->with('message', 'Patrimônio ' . $estate->name . ' atribuído ao colaborador ' . $employee->name . ' com sucesso.');
-
     }
 
 
@@ -316,7 +317,6 @@ class Estate extends Controller
         $estate->save();
 
         return redirect()->back()->with('message', 'Patrimônio ' . $estate->name . ' desatribuído do colaborador com sucesso.');
-
     }
 
 
