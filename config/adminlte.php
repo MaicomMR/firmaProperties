@@ -134,7 +134,7 @@ return [
 
     'use_route_url' => false,
 
-    'dashboard_url' => 'homeDashboard',
+    'dashboard_url' => 'home',
 
     'logout_url' => 'logout',
 
@@ -173,11 +173,6 @@ return [
     */
 
     'menu' => [
-        [
-            'text' => 'search',
-            'search' => false,
-            'topnav' => false,
-        ],
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
