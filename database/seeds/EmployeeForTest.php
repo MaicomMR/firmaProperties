@@ -1,10 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
-
-
-
 
 class EmployeeForTest extends Seeder
 {
@@ -17,59 +13,53 @@ class EmployeeForTest extends Seeder
 
     public function run()
     {
-        $faker = Faker::create('pt_BR');
 
         for ($insertData = 0; $insertData < 10; $insertData++){
         $randomPerson = [
             [
                 'name' => 'Maicom Rodeghiero',
-                'cpf' => $faker->cpf(false),
-                'phone' => $faker->phone,
-                'adress' => $faker->streetName,
-                'adressNumber' => rand(0, 9999),
-                'district' => $faker->firstNameMale,
-                'city' => $faker->city,
-                'zipCode' => $faker->postcode,
+                'cpf' => "147.147.147-55",
+                'phone' => "539998887771",
+                'adress' => "Rua. Santa Efigênia",
+                'adressNumber' => 1044,
+                'district' => "Fragata",
+                'city' => "Pelotas",
+                'zipCode' => "96150000",
             ], [
                 'name' => 'Edécio Iepsen',
-                'cpf' => $faker->cpf(false),
+                'cpf' => "123.456.789-55",
             ],               [
                 'name' => 'Ângelo Luz',
-                'cpf' => $faker->cpf(false),
-                'phone' => $faker->phone,
+                'cpf' => "123.456.789-55",
+                'phone' => "539998887771",
             ],               [
                 'name' => 'Gladimir Catarino',
-                'cpf' => $faker->cpf(false),
-                'phone' => $faker->phone,
-                'adress' => $faker->streetName,
+                'cpf' => "123.456.789-55",
+                'phone' => "539998887771",
+                'adress' => "Rua. Santa Efigênia",
             ],               [
                 'name' => 'Tom Cruise',
-                'cpf' => $faker->cpf(false),
-                'phone' => $faker->phone,
-                'adress' => $faker->streetName,
-                'adressNumber' => rand(0, 9999),
+                'cpf' => "123.456.789-55",
+                'phone' => "539998887771",
+                'adress' => "Rua. Santa Efigênia",
+                'adressNumber' => 1044,
             ],               [
                 'name' => 'Chuck Norris',
-                'cpf' => $faker->cpf(false),
-                'phone' => $faker->phone,
-                'adress' => $faker->streetName,
-                'adressNumber' => rand(0, 9999),
-                'district' => $faker->firstNameMale,
+                'cpf' => "123.456.789-55",
+                'phone' => "539998887771",
+                'adress' => "Rua. Santa Efigênia",
+                'adressNumber' => 1044,
+                'district' => "Fragata",
             ],               [
                 'name' => 'Jhon Wick',
-                'cpf' => $faker->cpf(false),
-                'adress' => $faker->streetName,
-                'district' => $faker->firstNameMale,
-                'city' => $faker->city,
-                'zipCode' => $faker->postcode,
+                'cpf' => "123.456.789-55",
+                'adress' => "Rua. Santa Efigênia",
+                'district' => "Fragata",
+                'city' => "Pelotas",
+                'zipCode' => "96150000",
             ],
 
         ];
-
-
-            DB::table('employees')->insert([
-                $randomPerson[rand(0, 6)]
-            ]);
         }
     }
 }
