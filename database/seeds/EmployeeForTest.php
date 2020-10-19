@@ -60,6 +60,11 @@ class EmployeeForTest extends Seeder
             ],
 
         ];
+
+
+            DB::table('employees')->insert([
+                $randomPerson[rand(0, 6)]
+            ]);
         }
     }
 }

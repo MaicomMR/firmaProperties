@@ -30,7 +30,13 @@
         <tr>
             <td>{{$Estate->label_id}}</td>
             <td>{{$Estate->name}}</td>
-            <td>{{$Estate->created_at->format('m-d-Y')}}</td>
+            <td>
+                @if($Estate->created_at)
+                    {{$Estate->created_at->format('m-d-Y')}}
+                @else
+                    Data de cadastro não encontrada
+                @endif
+            </td>
             <td>{{\Carbon\Carbon::parse($Estate->assurance_cover_date)->format('d-m-Y') . ' (' . \Carbon\Carbon::parse($Estate->assurance_cover_date)->diffForHumans() . ')'}}</td>
 
             <td class="text-right">
