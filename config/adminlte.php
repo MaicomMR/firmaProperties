@@ -134,7 +134,7 @@ return [
 
     'use_route_url' => false,
 
-    'dashboard_url' => 'homeDashboard',
+    'dashboard_url' => 'home',
 
     'logout_url' => 'logout',
 
@@ -174,11 +174,6 @@ return [
 
     'menu' => [
         [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
-        ],
-        [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
@@ -187,8 +182,6 @@ return [
             'text'        => 'Home',
             'url'         => 'home',
             'icon'        => 'fa fa-home',
-            'label'       => 4,
-            'label_color' => 'success',
         ],
         ['header' => 'PATRIMÔNIO'],
         [

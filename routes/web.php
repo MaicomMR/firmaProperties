@@ -12,12 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('home');
 });
 
 //Generic Dashboard pages
 Route::middleware(['auth'])->group(function () {
-    Route::get('home', 'Estate@home')->name('homeDashboard');
+    Route::get('home', 'HomepageController@home')->name('homeDashboard');
 });
 
 // Estate Routes

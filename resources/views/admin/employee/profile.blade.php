@@ -113,7 +113,7 @@
 
                     <div class="col-sm-12">
                         @if(isset($EmployeeEstate->assurance_cover_date))
-                            <span>Garantia: {{\Carbon\Carbon::parse($EmployeeEstate->assurance_cover_date)->format('m-d-Y') . ' (' . \Carbon\Carbon::parse($EmployeeEstate->assurance_cover_date)->diffForHumans() . ')'}}</span>
+                            <span>Garantia: {{\Carbon\Carbon::parse($EmployeeEstate->assurance_cover_date)->format('d-m-Y') . ' (' . \Carbon\Carbon::parse($EmployeeEstate->assurance_cover_date)->diffForHumans() . ')'}}</span>
                             <br>
                         @else
                             <span>Garantia: Não</span>
