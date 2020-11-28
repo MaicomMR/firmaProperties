@@ -76,7 +76,7 @@ class Estate extends Controller
 
     public function searchByName(Request $request)
     {
-        $EstateList = EstateModel::where('name', 'like', '%' . $request->estateNameLike . '%')->paginate(30);
+        $EstateList = EstateModel::where('name', 'LIKE', '%' . $request->estateNameLike . '%')->paginate(30);
         $activeEstateCount = EstateModel::all()->count();
         $inactiveEstateCount = EstateModel::onlyTrashed()->count();
         $EmployeeList = EmployeeModel::all();
