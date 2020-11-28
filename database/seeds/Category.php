@@ -13,10 +13,9 @@ class Category extends Seeder
     {
         DB::table('categories')->insert([
             [
-                'name' => 'Infraestrutura',
-            ],
-            [
                 'name' => 'Equipamento de TI',
+            ],[
+                'name' => 'Infraestrutura',
             ]
         ]);
     }

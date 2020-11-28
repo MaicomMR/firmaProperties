@@ -16,11 +16,14 @@ class CreateEstatesTable extends Migration
         Schema::create('estates', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->softDeletes();
 
+            $table->date('assurance_cover_date')->nullable()->default(null);
             $table->string('name');
             $table->string('estate_photo')->nullable(true);
             $table->double('value');
-            $table->integer('label_id');
+            $table->string('label_id');
+
 
         });
     }

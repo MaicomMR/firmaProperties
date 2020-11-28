@@ -174,11 +174,6 @@ return [
 
     'menu' => [
         [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
-        ],
-        [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
@@ -187,13 +182,11 @@ return [
             'text'        => 'Home',
             'url'         => 'home',
             'icon'        => 'fa fa-home',
-            'label'       => 4,
-            'label_color' => 'success',
         ],
         ['header' => 'PATRIMÔNIO'],
         [
             'text' => 'Adicionar Patrimônio',
-            'url'  => 'add',
+            'url'  => 'estates/add',
             'icon' => 'fas fa-plus-square',
         ],
         [
@@ -202,16 +195,32 @@ return [
             'icon' => 'fas fa-list-alt',
         ],
         [
+            'text'    => 'Colaboradores',
+            'icon'    => 'fa fa-users',
+            'submenu' => [
+                [
+                    'text' => 'Adicionar Colaborador',
+                    'url'  => 'employee/add',
+                ],
+                [
+                    'text' => 'Listar Colaboradores',
+                    'url'  => 'employee/index',
+                ],
+            ],
+        ],
+
+        ['header' => 'CATEGORIAS E FORNECEDORES'],
+        [
             'text'    => 'Categorias',
             'icon'    => 'fa fa-tags',
             'submenu' => [
                 [
                     'text' => 'Adicionar Categoria',
-                    'url'  => '#',
+                    'url'  => 'categories/create',
                 ],
                 [
                     'text' => 'Adicionar Sub-Categoria',
-                    'url'  => '#',
+                    'url'  => 'subcategories/create',
                 ],
                 [
                     'text' => 'Listar',
@@ -219,27 +228,16 @@ return [
                 ],
             ],
         ],
-        ['header' => 'NOTAS FISCAIS'],
         [
-            'text' => 'Adicionar Nota Fiscal',
-            'url'  => 'bill-of-sale',
-            'icon' => 'fas fa-file-alt',
-        ],
-        [
-            'text' => 'Adicionar Fornecedor',
-            'url'  => 'seller',
-            'icon' => 'fas fa-file-alt',
-        ],
-        [
-            'text' => 'Listar',
-            'url'  => '#',
-            'icon' => 'far fa-file-alt',
+            'text'        => 'Fornecedores',
+            'url'         => 'seller',
+            'icon'        => 'fas fa-file-alt',
         ],
         ['header' => 'CONFIGURAÇÕES'],
         [
             'text' => 'Configurações',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'url'  => 'admin/config/home',
+            'icon' => 'fas fa-cog',
         ],
     ],
 

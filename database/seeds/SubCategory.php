@@ -13,7 +13,7 @@ class SubCategory extends Seeder
     {
         DB::table('sub_categories')->insert([
             [
-                'name' => 'Outros',
+                'name' => 'Outro',
             ],[
                 'name' => 'Monitor',
             ],[
@@ -23,9 +23,17 @@ class SubCategory extends Seeder
             ],[
                 'name' => 'Mouse',
             ],[
-                'name' => 'Cadeiras',
+                'name' => 'Cadeira',
             ],[
                 'name' => 'Mobília',
+            ],[
+                'name' => 'Teclado',
+            ],[
+                'name' => 'Headset',
+            ],[
+                'name' => 'Fonte de Energia',
+            ],[
+                'name' => 'Celular',
             ]
         ]);
     }

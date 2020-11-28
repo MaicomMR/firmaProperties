@@ -2,92 +2,162 @@
 
 @section('title', 'Adicionar novo patrimônio')
 
+
+
+@section('content')
+    @if(count($errors)>0)
+        <div class="card">
+            <div class="card-header h5">
+                Opss... houve algum erro no preenchimento
+            </div>
+            <div class="card-body alert-danger">
+                @foreach($errors->all() as $error)
+                    <li style="color: white">{{$error}}</li>
+                @endforeach
+            </div>
+        </div>
+    @endif
+
+    @if (isset($estate_object))
+
+{!! Form::model($estate_object, [
+'route' => ['estate.update', $estate_object->id],
+'class' => 'form',
+'method' => 'PUT',
+'files' => true
+]) !!}
+
+@else
 @section('content_header')
     <h1>Adicionar novo patrimônio</h1>
 @stop
-
-@section('content')
-
-
-    <form>
-        <div class="container">
-            <div class="row">
-                <div class="col-2">
-                    <label for="exampleInputEmail1">Código Interno</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                           placeholder="00001" disabled>
-                </div>
-                <div class="col-2">
-                    <label for="exampleInputEmail1">Código Etiqueta</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                           placeholder="00001">
-                </div>
-                <div class="form-group col-6">
-                    <label for="exampleInputEmail1">Nome do patrimônio</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                           placeholder="Digite o nome do patrimônio">
-                    <small id="emailHelp" class="form-text text-muted">Este nome será exibido na listagem de
-                        patrimônios.</small>
-                </div>
+{!! Form::open([
+'route' => 'estateAdd',
+'class' => 'form']) !!}
+@endif
 
 
-            </div>
-            <div class="row">
-                <div class="form-group col-2">
-                    <label for="exampleInputEmail1">Nota Fiscal</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                           placeholder="Número da nota">
-                    <small id="emailHelp" class="form-text text-muted">Você pode adicionar uma nova nota fiscal clicando
-                        aqui.</small>
-                </div>
-                <div class="form-group col-2">
-                    <label for="exampleInputEmail1">Valor do bem</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                           placeholder="000,00R$">
-                </div>
+@if(session()->has('message'))
 
-                <div class="dropdown col-3">
-                    <label for="exampleInputEmail1">Categoria</label><br/>
-                    <div class="input-group">
-                        <select class="custom-select" id="inputGroupSelect04">
-                            @foreach($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
-                            @endforeach
-                        </select>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary bg-green" type="button">
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+    <div class="alert alert-success" role="alert">
+        {{ session()->get('message') }}
+    </div>
+@endif
 
-                <div class="dropdown col-3">
-                    <label for="exampleInputEmail1">Sub Categoria</label><br/>
-                    <div class="input-group">
-                        <select class="custom-select" id="inputGroupSelect04">
-                            @foreach($subCategories as $subCategory)
-                                <option value="{{$subCategory->id}}">{{$subCategory->name}}</option>
-                            @endforeach
-                        </select>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary bg-green" type="button">
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
 
+{!! Form::token(); !!}
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-sm-2">
+            {!! Form::label('label_id', 'Código Etiqueta'); !!}
+            {!! Form::text('label_id', null, [
+                                'class' => 'form-control',
+                                'placeholder' => '0430']); !!}
+        </div>
+
+        <div class="form-group col-sm-6">
+            {!! Form::label('name', 'Nome do patrimônio'); !!}
+            {!! Form::text('name', null, [
+    'class' => 'form-control',
+     'placeholder' => 'Nome ou modelo do equipamento']); !!}
+            <small id="emailHelp" class="form-text text-muted">Este nome será exibido na listagem de
+                patrimônios.</small>
+        </div>
+
+        <div class="form-group col-sm-2">
+            {!! Form::label('value', 'Valor do bem'); !!}
+            {!! Form::number('value', null, [
+    'class' => 'form-control',
+     'placeholder' => '1278,97',
+     'step' => '.01']); !!}
+        </div>
+    </div>
+
+
+
+    <div class="row">
+
+
+
+
+        <div class="dropdown col-sm-3">
+            {!! Form::label('categories_id', 'Categoria'); !!}
+            <div class="input-group">
+                {!! Form::select('categories_id', $categoriesPlucked, null,[
+                        'class' => 'custom-select',
+                        'placeholder' => 'Selecione uma categoria'
+
+                        ]); !!}
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary bg-green" type="button">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </button>
                 </div>
             </div>
+        </div>
+        <div class="dropdown col-sm-3">
+            {!! Form::label('sub_categories_id', 'Sub-Categoria'); !!}
 
-            <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+            <div class="input-group">
+                {!! Form::select('sub_categories_id', $subCategoriesPlucked, null, [
+                    'placeholder' => 'Selecione uma sub-categoria',
+                    'class' => 'custom-select']); !!}
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary bg-green" type="button">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="dropdown col-sm-2">
+            {!! Form::label('seller_id', 'Fornecedor'); !!}
+            <div class="input-group">
+                {!! Form::select('seller_id', $sellersPlucked, null,[
+                        'class' => 'custom-select',
+                        'placeholder' => 'Selecione um fornecedor'
 
-@stop
+                        ]); !!}
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary bg-green" type="button">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="dropdown col-sm-1">
+            {!! Form::label('assurance_cover_date', 'Garantia'); !!}
+            <div class="input-group" style="height: calc(2.25rem + 2px);">
+                {{Form::date('assurance_cover_date', null, [
+                'style' => 'border: 1px solid #ced4da;'])}}
+            </div>
+        </div>
+
+        <div class="form-group col-sm-10">
+            {!! Form::label('name', 'Observações'); !!}
+            {!! Form::textarea('observation', null, [
+                'class' => 'form-control',
+                'cols' => 3,
+                'rows' => 3,
+                'placeholder' => 'Observações sobre o objeto']); !!}
+        </div>
+
+    </div>
+
+    <div style="margin-top: 20px;">
+    {!! Form::submit('Salvar', ['class' => 'btn btn-info']); !!}
+    </div>
 
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+
+    {!! Form::close() !!}
+    @stop
+
+
+    @section('css')
+        <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')
